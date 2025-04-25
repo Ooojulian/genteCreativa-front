@@ -1,0 +1,48 @@
+/* src/styles/JefeEmpresa/JefeEmpresaDashboard.module.css */
+
+/* Estilos para el contenido de la vista 'inicio' (Reutilizados de ClienteDashboard) */
+.inicioContainer {
+    display: flex; /* Activa Flexbox */
+    gap: 30px; /* Espacio entre las columnas */
+    align-items: center; /* Centra verticalmente */
+    padding: 20px; /* Padding interno opcional */
+    flex-wrap: wrap; /* Permite que pasen a modo columna en pantallas pequeñas */
+    /* Aplica el fondo azulado si quieres */
+    /* background-color: #edf2ff79; */
+    /* border: 1px solid #d1dff1; */
+    border-radius: 8px;
+  }
+  
+  .inicioTexto {
+    flex: 1; /* Permite que crezca y ocupe espacio */
+    min-width: 280px; /* Ancho mínimo antes de envolver */
+  }
+  
+  .inicioTexto h3 {
+      margin-top: 0;
+      color: #334d6e; /* Azul oscuro */
+      margin-bottom: 15px;
+      font-size: 1.6em; /* Título más grande */
+  }
+  
+  .inicioTexto p {
+      margin-bottom: 10px;
+      line-height: 1.6;
+      color: #495057; /* Gris oscuro */
+      font-size: 1.1em; /* Texto un poco más grande */
+  }
+  
+  .inicioGif {
+    flex: 1; /* Permite que crezca */
+    text-align: center; /* Centra el GIF dentro de su contenedor */
+    min-width: 280px; /* Ancho mínimo */
+  }
+  
+  .inicioGif img {
+    max-width: 100%; /* Asegura que no se desborde */
+    height: auto; /* Mantiene la proporción */
+    max-height: 350px; /* Limita altura máxima si es muy grande */
+    border-radius: 8px; /* Bordes redondeados opcionales */
+  }
+  
+  /* Puedes añadir más estilos si otras vistas dentro de este dashboard necesitan estilos específicos */

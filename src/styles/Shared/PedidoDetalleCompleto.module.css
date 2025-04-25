@@ -1,0 +1,103 @@
+/* frontend/src/styles/Shared/PedidoDetalleCompleto.module.css */
+
+.detalleContainer {
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    font-family: sans-serif;
+    line-height: 1.6;
+}
+
+.titulo {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #333;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.seccion {
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px dashed #eee;
+}
+
+.seccion:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.seccion h4 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.seccion p {
+    margin: 5px 0;
+    color: #444;
+}
+
+.seccion strong {
+    color: #1a1a1a;
+    margin-right: 5px;
+}
+
+.itemList {
+    list-style: disc;
+    margin-left: 20px;
+    padding-left: 10px;
+}
+
+.itemList li {
+    margin-bottom: 5px;
+}
+
+.noSeleccionado {
+    padding: 20px;
+    text-align: center;
+    color: #777;
+}
+
+/* frontend/src/styles/Shared/PedidoDetalleCompleto.module.css */
+/* ... (estilos existentes) ... */
+
+.photoGallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px; /* Espacio entre fotos */
+    margin-top: 10px;
+    margin-bottom: 15px; /* Espacio antes de la siguiente subsección */
+}
+
+.photoContainer {
+    text-align: center;
+    border: 1px solid #eee;
+    padding: 5px;
+    background-color: #fff;
+}
+
+.photoThumbnail {
+    max-width: 150px; /* Ancho máximo de la miniatura */
+    max-height: 150px; /* Altura máxima */
+    height: auto;
+    display: block;
+    margin-bottom: 5px;
+    cursor: pointer; /* Indica que es clickeable (si usas <a>) */
+}
+
+.photoCaption {
+    font-size: 0.8em;
+    color: #666;
+    margin: 0;
+}
+
+.firmaImage {
+    max-width: 250px; /* Ancho máximo de la firma */
+    height: auto;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    margin-top: 5px;
+}

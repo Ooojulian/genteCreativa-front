@@ -1,0 +1,120 @@
+/* frontend/src/styles/Shared/HistorialItem.module.css */
+
+.historialItem {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    transition: box-shadow 0.2s ease;
+}
+
+.historialItem:hover {
+    box-shadow: 0 3px 6px rgba(0,0,0,0.08);
+}
+
+.resumen {
+    padding: 15px 20px;
+    display: flex;
+    flex-wrap: wrap; /* Para que se adapte en pantallas pequeñas */
+    gap: 10px 20px; /* Espacio entre elementos */
+    align-items: center;
+    cursor: pointer; /* Indica que se puede clickear */
+}
+
+.pedidoId { font-weight: bold; color: #333; }
+.cliente { color: #555; }
+.tipoServicio { font-style: italic; color: #007bff; }
+.fechaFin { color: #6c757d; font-size: 0.9em; margin-left: auto; /* Empuja a la derecha en pantallas grandes */ }
+
+.toggleButton {
+    background: none;
+    border: none;
+    color: #0069d9;
+    cursor: pointer;
+    font-size: 0.9em;
+    padding: 5px;
+    margin-left: 10px; /* Espacio respecto al último item */
+}
+.toggleButton:hover { text-decoration: underline; }
+
+
+.detallesContainer {
+    border-top: 1px dashed #eee;
+    padding: 20px;
+    display: flex; /* Layout de dos columnas */
+    flex-wrap: wrap; /* Se apilan en móvil */
+    gap: 30px; /* Espacio entre columnas */
+    background-color: #fdfdfd; /* Fondo ligeramente diferente */
+}
+
+.columna {
+    flex: 1; /* Ocupa espacio disponible */
+    min-width: 280px; /* Ancho mínimo antes de apilar */
+}
+
+.columna h4 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #5a5a5a;
+    font-size: 1.1em;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 5px;
+}
+
+.columna p {
+    margin-bottom: 8px;
+    font-size: 0.95em;
+    line-height: 1.5;
+}
+
+.columna strong {
+    color: #333;
+    margin-right: 5px;
+}
+
+.itemList {
+    list-style: disc;
+    margin-left: 20px;
+    padding-left: 10px;
+    font-size: 0.9em;
+}
+.itemList li {
+    margin-bottom: 3px;
+}
+
+/* Estilos para Fotos y Confirmación */
+.seccionFotos, .seccionConfirmacion {
+    margin-top: 20px;
+}
+.seccionFotos h5, .seccionConfirmacion h4 {
+    margin-bottom: 10px;
+}
+
+.galeria {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.galeria a { display: block; } /* Para que la imagen llene el enlace */
+
+.galeria img {
+    width: 80px; /* Tamaño miniatura */
+    height: 80px;
+    object-fit: cover; /* Mantiene proporción */
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    transition: transform 0.2s ease;
+}
+.galeria img:hover {
+    transform: scale(1.05);
+}
+
+.firmaImagen {
+    max-width: 250px; /* Limita tamaño firma */
+    height: auto;
+    border: 1px solid #ccc;
+    margin-top: 5px;
+    background-color: #fff; /* Fondo blanco por si es transparente */
+}

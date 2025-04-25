@@ -1,0 +1,158 @@
+/* src/styles/Inventario/HistorialInventario.module.css */
+
+/* --- Estilos Generales del Contenedor --- */
+.gestionContainer { /* Reutiliza el nombre si es el contenedor principal */
+    padding: 20px;
+    font-family: sans-serif;
+  }
+  
+  .gestionContainer h3 { /* Título Principal */
+    margin-top: 0;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    color: #333;
+    font-size: 1.5em;
+  }
+  
+  /* --- Estilos para la Sección de Filtros --- */
+  .filterContainer {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los filtros pasen a la siguiente línea */
+    gap: 18px; /* Espacio entre grupos de filtros */
+    margin-bottom: 25px;
+    padding: 18px;
+    border: 1px solid #e0e0e0; /* Borde más suave */
+    border-radius: 6px;
+    background-color: #d1dff1; /* Fondo gris muy claro para filtros */
+  }
+  
+  .filterGroup {
+    display: flex;
+    flex-direction: column;
+    min-width: 160px; /* Ancho mínimo para cada filtro */
+    flex-grow: 1; /* Permite que crezcan para llenar espacio */
+  }
+  
+  .filterLabel {
+    font-size: 0.85em;
+    margin-bottom: 5px;
+    color: #495057; /* Gris oscuro */
+    font-weight: 500;
+  }
+  
+  .filterSelect {
+    padding: 9px 10px; /* Padding ajustado */
+    border-radius: 4px;
+    border: 1px solid #ced4da; /* Borde estándar */
+    background-color: #fff;
+    font-size: 0.95em;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .filterSelect:disabled {
+      background-color: #e9ecef;
+      cursor: not-allowed;
+  }
+  .filterSelect:focus {
+      border-color: #86b7fe;
+      outline: 0;
+      box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+  }
+  
+  .loadingFiltersText { /* Texto "Cargando filtros..." */
+      align-self: center;
+      font-size: 0.9em;
+      color: #6c757d;
+      margin-left: 10px;
+  }
+  
+  /* --- Estilos de Mensajes (Reutilizado) --- */
+  .errorText { /* Usar nombres genéricos */
+      color: #dc3545;
+      margin: 15px 0;
+      font-size: 0.9em;
+      font-weight: bold;
+      padding: 10px;
+      border: 1px solid #f5c2c7;
+      background-color: #f8d7da;
+      border-radius: 4px;
+  }
+  
+  .loadingText { /* Estilo para "Cargando..." */
+      margin: 20px;
+      text-align: center;
+      color: #555;
+      font-style: italic;
+  }
+  
+  .noResultsText { /* Estilo para "No hay movimientos..." */
+      margin: 20px;
+      text-align: center;
+      color: #6c757d;
+  }
+  
+  
+  /* --- Estilos de la Tabla de Historial (Similar a otras tablas) --- */
+  .listContainer {
+      overflow-x: auto; /* Scroll horizontal */
+      margin-top: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      background-color: #fff; /* Fondo blanco para tabla */
+  }
+  
+  .historialTable {
+      border-collapse: collapse;
+      width: 100%;
+      min-width: 900px; /* Ancho mínimo para evitar compresión excesiva */
+      font-size: 0.88em; /* Ligeramente más pequeña */
+  }
+  
+  .historialTable th,
+  .historialTable td {
+      border: 1px solid #eee;
+      padding: 9px 11px; /* Padding ajustado */
+      text-align: left;
+      vertical-align: middle;
+      white-space: nowrap; /* Evitar saltos de línea en celdas */
+  }
+  
+  .historialTable thead th {
+      background-color: #ced4da;
+      font-weight: 600;
+      color: #495057;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+  }
+  
+  .historialTable tbody tr:nth-child(even) {
+      background-color: #fdfdfd;
+  }
+  .historialTable tbody tr:hover {
+      background-color: #f1f5ff;
+  }
+  
+  /* Estilos específicos para celdas de cantidad */
+  .amountCell {
+      text-align: right !important; /* Alinear números a la derecha */
+      font-family: monospace; /* Fuente monoespaciada para números */
+  }
+  
+  .changeCellPositive {
+      font-weight: bold;
+      color: #198754; /* Verde */
+      text-align: right !important;
+      font-family: monospace;
+  }
+  .changeCellNegative {
+      font-weight: bold;
+      color: #dc3545; /* Rojo */
+      text-align: right !important;
+      font-family: monospace;
+  }
+  .changeCellNeutral { /* Para cambio 0 */
+       text-align: right !important;
+       font-family: monospace;
+       color: #6c757d; /* Gris */
+  }

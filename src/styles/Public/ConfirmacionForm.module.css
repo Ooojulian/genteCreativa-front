@@ -1,0 +1,125 @@
+/* src/styles/Public/ConfirmacionForm.module.css */
+.container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 30px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    font-family: sans-serif;
+}
+
+.container h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #333;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Espacio entre grupos */
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+}
+
+.inputGroup label {
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #444;
+    font-size: 0.95em;
+}
+
+.input,
+.textarea,
+.select { /* Si tuvieras selects */
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+    width: 100%;
+    box-sizing: border-box; /* Importante */
+}
+
+.textarea {
+    resize: vertical; /* Permite redimensionar verticalmente */
+    min-height: 80px;
+}
+
+.signatureContainer {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    /* Ajusta width/height según necesites, o usa el del canvasProps */
+    width: 100%;
+    height: 150px; /* Altura del área de firma */
+    position: relative; /* Para posicionar el canvas si es necesario */
+}
+
+.signatureCanvas {
+    width: 100%;
+    height: 100%;
+    cursor: crosshair;
+}
+
+.clearButton {
+    margin-top: 8px;
+    padding: 5px 10px;
+    font-size: 0.85em;
+    cursor: pointer;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    align-self: flex-end; /* Alinea a la derecha */
+}
+.clearButton:hover {
+    background-color: #ddd;
+}
+
+
+.submitButton {
+    padding: 12px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-top: 10px;
+}
+
+.submitButton:hover:not(:disabled) {
+    background-color: #0056b3;
+}
+
+.submitButton:disabled {
+    background-color: #aaa;
+    cursor: not-allowed;
+}
+
+.error {
+    color: #d9534f; /* Rojo */
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    padding: 10px;
+    border-radius: 4px;
+    margin-top: 10px;
+    text-align: center;
+    font-size: 0.9em;
+}
+
+.successMessage {
+     text-align: center;
+     padding: 40px 20px;
+     background-color: #d4edda;
+     border: 1px solid #c3e6cb;
+     color: #155724;
+     border-radius: 8px;
+}
+.successMessage h2 {
+    margin-top: 0;
+}

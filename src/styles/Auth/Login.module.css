@@ -1,0 +1,207 @@
+/* src/styles/Auth/Login.module.css */
+
+/* Contenedor principal de la página */
+.loginPage {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  background-color: #f0f4f8;
+}
+
+/* Panel izquierdo (Info) */
+.infoPanel {
+  flex: 1;
+  background: #0069D9; /* Color azul sólido */
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  text-align: center;
+  position: relative; /* Necesario para z-index */
+  z-index: 0; /* Detrás del pseudo-elemento solapado */
+}
+
+.infoPanel h2 {
+  font-size: 1.8em;
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+
+.logoContainer {
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logoSvg { /* Si usas un SVG importado */
+  width: 80px;
+  height: 80px;
+  margin-bottom: 15px;
+}
+
+.logoText {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.infoText {
+  max-width: 400px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 40px;
+  transition: display 0.3s ease; /* Opcional: para animar ocultación */
+}
+
+.footerText {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  font-size: 0.8em;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+
+/* Panel derecho (Formulario) */
+.formPanel {
+  flex: 1.5;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 40px 40px 60px; /* Padding escritorio */
+  position: relative; /* Necesario para posicionar el ::before */
+  margin-left: 0;
+}
+
+/* Pseudo-elemento para el efecto zig-zag azul (ESCRITORIO) */
+.formPanel::before {
+  content: '';
+  position: absolute;
+  left: -1px; /* Solapamiento para ocultar línea */
+  top: 0;
+  bottom: 0;
+  width: 40px; /* Ancho/profundidad del zig-zag vertical */
+  background: #0069D9; /* Mismo azul sólido */
+  clip-path: polygon(
+    0% 0%, 100% 10%, 0% 20%, 100% 30%, 0% 40%, 100% 50%,
+    0% 60%, 100% 70%, 0% 80%, 100% 90%, 0% 100%
+  );
+  z-index: 1; /* Encima del infoPanel, debajo del contenido */
+  transition: all 0.3s ease; /* Opcional: para animar cambio a móvil */
+}
+
+
+/* Contenedor del formulario dentro del panel derecho */
+.loginFormContainer {
+  width: 100%;
+  max-width: 400px;
+  position: relative; /* Necesario para z-index */
+  z-index: 2; /* Encima del pseudo-elemento zig-zag */
+}
+
+.loginFormContainer h3 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #333;
+  font-weight: 600;
+  font-size: 1.6em;
+}
+
+.logoContainer {
+  margin-bottom: 20px; /* Reduce un poco el margen si es necesario */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* --- NUEVO: Estilos para la imagen del logo --- */
+.logoImage {
+  width: auto; /* Ajusta el ancho según tu logo */
+  height: auto; /* Mantiene la proporción */
+  margin-bottom: 1px; /* Espacio entre logo y texto */
+  /* Puedes añadir otros estilos como: */
+  /* object-fit: contain; */
+}
+
+/* Estilos de formulario (sin cambios) */
+.inputGroup { margin-bottom: 25px; position: relative; }
+.label { display: block; margin-bottom: 8px; font-weight: 500; font-size: 0.9em; color: #888; }
+.input { width: 100%; padding: 10px 5px; box-sizing: border-box; border: none; border-bottom: 2px solid #ccc; border-radius: 0; font-size: 1rem; background-color: transparent; transition: border-color 0.2s ease; }
+.input::placeholder { color: #aaa; font-style: italic; font-size: 0.95em; }
+.input:focus { border-bottom-color: #007bff; outline: none; }
+.buttonGroup { margin-top: 30px; display: flex; gap: 15px; }
+.submitButton { flex-grow: 1; padding: 12px 15px; background: linear-gradient(90deg, #007bff, #0056b3); color: white; border: none; border-radius: 25px; font-size: 1rem; font-weight: bold; cursor: pointer; transition: transform 0.1s ease, box-shadow 0.2s ease; box-shadow: 0 4px 6px rgba(0, 123, 255, 0.2); }
+.submitButton:hover { transform: translateY(-1px); box-shadow: 0 6px 8px rgba(0, 123, 255, 0.3); }
+.submitButton:disabled { background: #ccc; cursor: not-allowed; box-shadow: none; transform: none; }
+.secondaryButton { flex-grow: 1; padding: 12px 15px; background-color: white; color: #6c757d; border: 1px solid #ced4da; border-radius: 25px; font-size: 1rem; cursor: pointer; transition: background-color 0.2s ease, color 0.2s ease; }
+.secondaryButton:hover { background-color: #f8f9fa; color: #343a40; }
+.errorText { color: #dc3545; margin-top: 20px; text-align: center; font-size: 0.9em; }
+
+/* --- Responsive (max-width: 768px) --- */
+@media (max-width: 768px) {
+  .loginPage {
+    flex-direction: column; /* Apila verticalmente */
+  }
+
+  .infoPanel, .formPanel {
+    flex: none; /* Quita flexibilidad */
+    width: 100%; /* Ocupa todo el ancho */
+    min-height: auto; /* Altura automática */
+    padding: 40px; /* Padding uniforme */
+    margin-left: 0 !important; /* Resetea margen */
+    z-index: auto; /* Resetea z-index base */
+  }
+
+  .infoPanel {
+     padding-bottom: 50px; /* Espacio abajo para el zig-zag solapado */
+     position: relative;
+     z-index: 0;
+  }
+
+  .formPanel {
+      padding-top: 50px; /* Espacio arriba para el zig-zag solapado */
+      position: relative;
+      z-index: 0;
+  }
+
+  /* 1. Oculta el texto de párrafo en móvil */
+  .infoText {
+    display: none;
+  }
+
+  /* 2. Oculta el texto del footer en móvil */
+  .footerText {
+      display: none; /* <-- AÑADIDO: Oculta el footer */
+      /* Las reglas anteriores de position y margin ya no son necesarias */
+      /* position: static; */
+      /* margin-top: 20px; */
+  }
+
+  /* 3. Muestra y ajusta el zig-zag para ser HORIZONTAL */
+  .formPanel::before {
+    display: block;
+    left: 0;
+    right: 0;
+    top: -1px;
+    bottom: auto;
+    width: auto;
+    height: 30px;
+    background: #0069D9;
+    clip-path: polygon(
+        0% 0%, 10% 100%, 20% 0%, 30% 100%, 40% 0%, 50% 100%,
+        60% 0%, 70% 100%, 80% 0%, 90% 100%, 100% 0%
+    );
+    z-index: 1;
+  }
+
+  /* 4. Asegura que el contenido del formulario esté encima */
+  .loginFormContainer {
+      position: relative;
+      z-index: 2;
+  }
+}
+

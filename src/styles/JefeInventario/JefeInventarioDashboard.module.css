@@ -1,0 +1,48 @@
+/* src/styles/JefeInventario/JefeInventarioDashboard.module.css */
+
+/* Estilos para el contenido de la vista 'inicio' (Reutilizados) */
+.inicioContainer {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    padding: 20px;
+    flex-wrap: wrap;
+    /* Puedes añadir el fondo azulado aquí también si quieres */
+    /* background-color: #edf2ff79; */
+    /* border: 1px solid #d1dff1; */
+    border-radius: 8px;
+  }
+  
+  .inicioTexto {
+    flex: 1;
+    min-width: 280px;
+  }
+  
+  .inicioTexto h3 {
+      margin-top: 0;
+      color: #334d6e;
+      margin-bottom: 15px;
+      font-size: 1.6em;
+  }
+  
+  .inicioTexto p {
+      margin-bottom: 10px;
+      line-height: 1.6;
+      color: #495057;
+      font-size: 1.1em;
+  }
+  
+  .inicioGif {
+    flex: 1;
+    text-align: center;
+    min-width: 280px;
+  }
+  
+  .inicioGif img {
+    max-width: 100%;
+    height: auto;
+    max-height: 350px;
+    border-radius: 8px;
+  }
+  
+  /* Otros estilos específicos para este dashboard si los necesitas */

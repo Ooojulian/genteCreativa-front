@@ -1,0 +1,113 @@
+/* src/styles/Cliente/InventarioCliente.module.css */
+
+.container {
+  padding: 20px; /* Padding general similar a otros contenedores */
+  font-family: sans-serif;
+}
+
+.title {
+  margin-bottom: 25px; /* Consistente con otros títulos */
+  color: #333;
+  font-size: 1.5em;
+  font-weight: 600;
+  border-bottom: 1px solid #eee; /* Borde inferior */
+  padding-bottom: 10px;
+  text-align: left; /* Título centrado */
+}
+
+.emptyMessage {
+  margin-top: 20px; /* Espacio superior */
+  color: #6c757d; /* Gris */
+  font-style: italic;
+  text-align: center;
+  padding: 20px 15px;
+  background-color: #f8f9fa; /* Fondo gris claro */
+  border-radius: 5px;
+  border: 1px dashed #ced4da; /* Borde discontinuo */
+}
+
+/* Contenedor para scroll horizontal (Reutilizado) */
+.tableContainer {
+  overflow-x: auto;
+  margin-top: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Sombra suave */
+}
+
+.inventoryTable {
+  width: 100%;
+  min-width: 600px; /* Ancho mínimo para evitar compresión */
+  border-collapse: collapse;
+  font-size: 0.9em;
+}
+
+/* Estilo para celdas de cabecera (th) y datos (td) (Reutilizado) */
+.inventoryTable th,
+.inventoryTable td {
+  padding: 10px 12px; /* Padding consistente */
+  vertical-align: middle;
+  border-bottom: 1px solid #eee; /* Borde inferior más suave */
+  border-left: 1px solid #eee; /* Borde izquierdo */
+}
+.inventoryTable th:first-child,
+.inventoryTable td:first-child {
+    border-left: none; /* Sin borde izquierdo en la primera columna */
+}
+
+/* Quita el borde inferior de la última fila (Reutilizado) */
+.inventoryTable tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Estilo específico para la cabecera (Reutilizado) */
+.inventoryTable thead th {
+  background-color: #f8f9fa; /* Fondo cabecera */
+  color: #495057;
+  font-size: 0.85em; /* Ligeramente más pequeño */
+  font-weight: 600; /* Negrita */
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom-width: 2px; /* Borde inferior más grueso en cabecera */
+   border-bottom-color: #dee2e6;
+  position: sticky; /* Cabecera fija */
+  top: 0;
+  z-index: 1;
+}
+
+/* --- Alineación de Columnas (Ajustado a 4 columnas: Producto, Ubicación, Cantidad, Fecha) --- */
+/* Columna 1 y 2: Producto, Ubicación (Izquierda por defecto) */
+.inventoryTable th:nth-child(1), .inventoryTable td:nth-child(1),
+.inventoryTable th:nth-child(2), .inventoryTable td:nth-child(2) {
+  text-align: left;
+}
+
+/* Columna 3: Cantidad (Derecha) */
+.inventoryTable th:nth-child(3),
+.inventoryTable td:nth-child(3) {
+  text-align: right;
+  font-family: monospace; /* Para números */
+  width: 100px; /* Ancho fijo opcional */
+}
+
+/* Columna 4: Última Actualización (Centro) */
+.inventoryTable th:nth-child(4),
+.inventoryTable td:nth-child(4) {
+  text-align: center;
+  white-space: nowrap; /* Evitar salto de línea en fecha */
+  font-size: 0.9em; /* Fecha un poco más pequeña */
+  color: #555; /* Color gris */
+  width: 180px; /* Ancho fijo opcional */
+}
+
+
+/* Estilo para filas del cuerpo (Reutilizado) */
+.inventoryTable tbody tr {
+  transition: background-color 0.15s ease-in-out;
+}
+
+/* Hover sobre la fila (Reutilizado) */
+.inventoryTable tbody tr:hover {
+  background-color: #f1f5ff; /* Azul pálido consistente */
+}

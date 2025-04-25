@@ -1,0 +1,178 @@
+/* src/styles/Conductor/PedidoItem.module.css */
+
+.pedidoItem {
+  border: 1px solid #d1dff1; /* Borde azulado claro */
+  border-radius: 8px; /* Bordes redondeados */
+  padding: 18px 20px; /* Padding interno */
+  margin-bottom: 15px;
+  background-color: #fff; /* Fondo blanco */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06); /* Sombra sutil */
+  font-family: sans-serif;
+  transition: box-shadow 0.2s ease;
+}
+.pedidoItem:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08); /* Sombra más pronunciada al pasar el mouse */
+}
+
+.infoPrincipal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+  font-size: 0.9em;
+  color: #495057; /* Gris oscuro */
+}
+.infoPrincipal span {
+  margin-right: 10px;
+}
+.infoPrincipal strong {
+  color: #212529; /* Negro */
+}
+
+.detalles {
+  margin-bottom: 15px;
+}
+.detalles p {
+  margin: 5px 0;
+  font-size: 0.95em;
+  color: #343a40;
+  line-height: 1.5;
+}
+.detalles strong {
+  margin-right: 5px;
+  color: #1a1a1a;
+  font-weight: 600;
+}
+
+/* --- Estilos para Sección de Subida de Fotos --- */
+.uploadSection {
+  margin-top: 15px;
+  padding: 15px;
+  border: 1px dashed #c9d7e8; /* Borde discontinuo azulado */
+  border-radius: 5px;
+  background-color: #f8f9fa; /* Fondo gris claro */
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap; /* Para ajustar en pantallas pequeñas */
+  gap: 12px; /* Espacio entre elementos */
+}
+
+.uploadSection label {
+  font-weight: 500;
+  margin-right: 8px;
+  font-size: 0.9em;
+  color: #334d6e;
+}
+
+.uploadSection input[type="file"] {
+  font-size: 0.9em;
+  /* Estilos específicos del navegador pueden variar */
+  flex-grow: 1; /* Ocupa espacio disponible */
+}
+
+/* Botón de subida específico */
+.uploadButton {
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+  border: 1px solid #007bff; /* Borde azul */
+  background-color: #e7f3ff; /* Fondo azul muy claro */
+  color: #0056b3; /* Azul oscuro */
+  font-size: 0.9em;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+.uploadButton:hover:not(:disabled) {
+  background-color: #cfe2ff; /* Azul un poco más oscuro */
+  border-color: #0056b3;
+}
+.uploadButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  background-color: #e9ecef;
+  border-color: #ced4da;
+  color: #6c757d;
+}
+
+/* Mensajes de subida (Reutilizados/Adaptados) */
+.uploadStatus { font-style: italic; color: #555; font-size: 0.85em; margin: 5px 0; width: 100%;}
+.uploadError { color: #dc3545; font-size: 0.85em; margin: 5px 0; font-weight: bold; width: 100%;}
+.uploadSuccess { color: #198754; font-size: 0.85em; margin: 5px 0; font-weight: bold; width: 100%;}
+.infoNota { font-size: 0.85em; color: #6c757d; margin-top: 8px; font-style: italic; width: 100%; text-align: center;}
+
+/* --- Sección QR --- */
+.qrSection {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+  text-align: center;
+}
+
+.qrCodeContainer {
+  margin-top: 15px;
+  padding: 15px;
+  background-color: white;
+  display: inline-block;
+  border: 1px solid #eee;
+  border-radius: 4px;
+}
+.qrCodeContainer p {
+  margin-bottom: 10px;
+  font-size: 0.9em;
+}
+
+/* --- Botones de Acción Principales --- */
+.actionButtons {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+  text-align: right; /* Alinea botones a la derecha */
+  display: flex; /* Para usar gap si hay varios botones */
+  justify-content: flex-end; /* Alinea a la derecha */
+  gap: 10px;
+}
+
+.actionButton { /* Estilo para Iniciar/Finalizar/Generar QR */
+padding: 10px 18px; /* Botones principales más grandes */
+cursor: pointer;
+border-radius: 5px;
+border: 1px solid;
+font-size: 1em; /* Tamaño de fuente normal */
+font-weight: 500;
+transition: background-color 0.2s, border-color 0.2s, opacity 0.2s;
+}
+
+/* Colores específicos podrían ser */
+.actionButton:nth-of-type(1) { /* Asume que Iniciar es el primero */
+background-color: #d1e7dd; border-color: #badbcc; color: #0f5132;
+}
+.actionButton:nth-of-type(1):hover:not(:disabled) {
+  background-color: #b6dccf;
+}
+
+/* Botón Generar QR */
+.actionButton:nth-of-type(2), /* Si es el segundo botón (Generar QR) */
+.qrSection > .actionButton { /* O si está solo en la sección QR */
+   background-color: #fff3cd; border-color: #ffe69c; color: #664d03;
+}
+.actionButton:nth-of-type(2):hover:not(:disabled),
+.qrSection > .actionButton:hover:not(:disabled) {
+  background-color: #ffeeb7;
+}
+
+.actionButton:nth-of-type(3) { /* Asume que Finalizar es el tercero/último */
+ background-color: #cce5ff; border-color: #b8daff; color: #004085;
+}
+.actionButton:nth-of-type(3):hover:not(:disabled) {
+  background-color: #b8daff;
+}
+
+.actionButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  background-color: #adb5bd;
+  border-color: #adb5bd;
+  color: #fff;
+}

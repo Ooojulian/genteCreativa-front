@@ -1,0 +1,92 @@
+/* frontend/src/styles/Conductor/HistorialViajes.module.css */
+
+.container {
+    padding: var(--spacing-sm) 0;
+  }
+  
+  .title {
+    font-size: 1.4em;
+    font-weight: 600;
+    color: var(--color-dark, #343a40);
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 1px solid var(--color-border, #dee2e6);
+    text-align: center;
+  }
+  
+  .controlsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-md) var(--spacing-lg);
+    align-items: center;
+    margin-bottom: var(--spacing-xl, 2rem);
+    margin-top: var(--spacing-xl, 0.5rem);
+    padding: var(--spacing-md);
+    background-color: var(--color-light-gray, #f8f9fa);
+    border-radius: var(--border-radius-md);
+    border: none;
+  }
+  
+  .controlGroup {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs, 0.5rem);
+  }
+  
+  .controlLabel {
+    font-size: 0.9em;
+    font-weight: 500;
+    color: var(--color-muted, #6c757d);
+  }
+  
+  .selectControl {
+    padding: 8px 12px;
+    border-radius: var(--border-radius-sm, 4px);
+    border: 1px solid var(--color-border, #ccc);
+    font-size: 0.95em;
+    background-color: var(--color-white, #fff);
+    min-width: 120px;
+    cursor: pointer;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  }
+  
+  .selectControl:focus {
+    border-color: var(--color-primary-focus, #86b7fe);
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+  }
+  
+  .loadingMessage,
+  .errorMessage,
+  .noResultsMessage {
+    text-align: center;
+    padding: var(--spacing-lg);
+    margin-top: var(--spacing-lg);
+    border-radius: var(--border-radius-md);
+  }
+  
+  .loadingMessage {
+    color: var(--color-muted);
+  }
+  
+  .errorMessage {
+    color: var(--color-danger-dark, #842029);
+    background-color: var(--color-danger-light, #f8d7da);
+    border: 1px solid var(--color-danger-border, #f5c2c7);
+  }
+  
+  .noResultsMessage {
+    color: var(--color-muted);
+    font-style: italic;
+    background-color: var(--color-light, #f8f9fa);
+    border: 1px dashed var(--color-border, #dee2e6);
+  }
+  
+  .historialList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  /* Los estilos para cada item individual (HistorialItem) se definen en
+     src/styles/Shared/HistorialItem.module.css */

@@ -1,0 +1,39 @@
+/* src/styles/Cliente/ClienteDashboard.module.css */
+
+.inicioContainer {
+    display: flex; /* Activa Flexbox */
+    gap: 30px; /* Espacio entre las columnas */
+    align-items: center; /* Centra verticalmente si las alturas difieren */
+    padding: 20px; /* Padding interno opcional */
+    flex-wrap: wrap; /* Permite que pasen a modo columna en pantallas pequeñas */
+  }
+  
+  .inicioTexto {
+    flex: 1; /* Permite que crezca y ocupe espacio */
+    min-width: 280px; /* Ancho mínimo antes de envolver */
+  }
+  
+  .inicioTexto h3 {
+      margin-top: 0;
+      color: #334d6e; /* Azul oscuro */
+      margin-bottom: 15px;
+  }
+  
+  .inicioTexto p {
+      margin-bottom: 10px;
+      line-height: 1.6;
+      color: #495057; /* Gris oscuro */
+  }
+  
+  .inicioGif {
+    flex: 1; /* Permite que crezca */
+    text-align: center; /* Centra el GIF dentro de su contenedor */
+    min-width: 280px; /* Ancho mínimo */
+  }
+  
+  .inicioGif img {
+    max-width: 100%; /* Asegura que no se desborde */
+    height: auto; /* Mantiene la proporción */
+    border-radius: 8px; /* Bordes redondeados opcionales */
+    
+  }

@@ -1,0 +1,77 @@
+/* src/styles/Conductor/ConductorDashboard.module.css */
+
+/* Estilos para el contenido de la vista 'inicio' */
+.inicioContent {
+    padding: 25px;
+    background-color: #edf2ff79;
+    /* Color de fondo que te gustó */
+    border-radius: 8px;
+    border: 1px solid #d1dff1;
+    text-align: center;
+    /* Centra el contenido */
+}
+
+.welcomeTitle {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #334d6e;
+    /* Azul oscuro */
+    font-size: 1.6em;
+}
+
+.welcomeText {
+    color: #495057;
+    /* Gris oscuro */
+    font-size: 1.1em;
+    line-height: 1.6;
+}
+
+
+
+.pedidosTitle {
+    margin-top: 0;
+    /* Quita margen superior si está dentro de mainContent con padding */
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 1.4em;
+    /* Título de sección */
+    padding-bottom: 8px;
+    border-bottom: 1px solid #eee;
+}
+
+.loadingText,
+.errorText,
+.noPedidosText {
+    text-align: center;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 5px;
+    font-style: italic;
+}
+
+.loadingText {
+    color: #555;
+}
+
+.errorText {
+    color: #dc3545;
+    /* Rojo */
+    background-color: #f8d7da;
+    border: 1px solid #f5c2c7;
+    font-style: normal;
+    font-weight: 500;
+}
+
+.noPedidosText {
+    color: #6c757d;
+    /* Gris */
+    background-color: #f8f9fa;
+    border: 1px dashed #ced4da;
+}
+
+/* Estilos para la lista ul (los li vienen de PedidoItem.module.css) */
+.pedidosList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}

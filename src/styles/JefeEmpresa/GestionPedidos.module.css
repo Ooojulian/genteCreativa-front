@@ -1,0 +1,216 @@
+/* src/styles/JefeEmpresa/GestionPedidos.module.css */
+
+/* --- Estilos Generales del Contenedor (Similar a GestionUsuarios) --- */
+.gestionContainer {
+  padding: 20px;
+  font-family: sans-serif;
+}
+
+.title {
+  margin-top: 0;
+  margin-bottom: 25px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+  color: #333;
+  font-size: 1.5em; /* Consistente */
+}
+
+.actionBar {
+    margin-bottom: 20px;
+}
+
+/* --- Estilos Comunes para Botones (Reutilizados) --- */
+.commonButton {
+  padding: 10px 15px;
+  cursor: pointer;
+  margin-right: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 0.95em;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+.commonButton:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* Botones específicos (Reutilizados) */
+.createButton { background-color: #d4edda; border-color: #c3e6cb; color: #155724; }
+.createButton:hover:not(:disabled) { background-color: #c3e6cb; }
+.cancelButton { background-color: #f8d7da; border-color: #f5c6cb; color: #721c24; }
+.cancelButton:hover:not(:disabled) { background-color: #f5c6cb; }
+.submitButton { background-color: #cce5ff; border-color: #b8daff; color: #004085; }
+.submitButton:hover:not(:disabled) { background-color: #b8daff; }
+
+
+/* --- Estilos del Formulario de Pedido --- */
+.pedidoForm { /* Nombre específico */
+  border: 1px solid #d1dff1;
+  padding: 25px;
+  margin-top: 15px; /* Reducido margen superior */
+  margin-bottom: 30px;
+  background: #edf2ff79; /* <-- TU COLOR DE FONDO! */
+  border-radius: 8px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.07);
+  max-width: 750px; /* Un poco más ancho para pedidos */
+}
+
+.formTitle { /* Título dentro del form */
+    margin-top: 0;
+    margin-bottom: 25px;
+    font-size: 1.3em;
+    color: #334d6e;
+    text-align: center;
+}
+
+.inputGroup {
+  margin-bottom: 18px;
+}
+
+.label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+  color: #334d6e;
+  font-size: 0.9em;
+}
+
+.input,
+.textarea,
+.select {
+  width: 100%;
+  padding: 12px;
+  box-sizing: border-box;
+  border: 1px solid #c9d7e8;
+  border-radius: 4px;
+  font-size: 1em;
+  background-color: #fff;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.input:focus,
+.textarea:focus,
+.select:focus {
+    border-color: #5b97f1;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
+}
+.input:disabled {
+    background-color: #e9ecef;
+    cursor: not-allowed;
+}
+
+
+.textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.buttonGroup {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid #e0e8f4;
+    display: flex;
+    gap: 10px;
+}
+
+
+/* --- Estilos de Mensajes (Reutilizados) --- */
+.formError, .generalError { color: #d9534f; background-color: #f8d7da; border: 1px solid #f5c6cb; padding: 10px 15px; border-radius: 4px; margin-top: 15px; font-size: 0.9em; }
+.formSuccess, .generalSuccess { color: #155724; background-color: #d4edda; border: 1px solid #c3e6cb; padding: 10px 15px; border-radius: 4px; margin-top: 15px; font-size: 0.9em; }
+
+
+/* --- Estilos de Layout y Lista de Pedidos --- */
+.layout {
+    display: flex;
+    gap: 25px; /* Espacio entre lista y detalle */
+    margin-top: 20px; /* Espacio después de forms/botones */
+}
+
+.listaPedidos {
+    flex: 2; /* Lista un poco más ancha */
+    max-height: 75vh; /* Altura máxima con scroll */
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px; /* Padding interno */
+    background-color: #fff; /* Fondo blanco para la lista */
+}
+
+.detallePedido {
+    flex: 3; /* Detalle más ancho */
+    max-height: 75vh; /* Misma altura */
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #ffffff;
+
+     /* El padding está dentro de PedidoDetalleCompleto */
+}
+
+
+.listTitle { /* Título sobre la lista/tabla */
+    margin-top: 0; /* Ajustado */
+    margin-bottom: 15px;
+    color: #333;
+    font-size: 1.2em;
+}
+
+
+
+.pedidoTable { /* Tabla específica de pedidos */
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 0.9em;
+}
+
+.pedidoTable th,
+.pedidoTable td {
+    border: 1px solid #eee;
+    padding: 10px 12px;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.pedidoTable thead th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    color: #495057;
+    position: sticky; /* Cabecera fija */
+    top: 0;
+    z-index: 1;
+}
+
+.pedidoTable tbody tr {
+    cursor: pointer; /* Indica que la fila es clickeable */
+    transition: background-color 0.15s ease-in-out;
+}
+
+.pedidoTable tbody tr:nth-child(even) {
+    background-color: #fdfdfd;
+}
+.pedidoTable tbody tr:hover {
+    background-color: #f1f5ff;
+}
+.pedidoTable tbody tr.seleccionado { /* Estilo para fila seleccionada */
+    background-color: #e0eaff !important; /* Sobrescribe hover y even */
+    font-weight: 500;
+}
+
+.actionsCell { /* Celda de acciones */
+    white-space: nowrap;
+    text-align: center !important;
+    width: 100px; /* Ajusta según necesites */
+}
+
+/* Botones de acción en la lista (Reutilizados) */
+.listButton { padding: 5px 10px; font-size: 0.85em; margin-left: 5px; cursor: pointer; border: 1px solid transparent; border-radius: 3px; transition: background-color 0.2s, border-color 0.2s; }
+.editButton { background-color: #e0eaff; border-color: #b3c7ff; color: #0033cc; }
+.editButton:hover { background-color: #cce0ff; border-color: #a0bfff; }
+.deleteButton { background-color: #ffe0e0; border-color: #ffb3b3; color: #cc0000; }
+.deleteButton:hover { background-color: #ffcccc; border-color: #ff9999; }
+
+.divider { /* Separador opcional */
+    border: none;
+    border-top: 1px solid #eee;
+    margin: 30px 0;
+}

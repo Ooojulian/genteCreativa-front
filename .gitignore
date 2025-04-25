@@ -1,0 +1,26 @@
+# Dependencias
+node_modules/
+
+# Archivos de build (ajusta según tu proyecto: dist, build, .next, etc.)
+dist/
+build/
+.output/
+.nuxt/
+.next/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Archivos de entorno (¡MUY IMPORTANTE!)
+.env
+.env.*
+!.env.example
+
+# Archivos de sistema operativo
+.DS_Store
+Thumbs.db
