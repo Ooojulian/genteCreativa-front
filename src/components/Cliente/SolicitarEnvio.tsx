@@ -1,19 +1,14 @@
 // frontend/src/components/Cliente/SolicitarEnvio.tsx
-
 import React, { useState, useEffect, useCallback } from 'react';
-import { createPedidoTransporteCliente, getInventarioEmpresa } from '../../services/api';
+// --- CORRECCIÓN AQUÍ ---
+import { createPedidoTransporteCliente } from '../../services/transporte'; // <-- APUNTA A transporte.ts
+import { getInventarioEmpresa } from '../../services/bodegaje';      // <-- APUNTA A bodegaje.ts
+// ---------------------
 import styles from '../../styles/Cliente/SolicitarEnvio.module.css';
+// --- Añade las importaciones de tipos si las usas directamente ---
+import { ClienteToService, /* otros tipos como TipoServicio, etc. */ } from '../../types/pedido'; // Ajusta ruta
+// ---------------------------------------------------------
 
-// --- Interfaces y Tipos Actualizados ---
-
-// Interfaz para el inventario (sin cambios)
-interface InventarioClienteItem {
-    id: number;
-    producto_nombre: string;
-    ubicacion_nombre: string;
-    producto_id: number;
-    cantidad: number;
-}
 
 // Item para enviar a la API (sin cambios)
 interface ItemARetirarInput { producto_id: number; cantidad: number; }
@@ -69,7 +64,7 @@ const SolicitarEnvio: React.FC = () => {
     const [distanciaEstimada, setDistanciaEstimada] = useState<string>(''); // Usar string
 
     // Estados Retiro Bodega (sin cambios)
-    const [inventarioDisponible, setInventarioDisponible] = useState<InventarioClienteItem[]>([]);
+    const [inventarioDisponible, setInventarioDisponible] = useState<ClienteToService[]>([]);
     const [loadingInventario, setLoadingInventario] = useState(false);
     const [errorInventario, setErrorInventario] = useState<string | null>(null);
     const [cantidadesARetirar, setCantidadesARetirar] = useState<Record<number, number>>({});
@@ -112,7 +107,7 @@ const SolicitarEnvio: React.FC = () => {
                         producto_id: prodId
                     };
                 })
-                .filter((item): item is InventarioClienteItem => item !== null && item.cantidad > 0);
+                .filter((item): item is ClienteToService => item !== null && item.cantidad > 0);
             setInventarioDisponible(processedData);
         } catch (err: any) {
             setErrorInventario("No se pudo cargar tu inventario.");

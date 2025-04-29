@@ -1,12 +1,12 @@
-// frontend/src/components/Historial/HistorialViajes.tsx
-// OJO: Si moviste este archivo a components/Conductor/, ajusta las rutas de importación relativas
+// frontend/src/components/Conductor/HistorialViajes.tsx (Ajusta ruta si es necesario)
 
 import React, { useState, useEffect, useCallback } from 'react';
-import { PedidoDetalleData} from '../../types/pedido';
-import { getHistorialMesConductor } from '../../services/api'; // Ajusta la ruta si es necesario
-
-import HistorialItem from '../Shared/HistorialItem'; // Ajusta la ruta si es necesario
-import styles from '../../styles/Conductor/HistorialViajes.module.css';
+import { PedidoDetalleData} from '../../types/pedido'; // Ajusta ruta si es necesario
+// --- CORRECCIÓN AQUÍ ---
+import { getHistorialMesConductor } from '../../services/transporte'; // <-- APUNTA AL NUEVO ARCHIVO
+// ---------------------
+import HistorialItem from '../Shared/HistorialItem'; // Ajusta ruta si es necesario
+import styles from '../../styles/Conductor/HistorialViajes.module.css'; // Ajusta ruta si es necesario
 
 const HistorialViajes: React.FC = () => {
     const [historial, setHistorial] = useState<PedidoDetalleData[]>([]);

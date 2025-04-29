@@ -1,14 +1,14 @@
 // frontend/src/components/Conductor/ConductorDashboard.tsx
-
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { getPedidos } from '../../services/api'; // Make sure getPedidos is correctly imported
+// --- CORRECCIÓN AQUÍ ---
+import { getPedidos } from '../../services/transporte'; // <-- APUNTA AL NUEVO ARCHIVO
+// ---------------------
 import PedidoItem from './PedidoItem';
 import { useAuth } from '../../context/AuthContext';
 import HistorialViajes from './HistorialViajes';
 import layoutStyles from '../../styles/Layout/DashboardLayout.module.css';
-// --- Importa los estilos específicos para este dashboard ---
-import styles from '../../styles/Conductor/ConductorDashboard.module.css'; // Ajusta ruta si es necesario
-import { PedidoConductorData } from '../../types/pedido'; // Make sure PedidoConductorData is correct
+import styles from '../../styles/Conductor/ConductorDashboard.module.css';
+import { PedidoConductorData } from '../../types/pedido';
 import Header from '../Layout/Header';
 
 type ConductorVista = 'inicio' | 'pedidos' | 'historial';

@@ -1,9 +1,14 @@
 // frontend/src/components/Cliente/InventarioCliente.tsx
 import React, { useState, useEffect, useCallback } from 'react';
-import { getInventarioEmpresa } from '../../services/api';
-import styles from '../../styles/Cliente/InventarioCliente.module.css'; // Ajusta la ruta
-import { formatDistanceToNowStrict } from 'date-fns'; // <-- Importar date-fns
-import { es } from 'date-fns/locale'; 
+// --- CORRECCIÓN AQUÍ ---
+import { getInventarioEmpresa } from '../../services/bodegaje'; // <-- APUNTA AL NUEVO ARCHIVO
+// ---------------------
+import styles from '../../styles/Cliente/InventarioCliente.module.css';
+import { formatDistanceToNowStrict } from 'date-fns';
+import { es } from 'date-fns/locale';
+// --- Añade la importación del tipo si lo usas directamente ---
+import { InventarioDataOutput } from '../../types/pedido'; // Ajusta ruta
+// ---------------------------------------------------------
 
 // Interfaz para el inventario recibido
 interface InventarioItem {

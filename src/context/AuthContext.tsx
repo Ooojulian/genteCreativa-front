@@ -1,6 +1,6 @@
 // frontend/src/context/AuthContext.tsx
 import React, { createContext, useState, useEffect, ReactNode, useContext } from 'react';
-import api from '../services/api'; // Asegúrate que la ruta sea correcta
+import api from '../services/apiConfig'; // <-- APUNTA AL NUEVO ARCHIVO DE CONFIGURACIÓN
 import { useNavigate } from 'react-router-dom';
 
 // --- INICIO: Definición de Tipos (Asegúrate que coincidan con tu backend) ---

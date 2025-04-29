@@ -3,7 +3,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 // Importa las funciones API para Ubicaciones
 import {
     getUbicaciones, createUbicacion, updateUbicacion, deleteUbicacion
-} from '../../services/api'; // Ajusta la ruta si es necesario
+} from '../../services/bodegaje'; // <-- APUNTA AL NUEVO ARCHIVO
 
 // --- Importa el CSS Module ---
 import styles from '../../styles/JefeInventario/GestionUbicaciones.module.css'; // Ajusta la ruta

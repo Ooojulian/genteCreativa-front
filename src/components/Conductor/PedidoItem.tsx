@@ -1,15 +1,17 @@
 // frontend/src/components/Conductor/PedidoItem.tsx
 
 import React, { useState, ChangeEvent } from 'react';
+// --- CORRECCIÓN AQUÍ ---
 import {
     iniciarPedido,
     finalizarPedido,
     uploadPruebaEntrega,
-    getQRData // Importa la función para obtener datos del QR
-} from '../../services/api';
-import { PedidoConductorData } from '../../types/pedido'; // Importa la interfaz con flags booleanos
+    getQRData
+} from '../../services/transporte'; // <-- APUNTA AL NUEVO ARCHIVO
+// ---------------------
+import { PedidoConductorData } from '../../types/pedido'; // <-- Asegúrate de importar TipoFotoUpload si lo usas
 import styles from '../../styles/Conductor/PedidoItem.module.css';
-import QRCode from "react-qr-code"; // <-- Importa la librería para generar el QR
+import QRCode from "react-qr-code";
 
 // Interfaz para las props
 interface PedidoItemProps {

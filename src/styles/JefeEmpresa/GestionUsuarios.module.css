@@ -187,6 +187,69 @@
     width: 100px; /* Ancho fijo para acciones */
 }
 
+.filterContainer {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los filtros pasen a la siguiente línea */
+    gap: 18px; /* Espacio entre grupos de filtros */
+    margin-top: 20px; /* Espacio antes de los filtros (puedes ajustar) */
+    margin-bottom: 25px; /* Espacio después de los filtros */
+    padding: 18px;
+    border: 1px solid #e0e0e0; /* Borde más suave */
+    border-radius: 6px;
+    background-color: #d1dff1; /* Fondo azul claro como en HistorialInventario */
+  }
+  
+  .filterGroup {
+    display: flex;
+    flex-direction: column;
+    min-width: 160px; /* Ancho mínimo para cada filtro */
+    flex-grow: 1; /* Permite que crezcan para llenar espacio */
+  }
+  
+  .filterLabel {
+    font-size: 0.85em;
+    margin-bottom: 5px;
+    color: #495057; /* Gris oscuro */
+    font-weight: 500;
+  }
+  
+  .filterSelect {
+    padding: 9px 10px; /* Padding ajustado */
+    border-radius: 4px;
+    border: 1px solid #ced4da; /* Borde estándar */
+    background-color: #fff;
+    font-size: 0.95em;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    cursor: pointer; /* Añadido cursor */
+  }
+  .filterSelect:disabled {
+      background-color: #e9ecef;
+      cursor: not-allowed;
+  }
+  .filterSelect:focus {
+      border-color: #86b7fe; /* Azul claro para foco */
+      outline: 0;
+      box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25); /* Sombra de foco */
+  }
+
+  .filterInput {
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.95em;
+    flex-grow: 1;
+    /* Permite que el input ocupe el espacio restante */
+  }
+  
+  /* Asegúrate que tu JSX use 'loadingSmall' si copias esta clase */
+  .loadingSmall {
+      align-self: center; /* Alinea verticalmente con los selects */
+      font-size: 0.9em;
+      color: #6c757d; /* Gris muted */
+      margin-left: 10px;
+      padding-bottom: 5px; /* Ajuste fino de alineación vertical */
+  }
+
 /* Estilos para botones de acción en la lista (Igual que GestionEmpresas) */
 .listButton { padding: 5px 10px; font-size: 0.85em; margin-left: 5px; cursor: pointer; border: 1px solid transparent; border-radius: 3px; transition: background-color 0.2s, border-color 0.2s; }
 .editButton { background-color: #e0eaff; border-color: #b3c7ff; color: #0033cc; }

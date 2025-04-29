@@ -1,6 +1,6 @@
 // frontend/src/components/JefeEmpresa/HistorialPedidosJefe.tsx
 import React, { useState, useEffect, useCallback } from 'react';
-import { getHistorialGeneral } from '../../services/api';
+import { getHistorialGeneral } from '../../services/transporte'; // <-- APUNTA AL NUEVO ARCHIVO
 import HistorialItem from '../Shared/HistorialItem';
 import { PedidoDetalleData } from '../../types/pedido'; 
 

@@ -1,229 +1,291 @@
 /* src/styles/JefeEmpresa/GestionEmpresas.module.css */
 
 .gestionContainer {
-    padding: 20px;
-    font-family: sans-serif;
-  }
-  
-  .title {
-    margin-top: 0;
-    margin-bottom: 25px;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 10px;
-    color: #333;
-  }
-  
-  .actionBar {
-      margin-bottom: 20px;
-      /* Puedes añadir más estilos si necesitas alinear el botón */
-  }
-  
-  /* --- Estilos Comunes para Botones --- */
-  .commonButton {
-    padding: 10px 15px;
-    cursor: pointer;
-    margin-right: 10px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    font-size: 0.95em;
-    transition: background-color 0.2s, border-color 0.2s;
-  }
-  .commonButton:disabled {
-      cursor: not-allowed;
-      opacity: 0.6;
-  }
-  
-  /* Botones específicos */
-  .createButton {
-    background-color: #d4edda; /* Verde claro */
-    border-color: #c3e6cb;
-    color: #155724;
-  }
-  .createButton:hover:not(:disabled) {
-    background-color: #c3e6cb;
-  }
-  
-  .cancelButton {
-    background-color: #f8d7da; /* Rojo claro */
-    border-color: #f5c6cb;
-    color: #721c24;
-  }
-  .cancelButton:hover:not(:disabled) {
-    background-color: #f5c6cb;
-  }
-  
-  .submitButton {
-      background-color: #cce5ff; /* Azul claro */
-      border-color: #b8daff;
-      color: #004085;
-  }
-  .submitButton:hover:not(:disabled) {
-      background-color: #b8daff;
-  }
-  
-  
-  /* --- Estilos del Formulario --- */
-  .empresaForm {
-    border: 1px solid #ddd;
-    padding: 25px;
-    margin-top: 20px;
-    margin-bottom: 30px;
-    background: #edf2ff79;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
-  }
-  
-  .formTitle {
-      margin-top: 0;
-      margin-bottom: 20px;
-      font-size: 1.2em;
-      color: #444;
-  }
-  
-  .inputGroup {
-    margin-bottom: 18px; /* Más espacio */
-  }
-  
-  .label {
-    display: block;
-    margin-bottom: 6px;
-    font-weight: 500;
-    color: #555;
-    font-size: 0.9em;
-  }
-  
-  .input,
-  .textarea,
-  .select { /* Estilo base para todos los controles */
-    width: 100%;
-    padding: 12px; /* Un poco más de padding */
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1em;
-    transition: border-color 0.2s;
-  }
-  .input:focus,
-  .textarea:focus,
-  .select:focus {
-      border-color: #007bff; /* Resaltar al enfocar */
-      outline: none;
-  }
-  
-  .textarea {
-      resize: vertical;
-      min-height: 80px;
-  }
-  
-  .buttonGroup {
-      margin-top: 20px;
-      padding-top: 15px;
-      border-top: 1px solid #eee;
-      display: flex; /* Para alinear botones si es necesario */
-      gap: 10px;
-  }
-  
-  
-  /* --- Estilos de Mensajes --- */
-  .formError, .generalError {
-    color: #d9534f; /* Rojo */
-    background-color: #f8d7da;
-    border: 1px solid #f5c6cb;
-    padding: 10px 15px;
-    border-radius: 4px;
-    margin-top: 15px;
-    font-size: 0.9em;
-  }
-  
-  .formSuccess, .generalSuccess {
-    color: #155724; /* Verde */
-    background-color: #d4edda;
-    border: 1px solid #c3e6cb;
-    padding: 10px 15px;
-    border-radius: 4px;
-    margin-top: 15px;
-    font-size: 0.9em;
-  }
-  
-  
-  /* --- Estilos de la Lista --- */
-  .listTitle {
-      margin-top: 30px;
-      margin-bottom: 15px;
-      color: #333;
-  }
-  
-  .listContainer {
-      margin-top: 10px;
-  }
-  
-  .empresaList { /* Estilo para la <ul> */
-      list-style: none;
-      padding: 0;
-      margin: 0;
-  }
-  
-  .empresaItem { /* Estilo para cada <li> */
-      border-bottom: 1px solid #eee;
-      padding: 15px 5px; /* Más padding vertical */
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      transition: background-color 0.15s ease-in-out;
-  }
-  .empresaItem:hover {
-      background-color: #afcbdb3d;
-  }
-  .empresaItem:last-child {
-      border-bottom: none;
-  }
-  
-  .itemInfo {
-      flex-grow: 1; /* Ocupa el espacio disponible */
-      margin-right: 15px; /* Espacio antes de los botones */
-  }
-  .itemInfo strong {
-      font-size: 1.1em;
-      color: #222;
-      display: block; /* Nombre en su propia línea */
-      margin-bottom: 4px;
-  }
-  .itemInfo small {
-      color: #555;
-      font-size: 0.85em;
-  }
-  
-  .itemActions {
-      display: flex;
-      gap: 8px; /* Espacio entre botones de acción */
-      flex-shrink: 0; /* Evita que los botones se achiquen */
-  }
-  
-  .listButton { /* Estilo base para botones de la lista */
-      padding: 5px 10px;
-      font-size: 0.85em;
-      cursor: pointer;
-      border: 1px solid transparent; /* Borde transparente por defecto */
-      border-radius: 3px;
-      transition: background-color 0.2s, border-color 0.2s;
-  }
-  
-  .editButton {
-      background-color: #e0eaff;
-      border-color: #b3c7ff;
-      color: #0033cc;
-  }
-  .editButton:hover {
-      background-color: #cce0ff;
-      border-color: #a0bfff;
-  }
-  
-  .deleteButton {
-      background-color: #ffe0e0;
-      border-color: #ffb3b3;
-      color: #cc0000;
-  }
-  .deleteButton:hover {
-      background-color: #ffcccc;
-      border-color: #ff9999;
-  }
+  padding: 20px;
+  font-family: sans-serif;
+}
+
+.title {
+  margin-top: 0;
+  margin-bottom: 25px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+  color: #333;
+}
+
+.actionBar {
+  margin-bottom: 20px;
+  /* Puedes añadir más estilos si necesitas alinear el botón */
+}
+
+/* --- Estilos Comunes para Botones --- */
+.commonButton {
+  padding: 10px 15px;
+  cursor: pointer;
+  margin-right: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 0.95em;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.commonButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Botones específicos */
+.createButton {
+  background-color: #d4edda;
+  /* Verde claro */
+  border-color: #c3e6cb;
+  color: #155724;
+}
+
+.createButton:hover:not(:disabled) {
+  background-color: #c3e6cb;
+}
+
+.cancelButton {
+  background-color: #f8d7da;
+  /* Rojo claro */
+  border-color: #f5c6cb;
+  color: #721c24;
+}
+
+.cancelButton:hover:not(:disabled) {
+  background-color: #f5c6cb;
+}
+
+.submitButton {
+  background-color: #cce5ff;
+  /* Azul claro */
+  border-color: #b8daff;
+  color: #004085;
+}
+
+.submitButton:hover:not(:disabled) {
+  background-color: #b8daff;
+}
+
+
+/* --- Estilos del Formulario --- */
+.empresaForm {
+  border: 1px solid #ddd;
+  padding: 25px;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  background: #edf2ff79;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+}
+
+.formTitle {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 1.2em;
+  color: #444;
+}
+
+.inputGroup {
+  margin-bottom: 18px;
+  /* Más espacio */
+}
+
+.label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+  color: #555;
+  font-size: 0.9em;
+}
+
+.input,
+.textarea,
+.select {
+  /* Estilo base para todos los controles */
+  width: 100%;
+  padding: 12px;
+  /* Un poco más de padding */
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1em;
+  transition: border-color 0.2s;
+}
+
+.input:focus,
+.textarea:focus,
+.select:focus {
+  border-color: #007bff;
+  /* Resaltar al enfocar */
+  outline: none;
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.buttonGroup {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+  display: flex;
+  /* Para alinear botones si es necesario */
+  gap: 10px;
+}
+
+
+/* --- Estilos de Mensajes --- */
+.formError,
+.generalError {
+  color: #d9534f;
+  /* Rojo */
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  padding: 10px 15px;
+  border-radius: 4px;
+  margin-top: 15px;
+  font-size: 0.9em;
+}
+
+.formSuccess,
+.generalSuccess {
+  color: #155724;
+  /* Verde */
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+  padding: 10px 15px;
+  border-radius: 4px;
+  margin-top: 15px;
+  font-size: 0.9em;
+}
+
+
+/* --- Estilos de la Lista --- */
+.listTitle {
+  margin-top: 30px;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.listContainer {
+  margin-top: 10px;
+}
+
+.empresaList {
+  /* Estilo para la <ul> */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.empresaItem {
+  /* Estilo para cada <li> */
+  border-bottom: 1px solid #eee;
+  padding: 15px 5px;
+  /* Más padding vertical */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.15s ease-in-out;
+}
+
+.empresaItem:hover {
+  background-color: #afcbdb3d;
+}
+
+.empresaItem:last-child {
+  border-bottom: none;
+}
+
+.itemInfo {
+  flex-grow: 1;
+  /* Ocupa el espacio disponible */
+  margin-right: 15px;
+  /* Espacio antes de los botones */
+}
+
+.itemInfo strong {
+  font-size: 1.1em;
+  color: #222;
+  display: block;
+  /* Nombre en su propia línea */
+  margin-bottom: 4px;
+}
+
+.itemInfo small {
+  color: #555;
+  font-size: 0.85em;
+}
+
+.itemActions {
+  display: flex;
+  gap: 8px;
+  /* Espacio entre botones de acción */
+  flex-shrink: 0;
+  /* Evita que los botones se achiquen */
+}
+
+.listButton {
+  /* Estilo base para botones de la lista */
+  padding: 5px 10px;
+  font-size: 0.85em;
+  cursor: pointer;
+  border: 1px solid transparent;
+  /* Borde transparente por defecto */
+  border-radius: 3px;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.editButton {
+  background-color: #e0eaff;
+  border-color: #b3c7ff;
+  color: #0033cc;
+}
+
+.editButton:hover {
+  background-color: #cce0ff;
+  border-color: #a0bfff;
+}
+
+.deleteButton {
+  background-color: #ffe0e0;
+  border-color: #ffb3b3;
+  color: #cc0000;
+}
+
+.deleteButton:hover {
+  background-color: #ffcccc;
+  border-color: #ff9999;
+}
+
+.filterContainer {
+  margin-top: 15px;
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 500px;
+  /* O el ancho que prefieras */
+}
+
+.filterLabel {
+  font-weight: 600;
+  margin-right: 5px;
+  flex-shrink: 0;
+  /* Evita que la etiqueta se encoja */
+}
+
+.filterInput {
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.95em;
+  flex-grow: 1;
+  /* Permite que el input ocupe el espacio restante */
+}

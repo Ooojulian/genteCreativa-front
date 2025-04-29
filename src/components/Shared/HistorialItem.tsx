@@ -1,43 +1,99 @@
-// frontend/src/components/Shared/HistorialItem.tsx (o donde esté)
+// frontend/src/components/Shared/HistorialItem.tsx
 import React, { useState } from 'react';
-import { PedidoDetalleData, PruebaEntregaData, ConfirmacionClienteData} from '../../types/pedido';
-import styles from '../../styles/Shared/HistorialItem.module.css'; // Crea este archivo CSS
+// Asegúrate que la ruta a tu archivo de tipos sea correcta
+import { PedidoDetalleData, PruebaEntregaData, ConfirmacionClienteData } from '../../types/pedido';
+// Importa la función API para obtener el PDF
+import { getRemisionPDF } from '../../services/transporte'; // <-- APUNTA AL NUEVO ARCHIVO
+// Importa los estilos
+import styles from '../../styles/Shared/HistorialItem.module.css'; // Ajusta la ruta si es necesario
 
-
-
-
-// Props actualizadas
+// Props que espera el componente
 interface HistorialItemProps {
-  pedidoDetalle: PedidoDetalleData; // Recibe el objeto completo
+  pedidoDetalle: PedidoDetalleData; // Recibe el objeto completo del pedido
 }
 
-// Función para formatear (la tenías en ambos archivos, mejor tenerla en un utils/)
+// Función auxiliar para formatear fechas (puedes moverla a un archivo utils)
 const formatDateTime = (isoString: string | null): string => {
     if (!isoString) return '--';
-    try { const date = new Date(isoString); return date.toLocaleString(); }
-    catch (e) { return isoString; }
+    try {
+        const date = new Date(isoString);
+        // Formato ejemplo: 26/4/2025, 3:05 p. m. (ajusta según preferencia)
+        return date.toLocaleString('es-CO', {
+             dateStyle: 'short',
+             timeStyle: 'short'
+        });
+    }
+    catch (e) {
+        console.error("Error formateando fecha:", isoString, e);
+        return isoString;
+    }
 };
 
 // El componente funcional
 const HistorialItem: React.FC<HistorialItemProps> = ({ pedidoDetalle }) => {
-  // Estado local para mostrar/ocultar detalles (opcional)
+  // Estado local para mostrar/ocultar detalles
   const [detallesVisibles, setDetallesVisibles] = useState(false);
+  // Estado local para el botón de remisión
+  const [loadingRemision, setLoadingRemision] = useState(false);
+  const [errorRemision, setErrorRemision] = useState<string | null>(null);
 
-  const toggleDetalles = () => setDetallesVisibles(!detallesVisibles);
+  // Función para alternar la visibilidad de los detalles
+  const toggleDetalles = () => {
+      setDetallesVisibles(!detallesVisibles);
+      setErrorRemision(null); // Limpia error al ocultar/mostrar detalles
+  };
 
-  // Extraer datos para facilitar lectura
+  // Función para manejar la descarga/visualización de la remisión
+  const handleDescargarRemision = async () => {
+      setLoadingRemision(true);
+      setErrorRemision(null);
+      console.log(`Intentando descargar remisión para pedido ID: ${pedidoDetalle.id}`);
+      try {
+          // Llama a la función API que espera un Blob PDF
+          const pdfBlob = await getRemisionPDF(pedidoDetalle.id);
+
+          // Crea una URL temporal para el Blob recibido
+          const fileURL = window.URL.createObjectURL(pdfBlob);
+
+          // Abre el PDF en una nueva pestaña del navegador
+          window.open(fileURL, '_blank');
+
+          // Opcional: Si prefieres forzar descarga en lugar de abrir
+          /*
+          const link = document.createElement('a');
+          link.href = fileURL;
+          link.setAttribute('download', `remision_pedido_${pedidoDetalle.id}.pdf`); // Nombre sugerido para descarga
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link); // Limpiar
+          */
+
+           // Importante: Liberar la URL del objeto después de un tiempo (si abres en nueva pestaña)
+           // Si fuerzas descarga, puedes revocarla inmediatamente después de link.click()
+          setTimeout(() => window.URL.revokeObjectURL(fileURL), 100); // Libera memoria
+
+      } catch (error: any) {
+           console.error("Error al descargar/ver remisión:", error);
+           // Muestra el mensaje de error que viene de la función API
+           setErrorRemision(error.message || "No se pudo generar la remisión.");
+      } finally {
+          setLoadingRemision(false); // Termina el estado de carga
+      }
+  };
+
+  // Extracción de datos del pedido para facilitar el renderizado
   const {
       id, cliente, conductor, origen, destino, descripcion, estado_display,
       fecha_creacion, fecha_inicio, fecha_fin, tipo_servicio_display,
-      pruebas_entrega = [], // Valor por defecto array vacío
-      confirmacion_cliente = null, // Valor por defecto null
-      // ... otros campos de PedidoDetalleData que quieras mostrar ...
+      pruebas_entrega = [], // Asegura que sea un array
+      confirmacion_cliente = null, // Asegura que sea null si no existe
       items_pedido, numero_pasajeros, tipo_tarifa_pasajero_display,
       duracion_estimada_horas, distancia_estimada_km, tiempo_bodegaje_estimado,
       dimensiones_contenido, tipo_vehiculo_display,
       hora_recogida_programada, hora_entrega_programada
   } = pedidoDetalle;
 
+  // Filtrar fotos por tipo para mostrarlas separadas
   const fotosInicio = pruebas_entrega.filter(p => p.tipo_foto?.startsWith('INICIO'));
   const fotosFin = pruebas_entrega.filter(p => p.tipo_foto?.startsWith('FIN'));
 
@@ -57,7 +113,8 @@ const HistorialItem: React.FC<HistorialItemProps> = ({ pedidoDetalle }) => {
           {/* Detalles Adicionales (visibles condicionalmente) */}
           {detallesVisibles && (
               <div className={styles.detallesContainer}>
-                  <div className={styles.columna}> {/* Columna 1 */}
+                  {/* Columna 1: Detalles generales y específicos del tipo */}
+                  <div className={styles.columna}>
                       <h4>Detalles Generales</h4>
                       <p><strong>Conductor:</strong> {conductor || 'No asignado'}</p>
                       <p><strong>Estado:</strong> {estado_display}</p>
@@ -88,7 +145,8 @@ const HistorialItem: React.FC<HistorialItemProps> = ({ pedidoDetalle }) => {
                       </>)}
                   </div>
 
-                  <div className={styles.columna}> {/* Columna 2 */}
+                  {/* Columna 2: Pruebas (Fotos y Confirmación Cliente) y Acciones */}
+                  <div className={styles.columna}>
                       {/* Fotos */}
                       {(fotosInicio.length > 0 || fotosFin.length > 0) && (
                           <div className={styles.seccionFotos}>
@@ -97,7 +155,7 @@ const HistorialItem: React.FC<HistorialItemProps> = ({ pedidoDetalle }) => {
                                   <> <h5>Inicio:</h5> <div className={styles.galeria}> {fotosInicio.map(f => <a key={f.id} href={f.foto_url || '#'} target="_blank" rel="noopener noreferrer"><img src={f.foto_url || ''} alt={f.tipo_foto_display} title={`${f.tipo_foto_display} (${formatDateTime(f.timestamp)})`} /></a>)} </div> </>
                               )}
                               {fotosFin.length > 0 && (
-                                  <> <h5>Fin:</h5> <div className={styles.galeria}> {fotosFin.map(f => <a key={f.id} href={f.foto_url || '#'} target="_blank" rel="noopener noreferrer"><img src={f.foto_url || ''} alt={f.tipo_foto_display} title={`${f.tipo_foto_display} (${formatDateTime(f.timestamp)})`} /></a>)} </div> </>
+                                  <> {fotosInicio.length > 0 && <hr className={styles.photoSeparator}/>} <h5>Fin:</h5> <div className={styles.galeria}> {fotosFin.map(f => <a key={f.id} href={f.foto_url || '#'} target="_blank" rel="noopener noreferrer"><img src={f.foto_url || ''} alt={f.tipo_foto_display} title={`${f.tipo_foto_display} (${formatDateTime(f.timestamp)})`} /></a>)} </div> </>
                               )}
                           </div>
                       )}
@@ -115,6 +173,21 @@ const HistorialItem: React.FC<HistorialItemProps> = ({ pedidoDetalle }) => {
                               )}
                           </div>
                       )}
+
+                      {/* --- Sección de Acción: Remisión --- */}
+                      <div className={styles.seccionAcciones}>
+                          <h4>Acciones</h4>
+                          <button
+                              onClick={handleDescargarRemision}
+                              disabled={loadingRemision}
+                              className={styles.remisionButton}
+                          >
+                              {loadingRemision ? 'Generando PDF...' : 'Descargar/Ver Remisión'}
+                          </button>
+                          {/* Muestra el error si ocurre al intentar generar/descargar */}
+                          {errorRemision && <p className={styles.errorRemision}>{errorRemision}</p>}
+                      </div>
+                      {/* --- Fin Sección de Acción --- */}
                   </div>
               </div>
           )}

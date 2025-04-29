@@ -2,7 +2,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useParams } from 'react-router-dom'; // Para leer el token de la URL
 import SignatureCanvas from 'react-signature-canvas'; // Importa el componente de firma
-import { submitConfirmacionCliente } from '../../services/api'; // Necesitarás crear esta función en api.ts
+import { submitConfirmacionCliente } from '../../services/transporte'; // <-- APUNTA AL NUEVO ARCHIVO
 import styles from '../../styles/Public/ConfirmacionForm.module.css'; // Crea este archivo CSS
 
 // Interfaz para los datos del formulario

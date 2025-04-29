@@ -2,11 +2,12 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import {
     getPedidosJefe, updatePedido, deletePedido,
-    getConductores, getClientes, createPedidoJefe, // createPedidoJefe ahora debe manejar más tipos
-    getPedidoDetalle,
-    getInventarioPorEmpresaId // <-- Importa la nueva función API
-
-} from '../../services/api';
+    createPedidoJefe, getPedidoDetalle // Funciones de pedido Jefe/Admin
+    // getConductores, getClientes, // Se mueven a usuarios
+    // getInventarioPorEmpresaId // Se mueve a bodegaje
+} from '../../services/transporte'; // <-- Funciones de Pedidos
+import { getConductores, getClientes } from '../../services/usuarios'; // <-- Funciones de Usuarios
+import { getInventarioPorEmpresaId } from '../../services/bodegaje'; // <-- Función de Inventario
 // Importa las interfaces actualizadas desde tu archivo de tipos
 // Asegúrate que todas estas interfaces estén definidas correctamente en types/pedido.ts
 import {

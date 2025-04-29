@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext'; // Ajusta ruta si es diferente
-import { loginUser } from '../../services/api';     // Ajusta ruta si es diferente
+import { loginUser } from '../../services/auth';     // Ajusta ruta si es diferente
 import styles from '../../styles/Auth/Login.module.css'; // Ajusta ruta si es diferente
 import logoGenteCreativa from '../../assets/images/logo-gente-creativa.png'; // <-- AJUSTA EL NOMBRE DEL ARCHIVO
 

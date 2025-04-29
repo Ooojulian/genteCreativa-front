@@ -13,6 +13,8 @@ import GestionInventario from '../Inventario/GestionInventario';
 import HistorialInventario from '../Inventario/HistorialInventario';
 import GestionUbicaciones from '../Inventario/GestionUbicaciones';
 import GestionProductos from '../Inventario/GestionProductos';
+import GestionVehiculos from './GestionVehiculos';
+import GestionTiposVehiculo from './GestionTiposVehiculo'; 
 // Layout y otros
 import Header from '../Layout/Header';
 import layoutStyles from '../../styles/Layout/DashboardLayout.module.css';
@@ -24,7 +26,7 @@ import styles from '../../styles/JefeEmpresa/JefeEmpresaDashboard.module.css'; /
 import inicioGif from '../../assets/gift/jefe.gif'; // <-- Asumiendo ruta y extensión .gif
 
 // Tipos de vista
-type JefeVista = 'inicio' | 'empresas' | 'usuarios' | 'pedidos' | 'historial_pedidos' | 'inventario' | 'ubicaciones' | 'productos' | 'historial_inventario';
+type JefeVista = 'inicio' | 'empresas' | 'usuarios' | 'vehiculos' | 'tipos_vehiculo' | 'pedidos' | 'historial_pedidos' | 'inventario' | 'ubicaciones' | 'productos' | 'historial_inventario';
 
 const JefeEmpresaDashboard: React.FC = () => {
   const { user } = useAuth(); // logout no se usa aquí
@@ -35,12 +37,14 @@ const JefeEmpresaDashboard: React.FC = () => {
     switch (vistaActual) {
       case 'empresas': return <GestionEmpresas />;
       case 'usuarios': return <GestionUsuarios />;
+      case 'vehiculos': return <GestionVehiculos />;
       case 'pedidos': return <GestionPedidos />;
       case 'historial_pedidos': return <HistorialPedidosJefe />;
       case 'inventario': return <GestionInventario />;
       case 'ubicaciones': return <GestionUbicaciones />;
       case 'productos': return <GestionProductos />;
       case 'historial_inventario': return <HistorialInventario />;
+      case 'tipos_vehiculo': return <GestionTiposVehiculo />;
       case 'inicio':
       default:
         return ( // --- JSX Actualizado para 'inicio' ---
@@ -71,6 +75,8 @@ const JefeEmpresaDashboard: React.FC = () => {
         <button onClick={() => setVistaActual('inicio')} className={`${layoutStyles.navButton} ${vistaActual === 'inicio' ? layoutStyles.navButtonActive : ''}`}> Inicio </button>
         <button onClick={() => setVistaActual('empresas')} className={`${layoutStyles.navButton} ${vistaActual === 'empresas' ? layoutStyles.navButtonActive : ''}`}> Empresas </button>
         <button onClick={() => setVistaActual('usuarios')} className={`${layoutStyles.navButton} ${vistaActual === 'usuarios' ? layoutStyles.navButtonActive : ''}`}> Usuarios </button>
+        <button onClick={() => setVistaActual('vehiculos')} className={`${layoutStyles.navButton} ${vistaActual === 'vehiculos' ? layoutStyles.navButtonActive : ''}`}> Vehiculos </button>
+        <button onClick={() => setVistaActual('tipos_vehiculo')} className={`${layoutStyles.navButton} ${vistaActual === 'tipos_vehiculo' ? layoutStyles.navButtonActive : ''}`}> Tipos Vehículo </button>
         <button onClick={() => setVistaActual('pedidos')} className={`${layoutStyles.navButton} ${vistaActual === 'pedidos' ? layoutStyles.navButtonActive : ''}`}> Pedidos </button>
         <button onClick={() => setVistaActual('historial_pedidos')} className={`${layoutStyles.navButton} ${vistaActual === 'historial_pedidos' ? layoutStyles.navButtonActive : ''}`}> Hist. Pedidos </button>
         <button onClick={() => setVistaActual('inventario')} className={`${layoutStyles.navButton} ${vistaActual === 'inventario' ? layoutStyles.navButtonActive : ''}`}> Inventario </button>

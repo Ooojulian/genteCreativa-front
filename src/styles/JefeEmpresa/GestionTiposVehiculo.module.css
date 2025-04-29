@@ -1,0 +1,179 @@
+/* src/styles/JefeEmpresa/GestionTiposVehiculo.module.css */
+/* ESTILOS ADAPTADOS DE GestionUsuarios.module.css */
+
+/* --- Estilos Generales del Contenedor --- */
+.gestionContainer {
+    padding: 20px;
+    font-family: sans-serif;
+  }
+  
+  .title {
+    margin-top: 0;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    color: #333;
+  }
+  
+  .actionBar {
+      margin-bottom: 20px;
+  }
+  
+  .listTitle {
+      margin-top: 30px;
+      margin-bottom: 15px;
+      color: #333;
+      font-size: 1.2em;
+  }
+  
+  
+  /* --- Estilos Comunes para Botones --- */
+  .commonButton {
+    padding: 10px 15px;
+    cursor: pointer;
+    margin-right: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 0.95em;
+    transition: background-color 0.2s, border-color 0.2s;
+  }
+  .commonButton:disabled {
+      cursor: not-allowed;
+      opacity: 0.6;
+  }
+  
+  /* Botones específicos */
+  .createButton { background-color: #d4edda; border-color: #c3e6cb; color: #155724; }
+  .createButton:hover:not(:disabled) { background-color: #c3e6cb; }
+  .cancelButton { background-color: #f8d7da; border-color: #f5c6cb; color: #721c24; }
+  .cancelButton:hover:not(:disabled) { background-color: #f5c6cb; }
+  .submitButton { background-color: #cce5ff; border-color: #b8daff; color: #004085; }
+  .submitButton:hover:not(:disabled) { background-color: #b8daff; }
+  
+  
+  /* --- Estilos del Formulario de Tipos --- */
+  .tipoForm { /* Nombre de clase específico */
+    border: 1px solid #d1dff1;
+    padding: 25px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    background: #edf2ff79;
+    border-radius: 8px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.07);
+    max-width: 550px; /* Puede ser más estrecho que el de Usuarios */
+  }
+  
+  .formTitle {
+      margin-top: 0;
+      margin-bottom: 25px;
+      font-size: 1.3em;
+      color: #334d6e;
+      text-align: center;
+  }
+  
+  .inputGroup {
+    margin-bottom: 18px;
+  }
+  
+  .label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: #334d6e;
+    font-size: 0.9em;
+  }
+  
+  .input,
+  .textarea { /* Solo input y textarea aquí */
+    width: 100%;
+    padding: 12px;
+    box-sizing: border-box;
+    border: 1px solid #c9d7e8;
+    border-radius: 4px;
+    font-size: 1em;
+    background-color: #fff;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .input:focus,
+  .textarea:focus {
+      border-color: #5b97f1;
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
+  }
+  
+  .textarea {
+      resize: vertical;
+      min-height: 90px;
+  }
+  
+  .buttonGroup {
+      margin-top: 25px;
+      padding-top: 20px;
+      border-top: 1px solid #e0e8f4;
+      display: flex;
+      gap: 10px;
+  }
+  
+  /* --- Estilos de Mensajes --- */
+  .formError, .generalError { color: #d9534f; background-color: #f8d7da; border: 1px solid #f5c6cb; padding: 10px 15px; border-radius: 4px; margin-top: 15px; font-size: 0.9em; }
+  .formSuccess, .generalSuccess { color: #155724; background-color: #d4edda; border: 1px solid #c3e6cb; padding: 10px 15px; border-radius: 4px; margin-top: 15px; font-size: 0.9em; }
+  
+  
+  /* --- Estilos de la Lista de Tipos --- */
+  .listContainer { /* Si usas un contenedor para la lista */
+      margin-top: 10px;
+  }
+  
+  .tipoList { /* Estilo para la <ul> */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border: 1px solid #ddd; /* Borde consistente con otras listas */
+    border-radius: 5px;
+    background-color: #fff;
+  }
+  
+  .tipoItem { /* Estilo para cada <li> */
+    border-bottom: 1px solid #eee;
+    padding: 12px 15px; /* Padding consistente */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.15s ease-in-out;
+  }
+  .tipoItem:hover {
+      background-color: #f1f5ff; /* Hover consistente */
+  }
+  .tipoItem:last-child {
+      border-bottom: none;
+  }
+  
+  .itemInfo {
+      flex-grow: 1;
+      margin-right: 15px;
+  }
+  .itemInfo strong {
+      font-size: 1.05em; /* Consistente */
+      color: #222;
+      display: block;
+      margin-bottom: 3px;
+  }
+  .itemInfo small { /* Para la descripción */
+      color: #555;
+      font-size: 0.9em;
+      display: block;
+      margin-top: 2px;
+  }
+  
+  .itemActions {
+      display: flex;
+      gap: 8px;
+      flex-shrink: 0;
+  }
+  
+  /* Botones de acción en la lista (Copiado de GestionUsuarios) */
+  .listButton { padding: 5px 10px; font-size: 0.85em; margin-left: 5px; cursor: pointer; border: 1px solid transparent; border-radius: 3px; transition: background-color 0.2s, border-color 0.2s; }
+  .editButton { background-color: #e0eaff; border-color: #b3c7ff; color: #0033cc; }
+  .editButton:hover { background-color: #cce0ff; border-color: #a0bfff; }
+  .deleteButton { background-color: #ffe0e0; border-color: #ffb3b3; color: #cc0000; }
+  .deleteButton:hover { background-color: #ffcccc; border-color: #ff9999; }

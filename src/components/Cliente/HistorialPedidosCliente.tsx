@@ -1,9 +1,10 @@
 // frontend/src/components/Cliente/HistorialPedidosCliente.tsx
 import React, { useState, useEffect, useCallback } from 'react';
 import { PedidoDetalleData } from '../../types/pedido'; // Ajusta ruta si es necesario
-import { getHistorialMesCliente } from '../../services/api'; // Importa la nueva función API
-import HistorialItem from '../Shared/HistorialItem'; // Reutiliza el componente detallado
-// Estilos
+// --- CORRECCIÓN AQUÍ ---
+import { getHistorialMesCliente } from '../../services/transporte'; // <-- APUNTA AL NUEVO ARCHIVO
+// ---------------------
+import HistorialItem from '../Shared/HistorialItem';
 import styles from '../../styles/Cliente/HistorialPedidosCliente.module.css';
 
 const HistorialPedidosCliente: React.FC = () => {

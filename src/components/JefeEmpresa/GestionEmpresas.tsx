@@ -1,7 +1,7 @@
 // frontend/src/components/JefeEmpresa/GestionEmpresas.tsx
 import React, { useState, useEffect, useCallback } from 'react';
 // Importa TODAS las funciones API necesarias para Empresa
-import { createEmpresa, getEmpresas, updateEmpresa, deleteEmpresa } from '../../services/api';
+import { createEmpresa, getEmpresas, updateEmpresa, deleteEmpresa } from '../../services/empresas'; // <-- APUNTA AL NUEVO ARCHIVO
 import styles from '../../styles/JefeEmpresa/GestionEmpresas.module.css';
 
 
@@ -33,30 +33,43 @@ const GestionEmpresas: React.FC = () => {
     const [isSubmitting, setIsSubmitting] = useState(false); // Indicador de envío del formulario
     const [formError, setFormError] = useState<string | null>(null); // Errores específicos del formulario
     const [formSuccess, setFormSuccess] = useState<string | null>(null); // Mensajes de éxito (Crear, Editar, Borrar)
+    const [searchTerm, setSearchTerm] = useState('');
 
     // --- Funciones ---
 
     // Función para cargar la lista de empresas desde la API
-    const fetchEmpresas = useCallback(async () => {
-        console.log("[GestionEmpresas] Iniciando fetchEmpresas...");
+    const fetchEmpresas = useCallback(async (currentSearchTerm: string) => {
+        console.log(`[GestionEmpresas] Fetching con searchTerm: "${currentSearchTerm}"`);
         setIsLoading(true);
         setError(null); // Limpia errores previos de la lista
         try {
-            const data = await getEmpresas();
+            // Prepara el objeto de filtros
+            const filtros: { search?: string } = {};
+            if (currentSearchTerm.trim()) {
+                filtros.search = currentSearchTerm.trim();
+            }
+            // Llama a getEmpresas CON los filtros
+            const data = await getEmpresas(filtros);
             setEmpresas(data);
-            console.log("[GestionEmpresas] fetchEmpresas completado.");
+            console.log("[GestionEmpresas] Empresas cargadas:", data.length);
         } catch (err: any) {
             console.error("Error cargando empresas:", err.response?.data || err.message);
             setError(err.message || "Error al cargar la lista de empresas.");
+            setEmpresas([]); // Limpia la lista en caso de error
         } finally {
             setIsLoading(false);
         }
-    }, []); // useCallback con array vacío porque no depende de props o estado externo
+    }, []); // useCallback ahora no depende de nada que cambie frecuentemente
 
-    // Efecto para cargar las empresas al montar el componente
     useEffect(() => {
-        fetchEmpresas();
-    }, [fetchEmpresas]); // Se ejecuta cuando fetchEmpresas cambia (solo al inicio)
+        // Opcional: Debounce para evitar llamadas API en cada tecla
+        const delayDebounceFn = setTimeout(() => {
+            fetchEmpresas(searchTerm);
+        }, 300); // Espera 300ms después de dejar de escribir
+
+        return () => clearTimeout(delayDebounceFn); // Limpia el timeout si el componente se desmonta o searchTerm cambia de nuevo
+    }, [searchTerm, fetchEmpresas]); // Se ejecuta cuando searchTerm o fetchEmpresas cambian
+
 
     // Prepara el formulario para editar una empresa existente
     const handleEditClick = (empresa: EmpresaDataOutput) => {
@@ -98,7 +111,7 @@ const GestionEmpresas: React.FC = () => {
                 await deleteEmpresa(empresaId); // Llama a la función de la API
                 console.log(`[GestionEmpresas] deleteEmpresa API OK para ID: ${empresaId}`);
                 setFormSuccess(`Empresa "${empresaNombre}" eliminada correctamente.`); // Muestra mensaje de éxito
-                fetchEmpresas(); // Recarga la lista actualizada
+                fetchEmpresas(searchTerm); // Recarga la lista actualizada
             } catch (err: any) {
                 const errorMsg = err.response?.data?.detail || err.message || `Error al eliminar ${empresaNombre}`;
                 console.error(`[GestionEmpresas] Error en deleteEmpresa API para ID: ${empresaId}:`, errorMsg, err.response || err);
@@ -139,23 +152,23 @@ const GestionEmpresas: React.FC = () => {
                     throw new Error("El nombre es obligatorio para crear.");
                 }
                 console.log(`[GestionEmpresas] Intentando llamar a createEmpresa API`, empresaData);
-                 // Afirmamos el tipo porque sabemos que 'nombre' no es parcial aquí
+                // Afirmamos el tipo porque sabemos que 'nombre' no es parcial aquí
                 const nuevaEmpresa = await createEmpresa(empresaData as EmpresaDataInput);
                 console.log(`[GestionEmpresas] createEmpresa API OK`);
                 mensajeExito = `Empresa "${nuevaEmpresa.nombre}" creada.`;
             }
             setFormSuccess(mensajeExito); // Muestra mensaje de éxito
             resetForm();        // Limpia y oculta formulario
-            fetchEmpresas();    // Recarga la lista
+            fetchEmpresas(searchTerm);    // Recarga la lista
         } catch (err: any) {
-             console.error("Error guardando empresa:", err.response?.data || err.message);
-             const backendErrors = err.response?.data;
-             // Intenta mostrar errores de validación del backend
-             if (typeof backendErrors === 'object' && backendErrors !== null) {
-                 setFormError(Object.entries(backendErrors).map(([key, value]) => `${key}: ${Array.isArray(value) ? value.join(', ') : value}`).join('; '));
-             } else {
-                 setFormError(err.message || "Error al guardar la empresa.");
-             }
+            console.error("Error guardando empresa:", err.response?.data || err.message);
+            const backendErrors = err.response?.data;
+            // Intenta mostrar errores de validación del backend
+            if (typeof backendErrors === 'object' && backendErrors !== null) {
+                setFormError(Object.entries(backendErrors).map(([key, value]) => `${key}: ${Array.isArray(value) ? value.join(', ') : value}`).join('; '));
+            } else {
+                setFormError(err.message || "Error al guardar la empresa.");
+            }
         } finally {
             setIsSubmitting(false); // Libera el botón de submit
         }
@@ -169,13 +182,24 @@ const GestionEmpresas: React.FC = () => {
 
             {/* Botón Crear/Ocultar */}
             {!editingEmpresa && (
-             <button
-                onClick={() => { setShowForm(!showForm); if (showForm) resetForm(); }}
-                // Aplica clases CSS Module
-                className={`${styles.commonButton} ${showForm ? styles.cancelButton : styles.createButton}`} >
-                {showForm ? 'Ocultar Formulario' : '+ Crear Nueva Empresa'}
-             </button>
+                <button
+                    onClick={() => { setShowForm(!showForm); if (showForm) resetForm(); }}
+                    // Aplica clases CSS Module
+                    className={`${styles.commonButton} ${showForm ? styles.cancelButton : styles.createButton}`} >
+                    {showForm ? 'Ocultar Formulario' : '+ Crear Nueva Empresa'}
+                </button>
             )}
+            <div className={styles.filterContainer}> {/* Puedes crear una clase para esto */}
+                <label htmlFor="searchEmpresa" className={styles.filterLabel}>Buscar por Nombre/NIT:</label>
+                <input
+                    type="text"
+                    id="searchEmpresa"
+                    placeholder="Escribe para buscar..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className={styles.filterInput} // Estilo para el input
+                />
+            </div>
 
             {/* Formulario */}
             {showForm && (
@@ -207,33 +231,36 @@ const GestionEmpresas: React.FC = () => {
             {error && <p className={styles.generalError}>{error}</p>}
 
             {/* Lista de Empresas */}
+            
             <h4 className={styles.listTitle}>Empresas Registradas</h4>
             {isLoading ? (
-                 <p>Cargando lista...</p>
-             ) : !error && empresas.length === 0 ? (
-                 <p>No hay empresas creadas.</p>
-             ) : !error ? (
-                    // Usa clase contenedora si definiste una
-                    <ul className={styles.empresaList}>
-                        {empresas.map(emp => (
-                            <li key={emp.id} className={styles.empresaItem}>
-                                {/* Información */}
-                                <div className={styles.itemInfo}>
-                                    <strong>{emp.nombre}</strong> (ID: {emp.id})<br />
-                                    <small>
-                                        NIT: {emp.nit || '-'} | Tel: {emp.telefono || '-'} | Dir: {emp.direccion || '-'}
-                                    </small>
-                                </div>
-                                {/* Botones */}
-                                <div className={styles.itemActions}>
-                                    <button onClick={() => handleEditClick(emp)} className={`${styles.listButton} ${styles.editButton}`} title="Editar">✏️ Editar</button>
-                                    <button onClick={() => handleDeleteClick(emp.id, emp.nombre)} className={`${styles.listButton} ${styles.deleteButton}`} title="Eliminar">🗑️ Eliminar</button>
-                                </div>
-                            </li>
-                        ))}
-                    </ul>
-                ) : null
-             }
+                <p>Cargando lista...</p>
+            ) : error ? ( // Muestra error si lo hay
+                <p className={styles.generalError}>{error}</p>
+            ) : empresas.length === 0 ? (
+                <p>{searchTerm ? 'No hay empresas que coincidan con tu búsqueda.' : 'No hay empresas creadas.'}</p> // Mensaje contextual
+            ) : (
+                <ul className={styles.empresaList}>
+                    {/* ... (el map para renderizar empresas sigue igual) ... */}
+                    {empresas.map(emp => (
+                        <li key={emp.id} className={styles.empresaItem}>
+                            {/* Información */}
+                            <div className={styles.itemInfo}>
+                                <strong>{emp.nombre}</strong> (ID: {emp.id})<br />
+                                <small>
+                                    NIT: {emp.nit || '-'} | Tel: {emp.telefono || '-'} | Dir: {emp.direccion || '-'}
+                                </small>
+                            </div>
+                            {/* Botones */}
+                            <div className={styles.itemActions}>
+                                <button onClick={() => handleEditClick(emp)} className={`${styles.listButton} ${styles.editButton}`} title="Editar">✏️ Editar</button>
+                                <button onClick={() => handleDeleteClick(emp.id, emp.nombre)} className={`${styles.listButton} ${styles.deleteButton}`} title="Eliminar">🗑️ Eliminar</button>
+                            </div>
+                        </li>
+                    ))}
+                </ul>
+            )
+            }
         </div>
     );
 };

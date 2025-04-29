@@ -1,12 +1,8 @@
 # Dependencias
 node_modules/
 
-# Archivos de build (ajusta según tu proyecto: dist, build, .next, etc.)
-dist/
+# Carpeta de build de producción
 build/
-.output/
-.nuxt/
-.next/
 
 # Logs
 logs
@@ -14,13 +10,32 @@ logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-pnpm-debug.log*
+lerna-debug.log*
 
-# Archivos de entorno (¡MUY IMPORTANTE!)
-.env
-.env.*
-!.env.example
+# Archivos de entorno local (¡IMPORTANTE!)
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env # Si usas un .env genérico para secretos locales
+
+# Archivos de configuración de IDEs
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
 
 # Archivos de sistema operativo
 .DS_Store
 Thumbs.db
+
+# Otros
+coverage/
+*.tgz
+
+# Archivo de lock (opcional - algunos prefieren versionarlo, otros no)
+# package-lock.json
+# yarn.lock
