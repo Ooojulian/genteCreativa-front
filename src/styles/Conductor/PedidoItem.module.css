@@ -11,13 +11,16 @@
   transition: box-shadow 0.2s ease;
 }
 .pedidoItem:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08); /* Sombra más pronunciada al pasar el mouse */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08); /* Sombra más pronunciada */
 }
 
+/* --- Info Principal (Cliente, Estado, etc.) --- */
 .infoPrincipal {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap; /* AÑADIDO: Permitir que los elementos bajen */
+  gap: 5px 15px; /* AÑADIDO: Espacio entre elementos si bajan */
   margin-bottom: 12px;
   padding-bottom: 10px;
   border-bottom: 1px solid #eee;
@@ -25,12 +28,13 @@
   color: #495057; /* Gris oscuro */
 }
 .infoPrincipal span {
-  margin-right: 10px;
+  margin-right: 5px; /* Reducido margen */
 }
 .infoPrincipal strong {
   color: #212529; /* Negro */
 }
 
+/* --- Detalles (Origen, Destino, Descripción) --- */
 .detalles {
   margin-bottom: 15px;
 }
@@ -46,46 +50,48 @@
   font-weight: 600;
 }
 
-/* --- Estilos para Sección de Subida de Fotos --- */
+/* --- Sección de Subida de Fotos --- */
 .uploadSection {
   margin-top: 15px;
   padding: 15px;
-  border: 1px dashed #c9d7e8; /* Borde discontinuo azulado */
+  border: 1px dashed #c9d7e8;
   border-radius: 5px;
-  background-color: #f8f9fa; /* Fondo gris claro */
+  background-color: #f8f9fa;
   display: flex;
   align-items: center;
-  flex-wrap: wrap; /* Para ajustar en pantallas pequeñas */
-  gap: 12px; /* Espacio entre elementos */
+  flex-wrap: wrap; /* Permite ajustar en pantallas pequeñas */
+  gap: 10px; /* Espacio reducido */
 }
 
 .uploadSection label {
   font-weight: 500;
-  margin-right: 8px;
-  font-size: 0.9em;
+  margin-right: 5px; /* Reducido */
+  font-size: 0.85em; /* Reducido */
   color: #334d6e;
+  flex-shrink: 0; /* Evitar que la etiqueta se encoja */
 }
 
 .uploadSection input[type="file"] {
-  font-size: 0.9em;
-  /* Estilos específicos del navegador pueden variar */
+  font-size: 0.85em; /* Reducido */
   flex-grow: 1; /* Ocupa espacio disponible */
+  min-width: 150px; /* Ancho mínimo para que no se comprima demasiado */
 }
 
 /* Botón de subida específico */
 .uploadButton {
-  padding: 6px 12px;
+  padding: 6px 10px; /* Padding reducido */
   cursor: pointer;
   border-radius: 4px;
-  border: 1px solid #007bff; /* Borde azul */
-  background-color: #e7f3ff; /* Fondo azul muy claro */
-  color: #0056b3; /* Azul oscuro */
-  font-size: 0.9em;
+  border: 1px solid #007bff;
+  background-color: #e7f3ff;
+  color: #0056b3;
+  font-size: 0.85em; /* Reducido */
   font-weight: 500;
   transition: background-color 0.2s ease;
+  flex-shrink: 0; /* Evitar que el botón se encoja */
 }
 .uploadButton:hover:not(:disabled) {
-  background-color: #cfe2ff; /* Azul un poco más oscuro */
+  background-color: #cfe2ff;
   border-color: #0056b3;
 }
 .uploadButton:disabled {
@@ -96,31 +102,42 @@
   color: #6c757d;
 }
 
-/* Mensajes de subida (Reutilizados/Adaptados) */
-.uploadStatus { font-style: italic; color: #555; font-size: 0.85em; margin: 5px 0; width: 100%;}
-.uploadError { color: #dc3545; font-size: 0.85em; margin: 5px 0; font-weight: bold; width: 100%;}
-.uploadSuccess { color: #198754; font-size: 0.85em; margin: 5px 0; font-weight: bold; width: 100%;}
-.infoNota { font-size: 0.85em; color: #6c757d; margin-top: 8px; font-style: italic; width: 100%; text-align: center;}
+/* Mensajes de subida */
+.uploadStatus, .uploadError, .uploadSuccess, .infoNota {
+    font-size: 0.8em; /* Reducido */
+    margin: 4px 0;
+    width: 100%; /* Ocupan todo el ancho */
+}
+.uploadStatus { font-style: italic; color: #555; }
+.uploadError { color: #dc3545; font-weight: bold; }
+.uploadSuccess { color: #198754; font-weight: bold; }
+.infoNota { color: #6c757d; margin-top: 8px; font-style: italic; text-align: center;}
 
 /* --- Sección QR --- */
 .qrSection {
   margin-top: 20px;
-  padding-top: 20px;
+  padding-top: 15px; /* Reducido */
   border-top: 1px solid #eee;
   text-align: center;
 }
 
 .qrCodeContainer {
-  margin-top: 15px;
-  padding: 15px;
+  margin-top: 10px; /* Reducido */
+  padding: 10px; /* Reducido */
   background-color: white;
   display: inline-block;
   border: 1px solid #eee;
   border-radius: 4px;
+  max-width: 90%; /* Evitar que se salga en pantallas muy pequeñas */
 }
 .qrCodeContainer p {
-  margin-bottom: 10px;
-  font-size: 0.9em;
+  margin-bottom: 8px; /* Reducido */
+  font-size: 0.85em; /* Reducido */
+}
+/* Asegurar que el SVG del QR (si es un SVG) escale */
+.qrCodeContainer svg {
+    max-width: 100%;
+    height: auto;
 }
 
 /* --- Botones de Acción Principales --- */
@@ -128,51 +145,100 @@
   margin-top: 20px;
   padding-top: 15px;
   border-top: 1px solid #eee;
-  text-align: right; /* Alinea botones a la derecha */
-  display: flex; /* Para usar gap si hay varios botones */
-  justify-content: flex-end; /* Alinea a la derecha */
+  display: flex;
+  flex-wrap: wrap; /* AÑADIDO: Permitir que los botones bajen */
+  justify-content: flex-end; /* Alinea a la derecha (o centro/stretch en móvil) */
   gap: 10px;
 }
 
-.actionButton { /* Estilo para Iniciar/Finalizar/Generar QR */
-padding: 10px 18px; /* Botones principales más grandes */
-cursor: pointer;
-border-radius: 5px;
-border: 1px solid;
-font-size: 1em; /* Tamaño de fuente normal */
-font-weight: 500;
-transition: background-color 0.2s, border-color 0.2s, opacity 0.2s;
+.actionButton {
+  padding: 8px 15px; /* Padding reducido */
+  cursor: pointer;
+  border-radius: 5px;
+  border: 1px solid;
+  font-size: 0.9em; /* Fuente reducida */
+  font-weight: 500;
+  transition: background-color 0.2s, border-color 0.2s, opacity 0.2s;
+  flex-grow: 0; /* Evitar que crezcan por defecto */
+  flex-shrink: 0;
 }
 
-/* Colores específicos podrían ser */
-.actionButton:nth-of-type(1) { /* Asume que Iniciar es el primero */
-background-color: #d1e7dd; border-color: #badbcc; color: #0f5132;
-}
-.actionButton:nth-of-type(1):hover:not(:disabled) {
-  background-color: #b6dccf;
-}
-
-/* Botón Generar QR */
-.actionButton:nth-of-type(2), /* Si es el segundo botón (Generar QR) */
-.qrSection > .actionButton { /* O si está solo en la sección QR */
-   background-color: #fff3cd; border-color: #ffe69c; color: #664d03;
-}
-.actionButton:nth-of-type(2):hover:not(:disabled),
-.qrSection > .actionButton:hover:not(:disabled) {
-  background-color: #ffeeb7;
-}
-
-.actionButton:nth-of-type(3) { /* Asume que Finalizar es el tercero/último */
- background-color: #cce5ff; border-color: #b8daff; color: #004085;
-}
-.actionButton:nth-of-type(3):hover:not(:disabled) {
-  background-color: #b8daff;
-}
+/* Colores específicos (sin cambios) */
+.actionButton:nth-of-type(1) { background-color: #d1e7dd; border-color: #badbcc; color: #0f5132; }
+.actionButton:nth-of-type(1):hover:not(:disabled) { background-color: #b6dccf; }
+.actionButton:nth-of-type(2), .qrSection > .actionButton { background-color: #fff3cd; border-color: #ffe69c; color: #664d03; }
+.actionButton:nth-of-type(2):hover:not(:disabled), .qrSection > .actionButton:hover:not(:disabled) { background-color: #ffeeb7; }
+.actionButton:nth-of-type(3) { background-color: #cce5ff; border-color: #b8daff; color: #004085; }
+.actionButton:nth-of-type(3):hover:not(:disabled) { background-color: #b8daff; }
 
 .actionButton:disabled {
-  cursor: not-allowed;
-  opacity: 0.6;
-  background-color: #adb5bd;
-  border-color: #adb5bd;
-  color: #fff;
+  cursor: not-allowed; opacity: 0.6; background-color: #adb5bd; border-color: #adb5bd; color: #fff;
+}
+
+
+/* --- Media Queries --- */
+
+@media (max-width: 600px) {
+  .pedidoItem {
+    padding: 15px; /* Menos padding */
+  }
+  .infoPrincipal {
+    font-size: 0.85em;
+    gap: 5px 10px;
+    padding-bottom: 8px;
+    margin-bottom: 10px;
+  }
+  .detalles p {
+    font-size: 0.9em;
+  }
+  .uploadSection {
+    padding: 10px;
+    gap: 8px;
+  }
+  .uploadSection label, .uploadSection input[type="file"], .uploadButton {
+    font-size: 0.8em;
+  }
+  .uploadButton {
+    padding: 5px 8px;
+  }
+  .qrSection {
+    padding-top: 10px;
+  }
+  .actionButtons {
+    justify-content: stretch; /* Estirar botones para ocupar ancho */
+    gap: 8px;
+  }
+  .actionButton {
+    flex-grow: 1; /* Permitir que botones crezcan para llenar espacio */
+    font-size: 0.85em;
+    padding: 8px 10px;
+    text-align: center; /* Centrar texto en botones estirados */
+  }
+}
+
+@media (max-width: 400px) {
+   .pedidoItem {
+    padding: 10px;
+  }
+   .infoPrincipal {
+    flex-direction: column; /* Apilar info principal */
+    align-items: flex-start; /* Alinear a la izquierda */
+    gap: 3px;
+  }
+  .detalles p {
+    font-size: 0.85em;
+  }
+  .uploadSection {
+    /* Podría apilarse si es necesario */
+    /* flex-direction: column; */
+    /* align-items: stretch; */
+  }
+  .actionButtons {
+    flex-direction: column; /* Apilar botones verticalmente */
+    align-items: stretch; /* Estirar completamente */
+  }
+  .actionButton {
+    width: 100%; /* Asegurar ancho completo al apilar */
+    flex-grow: 0; /* No necesario si es column */
+  }
 }

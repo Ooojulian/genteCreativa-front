@@ -5,17 +5,17 @@
   font-family: sans-serif;
 }
 
-.title {
+.title { /* Título principal */
   margin-top: 0;
   margin-bottom: 25px;
   border-bottom: 1px solid #eee;
   padding-bottom: 10px;
   color: #333;
+  font-size: 1.5em; /* Consistencia */
 }
 
 .actionBar {
   margin-bottom: 20px;
-  /* Puedes añadir más estilos si necesitas alinear el botón */
 }
 
 /* --- Estilos Comunes para Botones --- */
@@ -23,50 +23,21 @@
   padding: 10px 15px;
   cursor: pointer;
   margin-right: 10px;
+  margin-bottom: 5px; /* Espacio si bajan de línea */
   border-radius: 4px;
   border: 1px solid #ccc;
   font-size: 0.95em;
-  transition: background-color 0.2s, border-color 0.2s;
+  transition: background-color 0.2s, border-color 0.2s, opacity 0.2s;
 }
-
-.commonButton:disabled {
-  cursor: not-allowed;
-  opacity: 0.6;
-}
+.commonButton:disabled { cursor: not-allowed; opacity: 0.6; }
 
 /* Botones específicos */
-.createButton {
-  background-color: #d4edda;
-  /* Verde claro */
-  border-color: #c3e6cb;
-  color: #155724;
-}
-
-.createButton:hover:not(:disabled) {
-  background-color: #c3e6cb;
-}
-
-.cancelButton {
-  background-color: #f8d7da;
-  /* Rojo claro */
-  border-color: #f5c6cb;
-  color: #721c24;
-}
-
-.cancelButton:hover:not(:disabled) {
-  background-color: #f5c6cb;
-}
-
-.submitButton {
-  background-color: #cce5ff;
-  /* Azul claro */
-  border-color: #b8daff;
-  color: #004085;
-}
-
-.submitButton:hover:not(:disabled) {
-  background-color: #b8daff;
-}
+.createButton { background-color: #d4edda; border-color: #c3e6cb; color: #155724; }
+.createButton:hover:not(:disabled) { background-color: #c3e6cb; }
+.cancelButton { background-color: #f8d7da; border-color: #f5c6cb; color: #721c24; }
+.cancelButton:hover:not(:disabled) { background-color: #f5c6cb; }
+.submitButton { background-color: #cce5ff; border-color: #b8daff; color: #004085; }
+.submitButton:hover:not(:disabled) { background-color: #b8daff; }
 
 
 /* --- Estilos del Formulario --- */
@@ -78,18 +49,19 @@
   background: #edf2ff79;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+  max-width: 650px; /* Ancho máximo en desktop */
 }
 
-.formTitle {
+.formTitle { /* Título dentro del form */
   margin-top: 0;
   margin-bottom: 20px;
   font-size: 1.2em;
   color: #444;
+  text-align: center; /* Centrado */
 }
 
 .inputGroup {
   margin-bottom: 18px;
-  /* Más espacio */
 }
 
 .label {
@@ -103,164 +75,45 @@
 .input,
 .textarea,
 .select {
-  /* Estilo base para todos los controles */
   width: 100%;
   padding: 12px;
-  /* Un poco más de padding */
   box-sizing: border-box;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 1em;
   transition: border-color 0.2s;
 }
-
 .input:focus,
 .textarea:focus,
-.select:focus {
-  border-color: #007bff;
-  /* Resaltar al enfocar */
-  outline: none;
-}
+.select:focus { border-color: #007bff; outline: none; }
+.textarea { resize: vertical; min-height: 80px; }
 
-.textarea {
-  resize: vertical;
-  min-height: 80px;
-}
-
-.buttonGroup {
+.buttonGroup { /* Botones dentro del form */
   margin-top: 20px;
   padding-top: 15px;
   border-top: 1px solid #eee;
   display: flex;
-  /* Para alinear botones si es necesario */
+  flex-wrap: wrap; /* Permitir que bajen */
   gap: 10px;
+}
+.buttonGroup .commonButton { /* Hacer que crezcan */
+  flex-grow: 1;
 }
 
 
 /* --- Estilos de Mensajes --- */
-.formError,
-.generalError {
-  color: #d9534f;
-  /* Rojo */
-  background-color: #f8d7da;
-  border: 1px solid #f5c6cb;
+.formError, .generalError, .formSuccess, .generalSuccess {
   padding: 10px 15px;
   border-radius: 4px;
   margin-top: 15px;
   font-size: 0.9em;
+  border: 1px solid;
 }
-
-.formSuccess,
-.generalSuccess {
-  color: #155724;
-  /* Verde */
-  background-color: #d4edda;
-  border: 1px solid #c3e6cb;
-  padding: 10px 15px;
-  border-radius: 4px;
-  margin-top: 15px;
-  font-size: 0.9em;
-}
+.formError, .generalError { color: #d9534f; background-color: #f8d7da; border-color: #f5c6cb;}
+.formSuccess, .generalSuccess { color: #155724; background-color: #d4edda; border-color: #c3e6cb;}
 
 
-/* --- Estilos de la Lista --- */
-.listTitle {
-  margin-top: 30px;
-  margin-bottom: 15px;
-  color: #333;
-}
-
-.listContainer {
-  margin-top: 10px;
-}
-
-.empresaList {
-  /* Estilo para la <ul> */
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.empresaItem {
-  /* Estilo para cada <li> */
-  border-bottom: 1px solid #eee;
-  padding: 15px 5px;
-  /* Más padding vertical */
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  transition: background-color 0.15s ease-in-out;
-}
-
-.empresaItem:hover {
-  background-color: #afcbdb3d;
-}
-
-.empresaItem:last-child {
-  border-bottom: none;
-}
-
-.itemInfo {
-  flex-grow: 1;
-  /* Ocupa el espacio disponible */
-  margin-right: 15px;
-  /* Espacio antes de los botones */
-}
-
-.itemInfo strong {
-  font-size: 1.1em;
-  color: #222;
-  display: block;
-  /* Nombre en su propia línea */
-  margin-bottom: 4px;
-}
-
-.itemInfo small {
-  color: #555;
-  font-size: 0.85em;
-}
-
-.itemActions {
-  display: flex;
-  gap: 8px;
-  /* Espacio entre botones de acción */
-  flex-shrink: 0;
-  /* Evita que los botones se achiquen */
-}
-
-.listButton {
-  /* Estilo base para botones de la lista */
-  padding: 5px 10px;
-  font-size: 0.85em;
-  cursor: pointer;
-  border: 1px solid transparent;
-  /* Borde transparente por defecto */
-  border-radius: 3px;
-  transition: background-color 0.2s, border-color 0.2s;
-}
-
-.editButton {
-  background-color: #e0eaff;
-  border-color: #b3c7ff;
-  color: #0033cc;
-}
-
-.editButton:hover {
-  background-color: #cce0ff;
-  border-color: #a0bfff;
-}
-
-.deleteButton {
-  background-color: #ffe0e0;
-  border-color: #ffb3b3;
-  color: #cc0000;
-}
-
-.deleteButton:hover {
-  background-color: #ffcccc;
-  border-color: #ff9999;
-}
-
+/* --- Filtro --- */
 .filterContainer {
   margin-top: 15px;
   margin-bottom: 20px;
@@ -268,17 +121,17 @@
   background-color: #f8f9fa;
   border-radius: 5px;
   display: flex;
+  flex-wrap: wrap; /* Permitir que baje el input */
   align-items: center;
   gap: 10px;
   max-width: 500px;
-  /* O el ancho que prefieras */
 }
 
 .filterLabel {
   font-weight: 600;
   margin-right: 5px;
   flex-shrink: 0;
-  /* Evita que la etiqueta se encoja */
+  font-size: 0.9em; /* Tamaño label */
 }
 
 .filterInput {
@@ -286,6 +139,137 @@
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 0.95em;
+  flex-grow: 1; /* Input ocupa espacio restante */
+  min-width: 150px; /* Ancho mínimo para input */
+}
+
+
+/* --- Estilos de la Lista --- */
+.listTitle { /* Título sobre la lista */
+  margin-top: 30px;
+  margin-bottom: 15px;
+  color: #333;
+  font-size: 1.2em; /* Consistencia */
+  border-bottom: 1px solid #eee; /* Separador */
+  padding-bottom: 5px;
+}
+
+.listContainer {
+  margin-top: 10px;
+}
+
+.empresaList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.empresaItem {
+  border-bottom: 1px solid #eee;
+  padding: 15px 10px; /* Padding ajustado */
+  display: flex;
+  flex-wrap: wrap; /* AÑADIDO: Permitir que acciones bajen */
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px; /* Espacio si acciones bajan */
+  transition: background-color 0.15s ease-in-out;
+}
+.empresaItem:hover { background-color: #afcbdb3d; }
+.empresaItem:last-child { border-bottom: none; }
+
+.itemInfo {
   flex-grow: 1;
-  /* Permite que el input ocupe el espacio restante */
+  /* margin-right: 15px; */ /* No necesario con gap */
+  min-width: 200px; /* Ancho mínimo para info */
+}
+.itemInfo strong {
+  font-size: 1.1em;
+  color: #222;
+  display: block;
+  margin-bottom: 4px;
+}
+.itemInfo small {
+  color: #555;
+  font-size: 0.85em;
+  display: block; /* Asegurar que esté debajo */
+}
+
+.itemActions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+  align-items: center; /* Alinear botones verticalmente */
+}
+
+.listButton { /* Botones Edit/Delete */
+  padding: 5px 10px;
+  font-size: 0.85em;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+.editButton { background-color: #e0eaff; border-color: #b3c7ff; color: #0033cc; }
+.editButton:hover { background-color: #cce0ff; border-color: #a0bfff; }
+.deleteButton { background-color: #ffe0e0; border-color: #ffb3b3; color: #cc0000; }
+.deleteButton:hover { background-color: #ffcccc; border-color: #ff9999; }
+
+
+/* --- Media Queries --- */
+
+@media (max-width: 768px) {
+    .gestionContainer { padding: 15px; }
+    .title { font-size: 1.3em; }
+    .listTitle { font-size: 1.1em; }
+
+    .empresaForm { padding: 20px; max-width: 95%; }
+    .input, .textarea, .select { padding: 10px; font-size: 0.95em; }
+    .label { font-size: 0.85em; }
+    .commonButton { padding: 8px 12px; font-size: 0.9em; }
+
+    .filterContainer { max-width: none; } /* Permitir ancho completo */
+    .filterInput { font-size: 0.9em; padding: 7px 9px; }
+
+    .empresaItem { padding: 12px 8px; }
+    .itemInfo strong { font-size: 1.05em; }
+    .itemInfo small { font-size: 0.8em; }
+    .listButton { padding: 4px 8px; font-size: 0.8em; }
+}
+
+@media (max-width: 480px) {
+    .gestionContainer { padding: 10px; }
+    .title { font-size: 1.2em; }
+    .listTitle { font-size: 1em; }
+
+    .empresaForm {
+        padding: 15px;
+        max-width: none;
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        margin-bottom: 20px;
+    }
+     .inputGroup { margin-bottom: 15px; }
+     .input, .textarea, .select { font-size: 0.9em; padding: 9px; }
+     .label { font-size: 0.8em; margin-bottom: 4px; }
+     .commonButton { width: 100%; margin: 5px 0 0 0; } /* Botones al 100% */
+     .buttonGroup { flex-direction: column; gap: 8px; } /* Apilar botones form */
+
+    .filterContainer { flex-direction: column; align-items: stretch; padding: 10px; }
+    .filterLabel { margin-bottom: 3px; }
+    .filterInput { width: 100%; }
+
+    .empresaItem {
+        /* Podrías cambiar a flex-direction: column aquí si prefieres apilar info y acciones */
+        /* flex-direction: column; */
+        /* align-items: flex-start; */
+         padding: 10px 5px;
+    }
+    .itemInfo { min-width: 0; } /* Quitar ancho mínimo */
+    .itemInfo strong { font-size: 1em; }
+    .itemActions {
+         width: 100%; /* Hacer que acciones ocupen todo el ancho si se apilan o bajan */
+         justify-content: flex-end; /* Alinear botones a la derecha */
+         margin-top: 5px; /* Espacio si bajan */
+    }
 }

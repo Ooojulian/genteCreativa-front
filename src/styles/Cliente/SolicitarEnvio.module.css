@@ -1,11 +1,11 @@
 /* src/styles/Cliente/SolicitarEnvio.module.css */
 
 .solicitarFormContainer {
-    padding: 20px; /* Añadido padding general */
+    padding: 20px; /* Padding general */
     font-family: sans-serif;
   }
   
-  .solicitarFormContainer h3 {
+  .solicitarFormContainer h3 { /* Título principal */
     margin-bottom: 25px;
     color: #333;
     text-align: center;
@@ -38,7 +38,6 @@
     font-size: 1.15em; /* Ligeramente más grande */
     font-weight: 600;
   }
-  
   .solicitarForm h4:first-of-type {
       margin-top: 0;
   }
@@ -55,7 +54,7 @@
     color: #334d6e;
   }
   
-  /* Estilos base para controles (Reutilizado) */
+  /* Estilos base para controles */
   .input,
   .select,
   .textarea {
@@ -91,63 +90,75 @@
   
   
   /* --- Sección Retiro de Bodega --- */
-  /* Mantenemos el título naranja si te gusta para destacar */
   .retiroSection h4 {
-      color: #fd7e14;
+      color: #fd7e14; /* Mantenemos naranja si gusta */
   }
   
   .tablaRetiroContainer {
-      max-height: 300px; /* Ajusta altura si es necesario */
-      overflow-y: auto;
-      border: 1px solid #ddd; /* Borde más estándar */
-      border-radius: 4px; /* Bordes redondeados */
+      max-height: 300px;
+      overflow-y: auto; /* Scroll vertical si hay muchos items */
+      overflow-x: auto; /* AÑADIDO: Scroll horizontal para pantallas pequeñas */
+      border: 1px solid #ddd;
+      border-radius: 4px;
       margin-top: 15px;
-      background-color: #fff; /* Fondo blanco para la tabla */
+      background-color: #fff;
   }
   
   .tablaRetiro {
       width: 100%;
+      min-width: 450px; /* AÑADIDO: Ancho mínimo para evitar compresión excesiva */
       font-size: 0.9em;
       border-collapse: collapse;
   }
   
   .tablaRetiro th,
   .tablaRetiro td {
-      border: 1px solid #eee; /* Bordes más suaves */
+      border: 1px solid #eee;
       padding: 8px 10px;
       text-align: left;
       vertical-align: middle;
+      white-space: nowrap; /* Evitar saltos de línea en tabla */
   }
   
   .tablaRetiro thead th { /* Estilo cabecera tabla */
       background-color: #f8f9fa;
       position: sticky;
-      top: 0;
+      top: 0; /* Cabecera fija verticalmente */
+      z-index: 1; /* Para que se superponga al hacer scroll */
       font-weight: 600;
       color: #495057;
   }
   
-  /* Alineación y ancho para columnas de cantidad */
+  /* Alineación y ancho columnas tabla */
+  .tablaRetiro th:nth-child(1), /* Producto */
+  .tablaRetiro td:nth-child(1) {
+      white-space: normal; /* Permitir salto línea en nombre producto */
+      min-width: 150px; /* Ancho mínimo para nombre producto */
+  }
   .tablaRetiro th:nth-child(3), /* Disp. */
   .tablaRetiro td:nth-child(3) {
       text-align: center;
-      width: 80px;
+      width: 60px; /* Ancho reducido */
+      font-family: monospace;
   }
   .tablaRetiro th:nth-child(4), /* Retirar* */
   .tablaRetiro td:nth-child(4) {
       text-align: center;
-      width: 100px;
+      width: 80px; /* Ancho reducido */
   }
   
   /* Input dentro de la tabla */
   .inputCantidadRetiro {
-      width: 75px; /* Ligeramente más ancho */
-      padding: 6px;
+      width: 60px; /* Ancho reducido */
+      padding: 5px; /* Padding reducido */
       text-align: center;
       border: 1px solid #ccc;
       border-radius: 3px;
-      font-size: 1em;
+      font-size: 0.95em; /* Fuente ligeramente más pequeña */
       box-sizing: border-box;
+      /* Asegurar que no haya márgenes extraños */
+      margin: 0;
+      vertical-align: middle; /* Alinear verticalmente */
   }
   .inputCantidadRetiro:disabled {
       background-color: #e9ecef;
@@ -159,54 +170,148 @@
       box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
   }
   
-  /* --- Separador (Reutilizado) --- */
+  /* --- Separador --- */
   .separator {
-      margin: 30px 0; /* Más espacio */
+      margin: 30px 0;
       border: 0;
-      border-top: 1px solid #e0e8f4; /* Separador azulado claro */
+      border-top: 1px solid #e0e8f4;
   }
   
   /* --- Mensajes y Botón Submit --- */
-  .formError { /* Reutilizado */
-      color: #d9534f; background-color: #f8d7da; border: 1px solid #f5c6cb;
+  .formError, .formSuccess {
       padding: 10px 15px; border-radius: 4px; margin: 15px 0; font-size: 0.9em;
       text-align: center;
   }
-  .formSuccess { /* Reutilizado */
-      color: #155724; background-color: #d4edda; border: 1px solid #c3e6cb;
-      padding: 10px 15px; border-radius: 4px; margin: 15px 0; font-size: 0.9em;
-      text-align: center;
-  }
+  .formError { color: #d9534f; background-color: #f8d7da; border: 1px solid #f5c6cb; }
+  .formSuccess { color: #155724; background-color: #d4edda; border: 1px solid #c3e6cb; }
   
-  .submitButton { /* Botón de envío principal */
+  .submitButton {
       width: 100%;
       padding: 12px 20px;
-      /* Usaremos el azul consistente de los botones submit */
       background-color: #cce5ff;
       border: 1px solid #b8daff;
       color: #004085;
-      /* Fin color azul */
       border-radius: 5px;
       font-size: 1.1rem;
-      font-weight: 600; /* Ligeramente menos negrita */
+      font-weight: 600;
       cursor: pointer;
-      transition: background-color 0.2s ease, border-color 0.2s ease;
+      transition: background-color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
       margin-top: 15px;
   }
   .submitButton:hover:not(:disabled) {
-      background-color: #b8daff; /* Azul más oscuro al pasar el mouse */
+      background-color: #b8daff;
       border-color: #a4caff;
   }
   .submitButton:disabled {
-      background-color: #adb5bd; /* Gris consistente para deshabilitado */
+      background-color: #adb5bd;
       border-color: #adb5bd;
       color: #fff;
       cursor: not-allowed;
-      opacity: 0.7; /* Opacidad */
+      opacity: 0.7;
   }
   
-  .infoNota { /* Nota sobre requerir ambas fotos */
+  .infoNota {
       font-size: 0.85em;
       color: #6c757d;
       margin-top: 5px;
   }
+
+
+/* --- Media Queries para Responsividad --- */
+
+@media (max-width: 768px) {
+  .solicitarForm {
+    padding: 20px; /* Reducir padding del form */
+    max-width: 95%; /* Permitir que sea un poco más ancho en tablets */
+  }
+
+  .solicitarFormContainer h3 { /* Título principal */
+      font-size: 1.3em;
+  }
+  .solicitarForm h4 { /* Títulos de sección */
+      font-size: 1.1em;
+  }
+
+  .input, .select, .textarea {
+      padding: 10px; /* Reducir padding en controles */
+      font-size: 0.95em;
+  }
+
+  /* Tabla Retiro */
+  .tablaRetiro {
+      font-size: 0.85em; /* Reducir fuente tabla */
+      min-width: 400px; /* Reducir ancho mínimo */
+  }
+  .tablaRetiro th, .tablaRetiro td {
+      padding: 6px 8px; /* Reducir padding celdas */
+  }
+  .inputCantidadRetiro {
+      width: 55px; /* Input más pequeño */
+      font-size: 0.9em;
+  }
+}
+
+@media (max-width: 480px) {
+  .solicitarFormContainer {
+      padding: 10px; /* Menos padding general */
+  }
+  .solicitarForm {
+    padding: 15px; /* Menos padding en el form */
+    max-width: 100%; /* Ocupar todo el ancho disponible */
+    box-shadow: none; /* Opcional: quitar sombra en móvil */
+    border: none; /* Opcional: quitar borde en móvil */
+    background: transparent; /* Opcional: fondo transparente */
+  }
+
+  .solicitarFormContainer h3 {
+      font-size: 1.2em;
+      margin-bottom: 20px;
+  }
+   .solicitarForm h4 {
+      font-size: 1.05em;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      padding-bottom: 5px;
+  }
+
+  .inputGroup {
+      margin-bottom: 15px; /* Menos espacio entre grupos */
+  }
+   .label {
+      font-size: 0.85em;
+      margin-bottom: 5px;
+  }
+   .input, .select, .textarea {
+      font-size: 0.9em;
+   }
+
+  /* Tabla Retiro */
+  .tablaRetiroContainer {
+      margin-top: 10px;
+  }
+  .tablaRetiro {
+      font-size: 0.8em; /* Fuente tabla aún más pequeña */
+      min-width: 300px; /* Ancho mínimo aún menor */
+  }
+   .tablaRetiro th, .tablaRetiro td {
+      padding: 5px 6px; /* Padding mínimo */
+   }
+   .tablaRetiro th:nth-child(3), /* Disp. */
+   .tablaRetiro td:nth-child(3) {
+       width: 50px;
+   }
+    .tablaRetiro th:nth-child(4), /* Retirar* */
+   .tablaRetiro td:nth-child(4) {
+       width: 70px;
+   }
+   .inputCantidadRetiro {
+      width: 50px;
+      padding: 4px;
+      font-size: 0.85em;
+   }
+
+  .submitButton {
+      font-size: 1rem; /* Botón un poco más pequeño */
+      padding: 10px 15px;
+  }
+}

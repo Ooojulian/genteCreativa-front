@@ -1,39 +1,69 @@
 /* src/styles/Cliente/ClienteDashboard.module.css */
 
+/* --- Tus estilos existentes --- */
 .inicioContainer {
-    display: flex; /* Activa Flexbox */
-    gap: 30px; /* Espacio entre las columnas */
-    align-items: center; /* Centra verticalmente si las alturas difieren */
-    padding: 20px; /* Padding interno opcional */
-    flex-wrap: wrap; /* Permite que pasen a modo columna en pantallas pequeñas */
-  }
-  
-  .inicioTexto {
-    flex: 1; /* Permite que crezca y ocupe espacio */
-    min-width: 280px; /* Ancho mínimo antes de envolver */
-  }
-  
-  .inicioTexto h3 {
-      margin-top: 0;
-      color: #334d6e; /* Azul oscuro */
-      margin-bottom: 15px;
-  }
-  
-  .inicioTexto p {
-      margin-bottom: 10px;
-      line-height: 1.6;
-      color: #495057; /* Gris oscuro */
-  }
-  
-  .inicioGif {
-    flex: 1; /* Permite que crezca */
-    text-align: center; /* Centra el GIF dentro de su contenedor */
-    min-width: 280px; /* Ancho mínimo */
-  }
-  
-  .inicioGif img {
-    max-width: 100%; /* Asegura que no se desborde */
-    height: auto; /* Mantiene la proporción */
-    border-radius: 8px; /* Bordes redondeados opcionales */
-    
-  }
+  display: flex;
+  gap: 30px; /* O var(--spacing-xl) */
+  align-items: center;
+  padding: 20px; /* O var(--spacing-lg) */
+  flex-wrap: wrap; /* Mantenlo por si acaso */
+}
+
+.inicioTexto {
+  flex: 1;
+  min-width: 280px;
+}
+
+.inicioTexto h3 {
+    margin-top: 0;
+    color: #334d6e; /* O var(--color-dark) */
+    margin-bottom: 15px; /* O var(--spacing-md) */
+}
+
+.inicioTexto p {
+    margin-bottom: 10px; /* O var(--spacing-sm) */
+    line-height: 1.6; /* O var(--line-height-base) */
+    color: #495057; /* O var(--color-text-secondary) */
+}
+
+.inicioGif {
+  flex: 1;
+  text-align: center;
+  min-width: 280px;
+}
+
+.inicioGif img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px; /* O var(--border-radius-md) */
+}
+
+/* --- AÑADE ESTE BLOQUE PARA RESPONSIVE --- */
+@media (max-width: 768px) { /* Punto de quiebre común para tablets/móviles */
+
+.inicioContainer {
+  flex-direction: column; /* Apila los elementos verticalmente */
+  gap: var(--spacing-xl); /* Ajusta el espacio vertical entre texto y GIF */
+  padding: var(--spacing-md); /* Reduce el padding en pantallas pequeñas */
+  align-items: stretch; /* Opcional: Estira los items al ancho completo */
+}
+
+.inicioTexto {
+  text-align: center; /* Centra el texto en móvil si lo prefieres */
+  min-width: auto; /* Quita el min-width en móvil */
+}
+
+.inicioGif {
+  min-width: auto; /* Quita el min-width en móvil */
+  /* Puedes añadir un margen superior si se ve muy pegado al texto */
+  /* margin-top: var(--spacing-lg); */
+}
+
+.inicioGif img {
+   max-width: 80%; /* Opcional: Haz el GIF un poco más pequeño en móvil */
+   margin-left: auto;
+   margin-right: auto;
+}
+
+}
+/* --- FIN BLOQUE RESPONSIVE --- */

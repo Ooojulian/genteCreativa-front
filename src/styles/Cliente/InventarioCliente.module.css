@@ -1,18 +1,18 @@
 /* src/styles/Cliente/InventarioCliente.module.css */
 
 .container {
-  padding: 20px; /* Padding general similar a otros contenedores */
+  padding: 20px; /* Padding general */
   font-family: sans-serif;
 }
 
 .title {
-  margin-bottom: 25px; /* Consistente con otros títulos */
+  margin-bottom: 25px; /* Consistente */
   color: #333;
   font-size: 1.5em;
   font-weight: 600;
   border-bottom: 1px solid #eee; /* Borde inferior */
   padding-bottom: 10px;
-  text-align: left; /* Título centrado */
+  text-align: left;
 }
 
 .emptyMessage {
@@ -26,88 +26,188 @@
   border: 1px dashed #ced4da; /* Borde discontinuo */
 }
 
-/* Contenedor para scroll horizontal (Reutilizado) */
+/* Contenedor de la tabla: Quitamos overflow-x y borde/sombra si se convierte en tarjetas */
 .tableContainer {
-  overflow-x: auto;
+  /* Quitamos overflow-x: auto; */
   margin-top: 20px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Sombra suave */
+  /* Quitamos borde y sombra aquí, se aplicarán a cada "tarjeta" en móvil */
+  /* border: 1px solid #ddd; */
+  /* border-radius: 5px; */
+  /* background-color: #fff; */
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); */
 }
 
 .inventoryTable {
   width: 100%;
-  min-width: 600px; /* Ancho mínimo para evitar compresión */
+  /* Quitamos min-width */
   border-collapse: collapse;
   font-size: 0.9em;
+  border: 1px solid #ddd; /* Borde general para vista de tabla */
+  border-radius: 5px; /* Bordes redondeados para vista tabla */
+  background-color: #fff; /* Fondo para vista tabla */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Sombra para vista tabla */
 }
 
-/* Estilo para celdas de cabecera (th) y datos (td) (Reutilizado) */
+/* Estilo celdas (vista tabla) */
 .inventoryTable th,
 .inventoryTable td {
-  padding: 10px 12px; /* Padding consistente */
+  padding: 10px 12px;
   vertical-align: middle;
-  border-bottom: 1px solid #eee; /* Borde inferior más suave */
-  border-left: 1px solid #eee; /* Borde izquierdo */
+  border-bottom: 1px solid #eee;
+  border-left: 1px solid #eee;
+  text-align: left; /* Alineación por defecto */
 }
 .inventoryTable th:first-child,
 .inventoryTable td:first-child {
-    border-left: none; /* Sin borde izquierdo en la primera columna */
+    border-left: none;
 }
-
-/* Quita el borde inferior de la última fila (Reutilizado) */
 .inventoryTable tbody tr:last-child td {
   border-bottom: none;
 }
 
-/* Estilo específico para la cabecera (Reutilizado) */
-.inventoryTable thead th {
-  background-color: #f8f9fa; /* Fondo cabecera */
+/* Cabecera (vista tabla) */
+.inventoryTable thead {
+  background-color: #f8f9fa;
   color: #495057;
-  font-size: 0.85em; /* Ligeramente más pequeño */
-  font-weight: 600; /* Negrita */
+  font-size: 0.85em;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  border-bottom-width: 2px; /* Borde inferior más grueso en cabecera */
-   border-bottom-color: #dee2e6;
-  position: sticky; /* Cabecera fija */
-  top: 0;
-  z-index: 1;
+  border-bottom: 2px solid #dee2e6;
 }
 
-/* --- Alineación de Columnas (Ajustado a 4 columnas: Producto, Ubicación, Cantidad, Fecha) --- */
-/* Columna 1 y 2: Producto, Ubicación (Izquierda por defecto) */
-.inventoryTable th:nth-child(1), .inventoryTable td:nth-child(1),
-.inventoryTable th:nth-child(2), .inventoryTable td:nth-child(2) {
+/* Ocultar cabecera por defecto en vista de tabla, se mostrará en móvil con ::before */
+.inventoryTable thead th {
+   position: sticky; /* Mantenemos sticky para desktop */
+   top: 0;
+   z-index: 1;
+   background-color: #f8f9fa; /* Asegurar fondo */
+}
+
+/* Alineación columnas (vista tabla) */
+.inventoryTable th:nth-child(1), .inventoryTable td:nth-child(1), /* Producto */
+.inventoryTable th:nth-child(2), .inventoryTable td:nth-child(2) { /* Ubicación */
   text-align: left;
 }
-
-/* Columna 3: Cantidad (Derecha) */
-.inventoryTable th:nth-child(3),
-.inventoryTable td:nth-child(3) {
+.inventoryTable th:nth-child(3), .inventoryTable td:nth-child(3) { /* Cantidad */
   text-align: right;
-  font-family: monospace; /* Para números */
-  width: 100px; /* Ancho fijo opcional */
+  font-family: monospace;
+  width: 80px;
 }
-
-/* Columna 4: Última Actualización (Centro) */
-.inventoryTable th:nth-child(4),
-.inventoryTable td:nth-child(4) {
+.inventoryTable th:nth-child(4), .inventoryTable td:nth-child(4) { /* Fecha */
   text-align: center;
-  white-space: nowrap; /* Evitar salto de línea en fecha */
-  font-size: 0.9em; /* Fecha un poco más pequeña */
-  color: #555; /* Color gris */
-  width: 180px; /* Ancho fijo opcional */
+  font-size: 0.9em;
+  color: #555;
+  width: 150px;
+  white-space: nowrap;
 }
 
-
-/* Estilo para filas del cuerpo (Reutilizado) */
-.inventoryTable tbody tr {
-  transition: background-color 0.15s ease-in-out;
-}
-
-/* Hover sobre la fila (Reutilizado) */
+/* Hover (vista tabla) */
 .inventoryTable tbody tr:hover {
-  background-color: #f1f5ff; /* Azul pálido consistente */
+  background-color: #f1f5ff;
+}
+
+
+/* --- Media Query para Móviles (Convertir a Tarjetas con Etiquetas Visibles) --- */
+@media (max-width: 600px) { /* Ajusta este breakpoint según necesites */
+
+  .tableContainer {
+    border: none; /* Quitar borde del contenedor */
+    box-shadow: none;
+    background-color: transparent; /* Fondo transparente */
+  }
+
+  .inventoryTable,
+  .inventoryTable thead,
+  .inventoryTable tbody,
+  .inventoryTable th,
+  .inventoryTable td,
+  .inventoryTable tr {
+    display: block; /* Cambiar display a block */
+    width: 100% !important; /* Forzar ancho completo */
+    box-sizing: border-box; /* Incluir padding/border en el ancho */
+  }
+
+  /* Ocultar cabecera de tabla original */
+  .inventoryTable thead {
+    display: none;
+  }
+
+  /* Estilo para cada fila (ahora una tarjeta) */
+  .inventoryTable tr {
+    margin-bottom: 15px; /* Espacio entre tarjetas */
+    border: 1px solid #ddd; /* Borde para cada tarjeta */
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    padding: 0; /* Quitar padding de la fila si tuviera */
+  }
+  .inventoryTable tbody tr:last-child {
+    margin-bottom: 0; /* Sin margen inferior en la última tarjeta */
+  }
+
+   /* Estilo para cada celda (ahora una fila dentro de la tarjeta) */
+  .inventoryTable td {
+    border: none;
+    border-bottom: 1px dashed #eee; /* Separador ligero entre datos */
+    position: relative; /* Mantenemos relative por si acaso */
+    padding: 8px 10px; /* Padding vertical y horizontal */
+    text-align: left; /* Alineamos todo a la izquierda por defecto */
+    white-space: normal;
+    min-height: auto; /* Quitamos altura mínima fija */
+    /* Quitamos display: flex y padding-left: 50% */
+  }
+  .inventoryTable td:last-child {
+    border-bottom: none; /* Sin borde inferior en la última celda de la tarjeta */
+  }
+
+  /* Estilo para la etiqueta (::before) */
+  .inventoryTable td::before {
+    content: attr(data-label); /* Usar el atributo data-label */
+    /* Ya no es position: absolute */
+    display: inline-block; /* Mostrar como bloque en línea */
+    font-weight: bold;
+    color: #555;
+    font-size: 0.85em;
+    margin-right: 8px; /* Espacio entre la etiqueta y el valor */
+    /* Quitamos width, left, padding-right, text-align */
+  }
+
+  /* Ajustes específicos para la primera celda (Producto) si quieres destacarla */
+   .inventoryTable td:nth-child(1) {
+      background-color: #f8f9fa; /* Fondo ligero */
+      border-top-left-radius: 5px; /* Redondear esquina superior */
+      border-top-right-radius: 5px;
+      /* Mantenemos el texto del producto en negrita si el td es bold */
+      /* font-weight: bold; */ /* Ya no es necesario si el ::before es bold */
+      color: #333;
+   }
+   /* Asegurarse que la etiqueta del producto también se vea bien */
+   .inventoryTable td:nth-child(1)::before {
+        /* Puedes añadir estilos específicos aquí si es necesario */
+   }
+
+   /* Ajuste opcional para alinear a la derecha columnas numéricas si lo prefieres */
+   .inventoryTable td:nth-child(3), /* Cantidad */
+   .inventoryTable td:nth-child(4) { /* Fecha, si quieres */
+       /* text-align: right; */ /* Descomenta si quieres el valor a la derecha */
+   }
+   .inventoryTable td:nth-child(3)::before,
+   .inventoryTable td:nth-child(4)::before {
+        /* text-align: left; */ /* Asegura que la etiqueta siga a la izquierda */
+   }
+
+
+} /* Fin de @media (max-width: 600px) */
+
+/* Otros Media Queries (Opcional, si necesitas ajustes intermedios) */
+@media (max-width: 768px) and (min-width: 601px) {
+  /* Aquí puedes poner estilos para tablets si no quieres el modo tarjeta aún */
+  /* Por ejemplo, sólo reducir padding y fuente como en la respuesta anterior */
+  .container { padding: 15px; }
+  .title { font-size: 1.3em; margin-bottom: 20px; }
+  .inventoryTable { font-size: 0.85em; }
+  .inventoryTable th, .inventoryTable td { padding: 8px 10px; }
+  .inventoryTable th:nth-child(3), .inventoryTable td:nth-child(3) { width: 70px; } /* Cantidad */
+  .inventoryTable th:nth-child(4), .inventoryTable td:nth-child(4) { width: 130px; font-size: 0.85em; } /* Fecha */
 }

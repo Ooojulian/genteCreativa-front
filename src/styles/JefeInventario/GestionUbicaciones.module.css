@@ -1,44 +1,37 @@
 /* src/styles/JefeInventario/GestionUbicaciones.module.css */
 
-/* --- Estilos Generales del Contenedor (Reutilizado) --- */
+/* --- Estilos Generales --- */
 .gestionContainer {
     padding: 20px;
     font-family: sans-serif;
   }
   
-  .gestionContainer h3 { /* Título Principal */
+  .gestionContainer h3 { /* Título Principal H3 */
     margin-top: 0;
     margin-bottom: 25px;
     border-bottom: 1px solid #eee;
     padding-bottom: 10px;
     color: #333;
-    font-size: 1.5em;
+    font-size: 1.5em; /* Consistencia */
   }
   
-  .gestionContainer h4 { /* Títulos de Secciones (Form, Lista) */
+  .gestionContainer h4 { /* Títulos de Secciones (Form, Lista) H4 */
       margin-top: 30px;
       margin-bottom: 15px;
       color: #333;
-      font-size: 1.2em;
+      font-size: 1.2em; /* Consistencia */
       padding-bottom: 5px;
       border-bottom: 1px solid #eee;
   }
   
-  /* --- Estilos Comunes para Botones (Reutilizado) --- */
+  /* --- Botones Comunes --- */
   .commonButton {
-    padding: 10px 15px;
-    cursor: pointer;
-    margin-right: 10px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    font-size: 0.95em;
-    transition: background-color 0.2s, border-color 0.2s;
+    padding: 10px 15px; cursor: pointer; margin-right: 10px; margin-bottom: 5px; /* Espacio si bajan */
+    border-radius: 4px; border: 1px solid #ccc; font-size: 0.95em;
+    transition: background-color 0.2s, border-color 0.2s, opacity 0.2s;
   }
-  .commonButton:disabled {
-      cursor: not-allowed;
-      opacity: 0.6;
-  }
-  .createButton { background-color: #d4edda; border-color: #c3e6cb; color: #155724; margin-bottom: 20px; }
+  .commonButton:disabled { cursor: not-allowed; opacity: 0.6; }
+  .createButton { background-color: #d4edda; border-color: #c3e6cb; color: #155724; } /* Sin margen extra */
   .createButton:hover:not(:disabled) { background-color: #c3e6cb; }
   .cancelButton { background-color: #f8d7da; border-color: #f5c6cb; color: #721c24; }
   .cancelButton:hover:not(:disabled) { background-color: #f5c6cb; }
@@ -46,134 +39,130 @@
   .submitButton:hover:not(:disabled) { background-color: #b8daff; }
   
   
-  /* --- Estilos del Formulario de Ubicaciones --- */
-  .ubicacionForm { /* Nombre específico */
-    border: 1px solid #d1dff1;
-    padding: 25px;
-    margin-top: 20px;
-    margin-bottom: 30px;
-    background: #edf2ff79; /* <-- TU COLOR DE FONDO! */
-    border-radius: 8px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.07);
-    max-width: 550px; /* Más estrecho que otros forms */
+  /* --- Formulario de Ubicaciones --- */
+  .ubicacionForm {
+    border: 1px solid #d1dff1; padding: 25px; margin-top: 20px; margin-bottom: 30px;
+    background: #edf2ff79; border-radius: 8px; box-shadow: 0 3px 6px rgba(0, 0, 0, 0.07);
+    max-width: 550px; /* Ancho desktop */
   }
   
   .formTitle { /* Título dentro del form */
-      margin-top: 0;
-      margin-bottom: 25px;
-      font-size: 1.2em;
-      color: #334d6e;
-      text-align: center;
-      border-bottom: none;
-      padding-bottom: 0;
+      margin-top: 0; margin-bottom: 25px; font-size: 1.2em; color: #334d6e;
+      text-align: center; border-bottom: none; padding-bottom: 0;
   }
   
-  .inputGroup {
-    margin-bottom: 18px;
-  }
+  .inputGroup { margin-bottom: 18px; }
+  .label { display: block; margin-bottom: 6px; font-weight: 500; color: #334d6e; font-size: 0.9em; }
   
-  .label {
-    display: block;
-    margin-bottom: 6px;
-    font-weight: 500;
-    color: #334d6e;
-    font-size: 0.9em;
-  }
-  
-  .input,
-  .textarea { /* Solo input y textarea aquí */
-    width: 100%;
-    padding: 12px;
-    box-sizing: border-box;
-    border: 1px solid #c9d7e8;
-    border-radius: 4px;
-    font-size: 1em;
-    background-color: #fff;
+  .input, .textarea {
+    width: 100%; padding: 12px; box-sizing: border-box; border: 1px solid #c9d7e8;
+    border-radius: 4px; font-size: 1em; background-color: #fff;
     transition: border-color 0.2s, box-shadow 0.2s;
   }
-  .input:focus,
-  .textarea:focus {
-      border-color: #5b97f1;
-      outline: none;
-      box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
+  .input:focus, .textarea:focus {
+      border-color: #5b97f1; outline: none; box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
+  }
+  .input:disabled, .textarea:disabled { /* Añadido disabled */
+      background-color: #e9ecef; cursor: not-allowed;
+  }
+  .textarea { resize: vertical; min-height: 90px; }
+  
+  .buttonGroup { /* Botones dentro del form */
+      margin-top: 25px; padding-top: 20px; border-top: 1px solid #e0e8f4;
+      display: flex; flex-wrap: wrap; gap: 10px;
+  }
+  .buttonGroup .commonButton { flex-grow: 1; } /* Estirar botones */
+  
+  
+  /* --- Mensajes --- */
+  .formError, .generalError, .formSuccess, .generalSuccess {
+    padding: 10px 15px; border-radius: 4px; margin-top: 15px; font-size: 0.9em; border: 1px solid;
+  }
+  .formError, .generalError { color: #d9534f; background-color: #f8d7da; border-color: #f5c6cb; }
+  .formSuccess, .generalSuccess { color: #155724; background-color: #d4edda; border-color: #c3e6cb; }
+  
+  
+  /* --- Lista de Ubicaciones --- */
+  .listTitle { /* Título H4 sobre la lista */
+      /* Ya tiene estilos generales de H4 */
   }
   
-  .textarea {
-      resize: vertical;
-      min-height: 90px; /* Un poco más alto para descripción */
+  .ubicacionList { /* Contenedor ul */
+      list-style: none; padding: 0; margin: 10px 0 0 0;
+      border: 1px solid #ddd; border-radius: 5px; background-color: #fff;
   }
   
-  .buttonGroup { /* Contenedor botones del form */
-      margin-top: 25px;
-      padding-top: 20px;
-      border-top: 1px solid #e0e8f4;
-      display: flex;
-      gap: 10px;
-  }
-  
-  
-  /* --- Estilos de Mensajes (Reutilizado) --- */
-  .formError, .generalError { color: #d9534f; background-color: #f8d7da; border: 1px solid #f5c6cb; padding: 10px 15px; border-radius: 4px; margin-top: 15px; font-size: 0.9em; }
-  .formSuccess, .generalSuccess { color: #155724; background-color: #d4edda; border: 1px solid #c3e6cb; padding: 10px 15px; border-radius: 4px; margin-top: 15px; font-size: 0.9em; }
-  
-  
-  /* --- Estilos de la Lista de Ubicaciones --- */
-  .listTitle { /* Título sobre la lista */
-      margin-top: 30px;
-      margin-bottom: 15px;
-      color: #333;
-  }
-  
-  .ubicacionList { /* Estilo para la <ul> */
-      list-style: none;
-      padding: 0;
-      margin: 10px 0 0 0; /* Margen superior ajustado */
-      border: 1px solid #ddd; /* Borde alrededor de la lista */
-      border-radius: 5px;
-      background-color: #fff;
-  }
-  
-  .ubicacionItem { /* Estilo para cada <li> */
-      border-bottom: 1px solid #eee;
-      padding: 12px 15px; /* Padding interno */
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+  .ubicacionItem { /* Cada li */
+      border-bottom: 1px solid #eee; padding: 12px 15px;
+      display: flex; flex-wrap: wrap; /* Permitir bajar acciones */
+      justify-content: space-between; align-items: center; gap: 10px;
       transition: background-color 0.15s ease-in-out;
   }
-  .ubicacionItem:hover {
-      background-color: #f9f9f9;
-  }
-  .ubicacionItem:last-child {
-      border-bottom: none; /* Sin borde inferior en el último */
-  }
+  .ubicacionItem:hover { background-color: #f9f9f9; } /* Hover consistente */
+  .ubicacionItem:last-child { border-bottom: none; }
   
   .itemInfo {
-      flex-grow: 1;
-      margin-right: 15px;
+      flex-grow: 1; min-width: 180px; /* Ancho mínimo info */
   }
   .itemInfo strong {
-      font-size: 1.05em; /* Un poco más pequeño que en Empresas */
-      color: #222;
-      display: block;
-      margin-bottom: 3px;
+      font-size: 1.05em; color: #222; display: block; margin-bottom: 3px;
   }
-  .itemInfo small { /* Para la descripción */
-      color: #555;
-      font-size: 0.9em;
-      display: block; /* Descripción en línea separada */
-      margin-top: 2px;
+  .itemInfo small { /* Descripción */
+      color: #555; font-size: 0.9em; display: block;
+      margin-top: 2px; white-space: normal; /* Permitir saltos */
   }
   
-  .itemActions {
-      display: flex;
-      gap: 8px;
-      flex-shrink: 0;
-  }
+  .itemActions { display: flex; gap: 8px; flex-shrink: 0; align-items: center; }
   
-  /* Botones de acción en la lista (Reutilizados) */
-  .listButton { padding: 5px 10px; font-size: 0.85em; margin-left: 5px; cursor: pointer; border: 1px solid transparent; border-radius: 3px; transition: background-color 0.2s, border-color 0.2s; }
+  /* Botones de acción en la lista */
+  .listButton {
+    padding: 5px 10px; font-size: 0.85em; cursor: pointer;
+    border: 1px solid transparent; border-radius: 3px;
+    transition: background-color 0.2s, border-color 0.2s;
+  }
   .editButton { background-color: #e0eaff; border-color: #b3c7ff; color: #0033cc; }
   .editButton:hover { background-color: #cce0ff; border-color: #a0bfff; }
   .deleteButton { background-color: #ffe0e0; border-color: #ffb3b3; color: #cc0000; }
   .deleteButton:hover { background-color: #ffcccc; border-color: #ff9999; }
+
+/* --- Media Queries --- */
+
+@media (max-width: 768px) {
+    .gestionContainer { padding: 15px; }
+    .gestionContainer h3 { font-size: 1.3em; }
+    .gestionContainer h4 { font-size: 1.1em; }
+
+    .ubicacionForm { padding: 20px; max-width: 95%; }
+    .input, .textarea { padding: 10px; font-size: 0.95em; }
+    .label { font-size: 0.85em; }
+    .commonButton { padding: 8px 12px; font-size: 0.9em; }
+
+    .ubicacionItem { padding: 10px 12px; }
+    .itemInfo strong { font-size: 1em; }
+    .itemInfo small { font-size: 0.85em; }
+    .listButton { padding: 4px 8px; font-size: 0.8em; }
+}
+
+@media (max-width: 480px) {
+    .gestionContainer { padding: 10px; }
+    .gestionContainer h3 { font-size: 1.2em; }
+    .gestionContainer h4 { font-size: 1em; }
+
+    .ubicacionForm {
+        padding: 15px; max-width: none; background: transparent;
+        border: none; box-shadow: none; margin-bottom: 20px;
+    }
+     .inputGroup { margin-bottom: 15px; }
+     .input, .textarea { font-size: 0.9em; padding: 9px; }
+     .label { font-size: 0.8em; margin-bottom: 4px; }
+     .commonButton { width: 100%; margin: 5px 0 0 0; } /* Botones al 100% */
+     .buttonGroup { flex-direction: column; gap: 8px; } /* Apilar botones form */
+
+    .ubicacionItem { padding: 10px 8px; }
+    .itemInfo { min-width: 0; } /* Quitar ancho mínimo */
+    /* No necesitamos apilar nombre/descripción aquí como en productos */
+
+    .itemActions {
+         width: 100%; justify-content: flex-end; margin-top: 8px;
+    }
+}

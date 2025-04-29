@@ -1,149 +1,203 @@
 /* src/styles/Layout/DashboardLayout.module.css */
 
-.header {
-    grid-area: header; /* Si usas grid */
-    
-    color: var(--color-white, #fff);
-    
-    display: flex; /* <-- USA FLEXBOX */
-    align-items: center; /* Alinea verticalmente al centro */
-    justify-content: space-between; /* Empuja el botón de logout a la derecha */
-    height: auto; /* Altura fija (ajusta según necesites) */
-    
-}
-
-/* Contenedor para agrupar logo y título */
-.headerLeft {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-md); /* Espacio entre logo y título */
-}
-
-/* Estilo para el logo dentro del header */
-.headerLogo {
-    height: 80px; /* Altura del logo (más pequeño que en login) */
-    width: auto; /* Ancho automático para mantener proporción */
-    display: block; /* Evita espacio extra debajo */
-}
-
-/* Estilo para el título en el header */
-.headerTitle {
-    margin: 0; /* Quita margen por defecto del h2 */
-    font-size: 1.3em; /* Tamaño del título */
-    font-weight: 500;
-    white-space: nowrap; /* Evita que el título se parta */
-    overflow: hidden;
-    text-overflow: ellipsis; /* Añade ... si el título es muy largo */
-}
-
-/* Estilo para el botón de logout (puede que ya lo tengas) */
-.logoutButton {
-    background-color: rgba(255, 255, 255, 0.1); /* Fondo semi-transparente */
-    color: var(--color-white, #fff);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    padding: var(--spacing-xs) var(--spacing-md);
-    border-radius: var(--border-radius-sm);
-    cursor: pointer;
-    font-size: 0.9em;
-    transition: background-color 0.2s ease;
-    /* margin-left: auto; */ /* No necesario si usas justify-content: space-between en .header */
-}
-
-.logoutButton:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-    border-color: rgba(255, 255, 255, 0.5);
-}
+/* --- Estilos Base --- */
 
 .dashboardContainer {
     padding: 25px;
     font-family: sans-serif;
-    max-width: 1200px;
-    /* O el ancho que prefieras */
-    margin: 20px auto;
-    /* Centra el dashboard si tiene max-width */
+    max-width: 1200px; /* Ancho máximo en pantallas grandes */
+    margin: 20px auto; /* Centra el dashboard si tiene max-width */
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    /* Añadido para asegurar que el padding se incluya en el width/height */
+    box-sizing: border-box;
 }
 
+/* --- Header --- */
 .header {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    
+    justify-content: space-between; /* Mantiene logo/título a la izq, botón a la der */
     padding-bottom: 15px;
     margin-bottom: 25px;
+    border-bottom: 1px solid #eee; /* Añadir borde inferior al header completo */
+    flex-wrap: wrap; /* Permitir que el botón pase abajo si no cabe */
+    gap: 10px; /* Espacio si el botón baja */
 }
 
-.header h2 {
+.headerLeft {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Espacio entre logo y título */
+    /* Para evitar que crezca y empuje el botón en pantallas medianas */
+    flex-shrink: 0;
+}
+
+.headerLogo {
+    height: 50px; /* Logo más pequeño */
+    width: auto;
+    display: block;
+}
+
+.headerTitle {
     margin: 0;
     color: #2c3e50;
-    /* Un azul oscuro */
-    font-size: 1.8em;
+    font-size: 1.5em; /* Tamaño título ajustado */
+    font-weight: 600; /* Un poco más de peso */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .logoutButton {
-    padding: 10px 18px;
+    padding: 8px 15px; /* Padding ajustado */
     cursor: pointer;
-    background-color: #e74c3c;
-    /* Rojo */
+    background-color: #e74c3c; /* Rojo */
     color: white;
     border: none;
     border-radius: 5px;
+    font-size: 0.9em; /* Fuente ajustada */
     font-weight: bold;
     transition: background-color 0.2s ease;
+    white-space: nowrap; /* Evitar que el texto del botón salte */
+    /* Quitar margen izquierdo automático si usas justify-content */
+    /* margin-left: auto; */
 }
-
 .logoutButton:hover {
-    background-color: #c0392b;
-    /* Rojo más oscuro */
+    background-color: #c0392b; /* Rojo más oscuro */
 }
 
+/* --- Navegación --- */
 .navigation {
     margin-bottom: 30px;
     padding-bottom: 15px;
     border-bottom: 1px solid #eee;
     display: flex;
-    flex-wrap: wrap;
-    /* Para que los botones pasen a la siguiente línea si no caben */
-    gap: 10px;
-    /* Espacio entre botones */
+    flex-wrap: wrap; /* Para que los botones pasen a la siguiente línea */
+    gap: 10px; /* Espacio entre botones */
 }
 
-.navButton {
+.navButton,
+.navButtonActive { /* Estilo base común */
     padding: 10px 15px;
     cursor: pointer;
     border: 1px solid #ccc;
-    background-color: #f8f9fa;
-    /* Un gris muy claro */
-    color: #343a40;
-    /* Gris oscuro */
     border-radius: 5px;
     font-size: 0.95em;
-    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    text-align: center; /* Centrar texto en botón */
+    flex-grow: 1; /* Permitir que los botones crezcan un poco */
 }
 
+.navButton { /* Estilo normal */
+    background-color: #f8f9fa;
+    color: #343a40;
+}
 .navButton:hover {
     background-color: #e9ecef;
-    /* Gris un poco más oscuro */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
-.navButtonActive {
-    /* Hereda estilos de navButton y añade/sobrescribe */
-    padding: 10px 15px;
-    cursor: pointer;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 0.95em;
-    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+.navButtonActive { /* Estilo activo */
     background-color: #007bff;
-    /* Azul primario */
     color: white;
     border-color: #0056b3;
     font-weight: bold;
+    box-shadow: 0 1px 3px rgba(0, 123, 255, 0.2);
 }
 
+/* --- Contenido Principal --- */
 .mainContent {
     margin-top: 20px;
+}
+
+
+/* --- Media Queries para Responsividad --- */
+
+@media (max-width: 768px) {
+    .dashboardContainer {
+        padding: 15px;
+        margin: 10px auto; /* Reducir margen superior/inferior */
+    }
+
+    .header {
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+    }
+
+    .headerLogo {
+        height: 40px; /* Logo aún más pequeño */
+    }
+
+    .headerTitle {
+        font-size: 1.3em; /* Título más pequeño */
+    }
+
+    .logoutButton {
+        padding: 7px 12px;
+        font-size: 0.85em;
+    }
+
+    .navigation {
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        gap: 8px; /* Espacio entre botones reducido */
+    }
+
+    .navButton, .navButtonActive {
+        padding: 8px 10px; /* Menos padding en botones */
+        font-size: 0.9em; /* Fuente más pequeña */
+        flex-grow: 0; /* Evitar que crezcan tanto, mejor que se envuelvan */
+    }
+
+    .mainContent {
+        margin-top: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .dashboardContainer {
+        padding: 10px;
+        margin: 0; /* Sin margen en móvil */
+        max-width: 100%; /* Ocupar todo el ancho */
+        border-radius: 0; /* Sin bordes redondeados en móvil */
+        box-shadow: none; /* Sin sombra en móvil */
+        min-height: 100vh; /* Opcional: asegurar altura mínima */
+    }
+
+    .header {
+        flex-direction: column; /* Apilar elementos del header */
+        align-items: flex-start; /* Alinear a la izquierda */
+        gap: 8px; /* Espacio entre logo/título y botón */
+    }
+
+    /* Opcional: Centrar el botón de logout si se apila */
+    /* .logoutButton {
+        align-self: center;
+        width: 80%;
+        margin-top: 10px;
+    } */
+
+    .headerLogo {
+        height: 35px;
+    }
+
+    .headerTitle {
+        font-size: 1.2em;
+    }
+
+    .navigation {
+        gap: 5px;
+        /* Justificar botones si quieres distribuirlos */
+        /* justify-content: space-around; */
+    }
+
+     .navButton, .navButtonActive {
+        font-size: 0.85em;
+        padding: 6px 8px;
+        /* Hacer que ocupen más espacio si son pocos */
+        /* flex-basis: 48%; */ /* Ejemplo: casi mitad */
+        /* flex-grow: 1; */
+    }
 }

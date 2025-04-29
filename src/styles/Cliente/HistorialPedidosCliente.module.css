@@ -2,125 +2,214 @@
 
 /* --- Estilos Generales del Contenedor --- */
 .container {
-    padding: 20px; /* Padding general */
-    font-family: sans-serif;
+  padding: 20px;
+  /* Padding general */
+  font-family: sans-serif;
+}
+
+.input,
+.select,
+.textarea {
+  width: 100%;
+  padding: 12px;
+  box-sizing: border-box;
+  border: 1px solid #c9d7e8;
+  border-radius: 4px;
+  font-size: 1em;
+  background-color: #fff;
+  color: #212529;
+  line-height: 1.5;
+  transition: border-color 0.2s, box-shadow 0.2s;
+
+  /* --- Añadir estas líneas --- */
+  white-space: nowrap;
+  /* Evita que el texto seleccionado salte de línea */
+  overflow: hidden;
+  /* Oculta el desbordamiento del texto seleccionado */
+  text-overflow: ellipsis;
+  /* Muestra '...' si el texto seleccionado es muy largo */
+  /* -------------------------- */
+}
+
+.title {
+  /* Título Principal */
+  font-size: 1.5em;
+  /* Tamaño consistente */
+  font-weight: 600;
+  color: #333;
+  margin-top: 0;
+  margin-bottom: 25px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+  /* Borde inferior */
+  text-align: left;
+}
+
+/* --- Contenedor de Filtros --- */
+.controlsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  /* Permite que los elementos pasen a la siguiente línea */
+  gap: 15px 20px;
+  /* Espacio vertical y horizontal reducido */
+  align-items: flex-end;
+  /* Alinea al final */
+  margin-bottom: 25px;
+  /* Espacio debajo reducido */
+  padding: 15px;
+  /* Padding interno reducido */
+  background-color: #f8f9fa;
+  /* Fondo gris claro */
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+}
+
+.controlGroup {
+  display: flex;
+  flex-direction: column;
+  /* Label arriba, select abajo */
+  min-width: 130px;
+  /* Ancho mínimo reducido */
+  flex-grow: 1;
+  /* Ocupa espacio disponible */
+}
+
+.controlLabel {
+  font-size: 0.8em;
+  /* Ligeramente más pequeño */
+  margin-bottom: 4px;
+  /* Espacio reducido */
+  color: #495057;
+  font-weight: 500;
+}
+
+.selectControl {
+  padding: 8px 10px;
+  /* Padding ajustado */
+  border-radius: 4px;
+  border: 1px solid #ced4da;
+  font-size: 0.9em;
+  /* Ligeramente más pequeño */
+  background-color: #fff;
+  cursor: pointer;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.selectControl:focus {
+  border-color: #86b7fe;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+/* --- Estilos de Mensajes (Consistentes) --- */
+.loadingMessage {
+  text-align: center;
+  padding: 15px;
+  margin-top: 15px;
+  color: #555;
+  font-style: italic;
+}
+
+.errorMessage {
+  color: #dc3545;
+  /* Rojo */
+  background-color: #f8d7da;
+  border: 1px solid #f5c2c7;
+  padding: 10px 15px;
+  border-radius: 4px;
+  margin: 15px 0;
+  font-size: 0.9em;
+  text-align: center;
+}
+
+.noResultsMessage {
+  text-align: center;
+  padding: 15px;
+  margin-top: 15px;
+  border-radius: 5px;
+  color: #6c757d;
+  font-style: italic;
+  background-color: #f8f9fa;
+  border: 1px dashed #ced4da;
+}
+
+/* --- Estilos de la Lista (Contenedor) --- */
+.historialList {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0 0 0;
+  /* Margen superior */
+}
+
+/* --- Media Queries para Responsividad --- */
+
+/* Para tablets y pantallas medianas */
+@media (max-width: 768px) {
+  .container {
+    padding: 15px;
+    /* Reducir padding general */
   }
-  
-  .title { /* Título Principal */
-    font-size: 1.5em; /* Tamaño consistente */
-    font-weight: 600;
-    color: #333;
-    margin-top: 0;
-    margin-bottom: 25px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #eee; /* Borde inferior */
-    text-align: left;
+
+  .title {
+    font-size: 1.3em;
+    /* Reducir tamaño del título */
+    margin-bottom: 20px;
   }
-  
-  /* --- Contenedor de Filtros (Similar a HistorialInventario) --- */
+
   .controlsContainer {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 18px 25px; /* Espacio vertical y horizontal */
-    align-items: flex-end; /* Alinea al final para que labels y selects queden bien */
-    margin-bottom: 30px; /* Más espacio debajo */
-    padding: 20px; /* Padding interno */
-    background-color: #f8f9fa; /* Fondo gris claro */
-    border: 1px solid #e0e0e0;
-    border-radius: 6px;
+    gap: 10px 15px;
+    /* Reducir espacio entre filtros */
   }
-  
+
   .controlGroup {
-    display: flex;
-    flex-direction: column; /* Label arriba, select abajo */
-    min-width: 150px; /* Ancho mínimo */
-    flex-grow: 1; /* Ocupa espacio disponible */
+    min-width: 120px;
+    /* Ajustar ancho mínimo si es necesario */
   }
-  
-  .controlLabel {
-    font-size: 0.85em;
-    margin-bottom: 5px;
-    color: #495057;
-    font-weight: 500;
+}
+
+/* Para móviles */
+@media (max-width: 480px) {
+  .container {
+    padding: 10px;
+    /* Aún menos padding */
   }
-  
+
+  .title {
+    font-size: 1.2em;
+    /* Título más pequeño */
+  }
+
+  .controlsContainer {
+    padding: 10px;
+    /* Menos padding en filtros */
+    gap: 10px;
+    /* Espacio uniforme */
+  }
+
+  .controlGroup {
+    min-width: 100%;
+    /* Hacer que cada filtro ocupe el ancho completo */
+    flex-grow: 0;
+    /* Evitar que crezcan */
+  }
+
   .selectControl {
-    padding: 9px 12px; /* Padding ajustado */
-    border-radius: 4px;
-    border: 1px solid #ced4da;
-    font-size: 0.95em;
-    background-color: #fff;
-    cursor: pointer;
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    font-size: 0.85em;
+    /* Fuente más pequeña en selects */
   }
-  .selectControl:focus {
-      border-color: #86b7fe;
-      outline: 0;
-      box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
-  }
-  
-  /* --- Estilos de Mensajes (Consistentes) --- */
+
+  .errorMessage,
+  .noResultsMessage,
   .loadingMessage {
-      text-align: center;
-      padding: 20px;
-      margin-top: 20px;
-      color: #555;
-      font-style: italic;
+    font-size: 0.85em;
+    /* Mensajes más pequeños */
+    padding: 8px 10px;
   }
-  
-  .errorMessage {
-      color: #dc3545; /* Rojo */
-      background-color: #f8d7da;
-      border: 1px solid #f5c2c7;
-      padding: 10px 15px;
-      border-radius: 4px;
-      margin: 15px 0;
-      font-size: 0.9em;
-      text-align: center;
-  }
-  
-  .noResultsMessage {
-      text-align: center;
-      padding: 20px 15px;
-      margin-top: 20px;
-      border-radius: 5px;
-      color: #6c757d;
-      font-style: italic;
-      background-color: #f8f9fa;
-      border: 1px dashed #ced4da;
-  }
-  
-  /* --- Estilos de la Lista (Contenedor) --- */
-  .historialList {
-      list-style: none;
-      padding: 0;
-      margin: 20px 0 0 0; /* Margen superior */
-  }
-  
-  /* Nota: Los estilos para cada item (<li>) dentro de esta lista
-     deberían estar definidos en un archivo separado y reutilizable,
-     por ejemplo: src/styles/Shared/HistorialItem.module.css,
-     ya que probablemente uses el mismo estilo de item en el historial
-     del conductor y en el del jefe. */
-  
-  /* Si NO tienes un HistorialItem.module.css separado, puedes añadir
-     estilos básicos aquí como ejemplo: */
-  /*
-  .historialItem {
-     border: 1px solid #eee;
-     padding: 15px;
-     margin-bottom: 10px;
-     border-radius: 5px;
-     background-color: #fff;
-  }
-  .historialItem:hover {
-      background-color: #f9f9f9;
-  }
-  .historialItem p {
-      margin: 5px 0;
-      font-size: 0.95em;
-  }
-  .historialItem strong {
-      margin-right: 5px;
-  }
-  */
+}
+
+/* Nota: Los estilos para cada item (<li>) dentro de esta lista
+   deberían estar definidos en un archivo separado y reutilizable,
+   por ejemplo: src/styles/Shared/HistorialItem.module.css,
+   ya que probablemente uses el mismo estilo de item en el historial
+   del conductor y en el del jefe. Asegúrate de que ese archivo
+   también sea responsive. */

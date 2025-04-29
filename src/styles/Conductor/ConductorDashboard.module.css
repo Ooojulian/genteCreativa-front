@@ -3,38 +3,32 @@
 /* Estilos para el contenido de la vista 'inicio' */
 .inicioContent {
     padding: 25px;
-    background-color: #edf2ff79;
-    /* Color de fondo que te gustó */
+    background-color: #edf2ff79; /* Color de fondo que te gustó */
     border-radius: 8px;
     border: 1px solid #d1dff1;
-    text-align: center;
-    /* Centra el contenido */
+    text-align: center; /* Centra el contenido */
+    margin-bottom: 30px; /* Espacio si hay contenido debajo */
 }
 
 .welcomeTitle {
     margin-top: 0;
     margin-bottom: 15px;
-    color: #334d6e;
-    /* Azul oscuro */
+    color: #334d6e; /* Azul oscuro */
     font-size: 1.6em;
 }
 
 .welcomeText {
-    color: #495057;
-    /* Gris oscuro */
+    color: #495057; /* Gris oscuro */
     font-size: 1.1em;
     line-height: 1.6;
 }
 
-
-
+/* Estilos para la sección de Pedidos */
 .pedidosTitle {
-    margin-top: 0;
-    /* Quita margen superior si está dentro de mainContent con padding */
+    margin-top: 0; /* Quita margen superior si está dentro de mainContent con padding */
     margin-bottom: 20px;
     color: #333;
-    font-size: 1.4em;
-    /* Título de sección */
+    font-size: 1.4em; /* Título de sección */
     padding-bottom: 8px;
     border-bottom: 1px solid #eee;
 }
@@ -47,6 +41,7 @@
     margin-top: 20px;
     border-radius: 5px;
     font-style: italic;
+    font-size: 0.95em; /* Tamaño base para mensajes */
 }
 
 .loadingText {
@@ -54,8 +49,7 @@
 }
 
 .errorText {
-    color: #dc3545;
-    /* Rojo */
+    color: #dc3545; /* Rojo */
     background-color: #f8d7da;
     border: 1px solid #f5c2c7;
     font-style: normal;
@@ -63,15 +57,67 @@
 }
 
 .noPedidosText {
-    color: #6c757d;
-    /* Gris */
+    color: #6c757d; /* Gris */
     background-color: #f8f9fa;
     border: 1px dashed #ced4da;
 }
 
-/* Estilos para la lista ul (los li vienen de PedidoItem.module.css) */
+/* Estilos para la lista ul */
 .pedidosList {
     list-style: none;
     padding: 0;
-    margin: 0;
+    margin: 0; /* Quitamos margen superior si los items ya tienen margen */
 }
+
+/* --- Media Queries para Responsividad --- */
+
+@media (max-width: 768px) {
+  .inicioContent {
+    padding: 20px; /* Reducir padding */
+  }
+  .welcomeTitle {
+    font-size: 1.4em; /* Título más pequeño */
+  }
+  .welcomeText {
+    font-size: 1em; /* Texto más pequeño */
+  }
+  .pedidosTitle {
+    font-size: 1.3em;
+    margin-bottom: 15px;
+  }
+  .loadingText, .errorText, .noPedidosText {
+    padding: 15px;
+    font-size: 0.9em;
+  }
+}
+
+@media (max-width: 480px) {
+  .inicioContent {
+    padding: 15px; /* Menos padding */
+    border: none; /* Opcional: quitar borde en móvil */
+    background-color: transparent; /* Opcional: quitar fondo */
+    margin-bottom: 20px;
+  }
+  .welcomeTitle {
+    font-size: 1.25em;
+    margin-bottom: 10px;
+  }
+  .welcomeText {
+    font-size: 0.95em;
+  }
+  .pedidosTitle {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+  }
+   .loadingText, .errorText, .noPedidosText {
+    padding: 10px;
+    font-size: 0.85em;
+    margin-top: 15px;
+  }
+}
+
+/* Nota: La responsividad de cada pedido individual en la lista
+   dependerá de los estilos definidos en:
+   src/styles/Conductor/PedidoItem.module.css
+   Asegúrate de que ese archivo también tenga media queries. */

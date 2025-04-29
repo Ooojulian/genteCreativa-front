@@ -1,9 +1,11 @@
+//frontend/src/components/Auth/Login.tsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext'; // Ajusta ruta si es diferente
 import { loginUser } from '../../services/auth';     // Ajusta ruta si es diferente
 import styles from '../../styles/Auth/Login.module.css'; // Ajusta ruta si es diferente
 import logoGenteCreativa from '../../assets/images/logo-gente-creativa.png'; // <-- AJUSTA EL NOMBRE DEL ARCHIVO
+import logoGenteCreativaMobile from '../../assets/images/logo-gente-creativa-mobile.png';
 
 
 const Login: React.FC = () => {
@@ -58,17 +60,25 @@ const Login: React.FC = () => {
     };
 
     return (
-        <div className={styles.loginPage}> {/* Contenedor principal */}
-            {/* Columna Izquierda (Información) */}
+        <div className={styles.loginPage}>
+            {/* Columna Izquierda (Info) */}
             <div className={styles.infoPanel}>
                 <h2>Bienvenido a</h2>
-                <div className={styles.logoContainer}>
-                    <img
-                        src={logoGenteCreativa} // Usa la variable importada
-                        alt="Logo Gente Creativa" // Texto alternativo descriptivo
-                        className={styles.logoImage} // Añade una clase para estilizar
+                {/* --- ESTRUCTURA <picture> --- */}
+                <picture className={styles.logoContainer}>
+                    {/* Fuente para pantallas pequeñas (móvil) */}
+                    <source
+                        media="(max-width: 768px)"
+                        srcSet={logoGenteCreativaMobile} // Usa la imagen móvil
                     />
-                </div>
+                    {/* Imagen por defecto (escritorio) y fallback */}
+                    <img
+                        src={logoGenteCreativa} // Imagen de escritorio por defecto
+                        alt="Logo Gente Creativa"
+                        className={styles.logoImage} // Aplica la clase a la <img>
+                    />
+                </picture>
+                 {/* --- FIN ESTRUCTURA <picture> --- */}
                 <p className={styles.infoText}>
                     Plataforma de gestión logística integral. Inicia sesión para continuar.
                 </p>
@@ -79,23 +89,16 @@ const Login: React.FC = () => {
 
             {/* Columna Derecha (Formulario) */}
             <div className={styles.formPanel}>
-                <div className={styles.loginFormContainer}>
-                    <h3>Iniciar Sesión</h3>
-                    <form onSubmit={handleSubmit}>
-                        <div className={styles.inputGroup}>
-                            <label htmlFor="cedula" className={styles.label}>Cédula</label>
-                            <input type="text" id="cedula" className={styles.input} value={cedula} onChange={(e) => setCedula(e.target.value)} placeholder="Ingresa tu cédula" required />
-                        </div>
-                        <div className={styles.inputGroup}>
-                            <label htmlFor="password" className={styles.label}>Contraseña</label>
-                            <input type="password" id="password" className={styles.input} value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Ingresa tu contraseña" required />
-                        </div>
-                        {error && <p className={styles.errorText}>{error}</p>}
-                        <div className={styles.buttonGroup}>
-                            <button type="submit" className={styles.submitButton}>Iniciar Sesión</button>
-                        </div>
-                    </form>
-                </div>
+                 <div className={styles.loginFormContainer}>
+                     {/* ... (resto del formulario: h3, form, inputGroup, etc. sin cambios) ... */}
+                      <h3>Iniciar Sesión</h3>
+                     <form onSubmit={handleSubmit}>
+                         <div className={styles.inputGroup}> <label htmlFor="cedula" className={styles.label}>Cédula</label> <input type="text" id="cedula" className={styles.input} value={cedula} onChange={(e) => setCedula(e.target.value)} placeholder="Ingresa tu cédula" required /> </div>
+                         <div className={styles.inputGroup}> <label htmlFor="password" className={styles.label}>Contraseña</label> <input type="password" id="password" className={styles.input} value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Ingresa tu contraseña" required /> </div>
+                         {error && <p className={styles.errorText}>{error}</p>}
+                         <div className={styles.buttonGroup}> <button type="submit" className={styles.submitButton}>Iniciar Sesión</button> </div>
+                     </form>
+                 </div>
             </div>
         </div>
     );

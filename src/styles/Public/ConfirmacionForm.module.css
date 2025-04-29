@@ -1,18 +1,21 @@
 /* src/styles/Public/ConfirmacionForm.module.css */
 .container {
-    max-width: 600px;
-    margin: 40px auto;
+    max-width: 600px; /* Ancho máximo en desktop */
+    margin: 40px auto; /* Centrado en desktop */
     padding: 30px;
     border: 1px solid #e0e0e0;
     border-radius: 8px;
     background-color: #f9f9f9;
     font-family: sans-serif;
+    box-sizing: border-box; /* Incluir padding en el ancho */
 }
 
 .container h2 {
     text-align: center;
+    margin-top: 0; /* Quitar margen superior por si acaso */
     margin-bottom: 25px;
     color: #333;
+    font-size: 1.5em; /* Tamaño título */
 }
 
 .form {
@@ -43,29 +46,36 @@
     width: 100%;
     box-sizing: border-box; /* Importante */
 }
+.input:focus, .textarea:focus, .select:focus {
+     border-color: #86b7fe; /* Consistencia foco */
+     outline: 0;
+     box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
 
 .textarea {
-    resize: vertical; /* Permite redimensionar verticalmente */
+    resize: vertical;
     min-height: 80px;
 }
 
+/* --- Área de Firma --- */
 .signatureContainer {
     border: 1px solid #ccc;
     border-radius: 4px;
     background-color: #fff;
-    /* Ajusta width/height según necesites, o usa el del canvasProps */
     width: 100%;
-    height: 150px; /* Altura del área de firma */
+    height: 150px; /* Altura fija (puede ajustarse en media query) */
     position: relative; /* Para posicionar el canvas si es necesario */
+    touch-action: none; /* IMPORTANTE: Para evitar scroll al firmar en táctil */
 }
 
-.signatureCanvas {
+.signatureCanvas { /* Asegúrate de que el canvas se ajuste */
+    display: block; /* Evitar espacio extra debajo */
     width: 100%;
     height: 100%;
     cursor: crosshair;
 }
 
-.clearButton {
+.clearButton { /* Botón limpiar firma */
     margin-top: 8px;
     padding: 5px 10px;
     font-size: 0.85em;
@@ -74,12 +84,16 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     align-self: flex-end; /* Alinea a la derecha */
+    /* Mejorar visibilidad y tamaño táctil */
+    min-height: 30px;
+    min-width: 70px;
 }
 .clearButton:hover {
     background-color: #ddd;
 }
 
 
+/* --- Botón Enviar --- */
 .submitButton {
     padding: 12px 20px;
     background-color: #007bff;
@@ -87,39 +101,67 @@
     border: none;
     border-radius: 4px;
     font-size: 1.1em;
+    font-weight: 500; /* Ligeramente menos negrita */
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: background-color 0.2s, opacity 0.2s;
     margin-top: 10px;
+    width: 100%; /* Ancho completo por defecto */
 }
+.submitButton:hover:not(:disabled) { background-color: #0056b3; }
+.submitButton:disabled { background-color: #aaa; cursor: not-allowed; opacity: 0.7; }
 
-.submitButton:hover:not(:disabled) {
-    background-color: #0056b3;
-}
-
-.submitButton:disabled {
-    background-color: #aaa;
-    cursor: not-allowed;
-}
-
+/* --- Mensajes --- */
 .error {
-    color: #d9534f; /* Rojo */
-    background-color: #f8d7da;
-    border: 1px solid #f5c6cb;
-    padding: 10px;
-    border-radius: 4px;
-    margin-top: 10px;
-    text-align: center;
-    font-size: 0.9em;
+    color: #d9534f; background-color: #f8d7da; border: 1px solid #f5c6cb;
+    padding: 10px; border-radius: 4px; margin-top: 10px;
+    text-align: center; font-size: 0.9em;
 }
 
 .successMessage {
-     text-align: center;
-     padding: 40px 20px;
-     background-color: #d4edda;
-     border: 1px solid #c3e6cb;
-     color: #155724;
-     border-radius: 8px;
+     text-align: center; padding: 30px 20px; /* Menos padding */
+     background-color: #d4edda; border: 1px solid #c3e6cb;
+     color: #155724; border-radius: 8px;
 }
 .successMessage h2 {
     margin-top: 0;
+    font-size: 1.3em; /* Reducir tamaño título éxito */
+}
+
+
+/* --- Media Queries --- */
+
+@media (max-width: 768px) {
+  .container {
+    margin: 20px auto; /* Reducir margen vertical */
+    padding: 20px; /* Reducir padding */
+    max-width: 90%; /* Límite de ancho relativo */
+  }
+   .container h2 { font-size: 1.3em; margin-bottom: 20px; }
+   .inputGroup label { font-size: 0.9em; }
+   .input, .textarea, .select { font-size: 0.95em; padding: 9px 10px; }
+   .submitButton { font-size: 1em; padding: 11px 18px; }
+   .successMessage { padding: 25px 15px; }
+   .successMessage h2 { font-size: 1.2em; }
+}
+
+@media (max-width: 480px) {
+  .container {
+    margin: 0; /* Sin margen en móvil */
+    padding: 15px; /* Padding mínimo */
+    max-width: 100%; /* Ancho completo */
+    border: none; /* Quitar borde */
+    border-radius: 0; /* Quitar borde redondeado */
+    background-color: #fff; /* Opcional: Cambiar fondo */
+    min-height: 100vh; /* Opcional: asegurar altura mínima */
+  }
+   .container h2 { font-size: 1.2em; margin-bottom: 15px; }
+   .form { gap: 15px; } /* Menos espacio entre campos */
+   .inputGroup label { font-size: 0.85em; margin-bottom: 5px; }
+   .input, .textarea, .select { font-size: 0.9em; padding: 8px 10px; }
+   .signatureContainer { height: 180px; } /* Opcional: Más altura para firma en táctil */
+   .clearButton { font-size: 0.8em; padding: 4px 8px; min-height: 28px; min-width: 60px; }
+   .submitButton { font-size: 0.95em; padding: 10px 15px; margin-top: 15px;}
+   .error { font-size: 0.85em; padding: 8px; }
+   .successMessage { padding: 20px 10px; }
+   .successMessage h2 { font-size: 1.1em; }
 }

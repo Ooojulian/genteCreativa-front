@@ -1,92 +1,152 @@
 /* frontend/src/styles/Conductor/HistorialViajes.module.css */
 
+/* --- Estilos Base (Usando Variables Globales) --- */
 .container {
-    padding: var(--spacing-sm) 0;
+  /* Usa variable si está definida globalmente, sino un valor fijo */
+  padding: var(--spacing-lg, 1.5rem) var(--spacing-md, 1rem);
+}
+
+.title {
+  font-size: 1.4em;
+  font-weight: 600;
+  color: var(--color-dark, #343a40);
+  margin-bottom: var(--spacing-lg, 1.5rem);
+  padding-bottom: var(--spacing-sm, 0.5rem);
+  border-bottom: 1px solid var(--color-border, #dee2e6);
+  text-align: center;
+}
+
+.controlsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-md, 1rem) var(--spacing-lg, 1.5rem); /* Espacio vertical y horizontal */
+  align-items: flex-end; /* Alinea al final para mejor visualización */
+  margin-bottom: var(--spacing-xl, 2rem);
+  margin-top: var(--spacing-sm, 0.5rem); /* Reducido margen superior */
+  padding: var(--spacing-md, 1rem);
+  background-color: var(--color-light-gray, #f8f9fa);
+  border-radius: var(--border-radius-md, 6px); /* Usar variable si existe */
+  border: none;
+}
+
+.controlGroup {
+  display: flex;
+  flex-direction: column; /* Apilar label y select */
+  gap: var(--spacing-xs, 0.25rem); /* Espacio entre label y select */
+  flex-grow: 1; /* Permitir que crezcan */
+  min-width: 150px; /* Ancho mínimo */
+}
+
+.controlLabel {
+  font-size: 0.85em; /* Fuente más pequeña para label */
+  font-weight: 500;
+  color: var(--color-muted, #6c757d);
+  margin-bottom: 2px; /* Pequeño ajuste */
+}
+
+.selectControl {
+  padding: 8px 12px;
+  border-radius: var(--border-radius-sm, 4px);
+  border: 1px solid var(--color-border, #ccc);
+  font-size: 0.95em;
+  background-color: var(--color-white, #fff);
+  /* min-width: 120px; */ /* Quitar min-width aquí, dejarlo en controlGroup */
+  cursor: pointer;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.selectControl:focus {
+  border-color: var(--color-primary-focus, #86b7fe);
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+/* Mensajes */
+.loadingMessage,
+.errorMessage,
+.noResultsMessage {
+  text-align: center;
+  padding: var(--spacing-lg, 1.5rem);
+  margin-top: var(--spacing-lg, 1.5rem);
+  border-radius: var(--border-radius-md, 6px);
+  font-size: 0.95em; /* Tamaño base mensajes */
+}
+
+.loadingMessage { color: var(--color-muted, #6c757d); }
+.errorMessage {
+  color: var(--color-danger-dark, #842029);
+  background-color: var(--color-danger-light, #f8d7da);
+  border: 1px solid var(--color-danger-border, #f5c2c7);
+}
+.noResultsMessage {
+  color: var(--color-muted, #6c757d);
+  font-style: italic;
+  background-color: var(--color-light, #f8f9fa);
+  border: 1px dashed var(--color-border, #dee2e6);
+}
+
+/* Lista */
+.historialList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* --- Media Queries --- */
+
+@media (max-width: 768px) {
+  .container {
+      padding: var(--spacing-md, 1rem); /* Menos padding */
   }
-  
   .title {
-    font-size: 1.4em;
-    font-weight: 600;
-    color: var(--color-dark, #343a40);
-    margin-bottom: var(--spacing-lg);
-    padding-bottom: var(--spacing-sm);
-    border-bottom: 1px solid var(--color-border, #dee2e6);
-    text-align: center;
+      font-size: 1.3em;
+      margin-bottom: var(--spacing-md, 1rem);
   }
-  
   .controlsContainer {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--spacing-md) var(--spacing-lg);
-    align-items: center;
-    margin-bottom: var(--spacing-xl, 2rem);
-    margin-top: var(--spacing-xl, 0.5rem);
-    padding: var(--spacing-md);
-    background-color: var(--color-light-gray, #f8f9fa);
-    border-radius: var(--border-radius-md);
-    border: none;
+      gap: var(--spacing-sm, 0.5rem) var(--spacing-md, 1rem); /* Menos gap */
+      padding: var(--spacing-sm, 0.5rem);
+      margin-bottom: var(--spacing-lg, 1.5rem);
   }
-  
   .controlGroup {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-xs, 0.5rem);
+      min-width: 130px; /* Ajustar ancho mínimo */
   }
-  
-  .controlLabel {
-    font-size: 0.9em;
-    font-weight: 500;
-    color: var(--color-muted, #6c757d);
-  }
-  
   .selectControl {
-    padding: 8px 12px;
-    border-radius: var(--border-radius-sm, 4px);
-    border: 1px solid var(--color-border, #ccc);
-    font-size: 0.95em;
-    background-color: var(--color-white, #fff);
-    min-width: 120px;
-    cursor: pointer;
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+      font-size: 0.9em;
+      padding: 6px 10px;
   }
-  
-  .selectControl:focus {
-    border-color: var(--color-primary-focus, #86b7fe);
-    outline: 0;
-    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+  .loadingMessage, .errorMessage, .noResultsMessage {
+      padding: var(--spacing-md, 1rem);
+      font-size: 0.9em;
   }
-  
-  .loadingMessage,
-  .errorMessage,
-  .noResultsMessage {
-    text-align: center;
-    padding: var(--spacing-lg);
-    margin-top: var(--spacing-lg);
-    border-radius: var(--border-radius-md);
+}
+
+@media (max-width: 480px) {
+  .container {
+      padding: var(--spacing-sm, 0.5rem);
   }
-  
-  .loadingMessage {
-    color: var(--color-muted);
+   .title {
+      font-size: 1.2em;
   }
-  
-  .errorMessage {
-    color: var(--color-danger-dark, #842029);
-    background-color: var(--color-danger-light, #f8d7da);
-    border: 1px solid var(--color-danger-border, #f5c2c7);
+  .controlsContainer {
+      gap: var(--spacing-sm, 0.5rem);
+      align-items: stretch; /* Estirar elementos */
   }
-  
-  .noResultsMessage {
-    color: var(--color-muted);
-    font-style: italic;
-    background-color: var(--color-light, #f8f9fa);
-    border: 1px dashed var(--color-border, #dee2e6);
+  .controlGroup {
+      min-width: 100%; /* Ocupar todo el ancho */
+      flex-grow: 0;
   }
-  
-  .historialList {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+   .controlLabel {
+      font-size: 0.8em;
   }
-  
-  /* Los estilos para cada item individual (HistorialItem) se definen en
-     src/styles/Shared/HistorialItem.module.css */
+  .selectControl {
+      font-size: 0.85em;
+  }
+  .loadingMessage, .errorMessage, .noResultsMessage {
+      padding: var(--spacing-sm, 0.5rem);
+      font-size: 0.85em;
+      margin-top: var(--spacing-md, 1rem);
+  }
+}
+
+/* Los estilos para cada item individual (HistorialItem) se definen en
+   src/styles/Shared/HistorialItem.module.css[cite: 1]. Asegúrate de que ese
+   archivo también sea responsive. */

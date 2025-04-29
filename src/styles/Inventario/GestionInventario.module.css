@@ -1,6 +1,6 @@
 /* src/styles/Inventario/GestionInventario.module.css */
 
-/* --- Estilos Generales del Contenedor (Reutilizado) --- */
+/* --- Estilos Generales del Contenedor --- */
 .gestionContainer {
   padding: 20px;
   font-family: sans-serif;
@@ -24,7 +24,7 @@
     border-bottom: 1px solid #eee;
 }
 
-/* --- Estilos Comunes para Botones (Reutilizado) --- */
+/* --- Estilos Comunes para Botones --- */
 .commonButton {
   padding: 10px 15px;
   cursor: pointer;
@@ -32,7 +32,7 @@
   border-radius: 4px;
   border: 1px solid #ccc;
   font-size: 0.95em;
-  transition: background-color 0.2s, border-color 0.2s;
+  transition: background-color 0.2s, border-color 0.2s, opacity 0.2s;
 }
 .commonButton:disabled {
     cursor: not-allowed;
@@ -47,15 +47,15 @@
 
 
 /* --- Estilos del Formulario de Inventario --- */
-.inventoryForm { /* Nombre específico */
+.inventoryForm {
   border: 1px solid #d1dff1;
   padding: 25px;
   margin-top: 20px;
   margin-bottom: 30px;
-  background: #edf2ff79; /* <-- TU COLOR DE FONDO! */
+  background: #edf2ff79;
   border-radius: 8px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.07);
-  max-width: 600px; /* Ajusta si necesitas más ancho */
+  max-width: 600px; /* Ancho máximo en desktop */
 }
 
 .inventoryForm h4 { /* Título dentro del form */
@@ -64,7 +64,7 @@
     font-size: 1.2em;
     color: #334d6e;
     text-align: center;
-    border-bottom: none; /* Sin borde inferior para título de form */
+    border-bottom: none;
     padding-bottom: 0;
 }
 
@@ -81,7 +81,7 @@
 }
 
 .input,
-.select { /* Solo input y select aquí */
+.select {
   width: 100%;
   padding: 12px;
   box-sizing: border-box;
@@ -90,6 +90,10 @@
   font-size: 1em;
   background-color: #fff;
   transition: border-color 0.2s, box-shadow 0.2s;
+  /* Para select nativos en caso de texto largo */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .input:focus,
 .select:focus {
@@ -98,29 +102,31 @@
     box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
 }
 .input:disabled,
-.select:disabled { /* Estilo para selects deshabilitados */
+.select:disabled {
     background-color: #e9ecef;
     cursor: not-allowed;
     color: #6c757d;
 }
 
-/* Estilo para mostrar texto en lugar de input/select en modo edición */
-.infoText {
+.infoText { /* Texto no editable en modo edición */
   padding: 12px;
-  background-color: #e9ecef; /* Fondo gris claro */
+  background-color: #e9ecef;
   border: 1px solid #ced4da;
   border-radius: 4px;
   font-size: 1em;
-  color: #495057; /* Color de texto un poco más oscuro */
+  color: #495057;
   min-height: 46px; /* Para alinear altura con inputs */
   box-sizing: border-box;
   display: flex;
   align-items: center;
+  word-break: break-word; /* Permitir saltos si es necesario */
+  white-space: normal; /* Permitir saltos */
 }
-.infoText small { /* Estilo para el "(No editable)" */
+.infoText small {
     margin-left: 8px;
     font-size: 0.8em;
     color: #6c757d;
+    white-space: nowrap; /* Evitar salto en "(No editable)" */
 }
 
 .buttonGroup { /* Contenedor botones del form */
@@ -128,28 +134,92 @@
     padding-top: 20px;
     border-top: 1px solid #e0e8f4;
     display: flex;
+    flex-wrap: wrap; /* Permitir que bajen */
     gap: 10px;
 }
 
 
-/* --- Estilos de Mensajes (Reutilizado) --- */
-.formError, .generalError { color: #d9534f; background-color: #f8d7da; border: 1px solid #f5c6cb; padding: 10px 15px; border-radius: 4px; margin-top: 15px; font-size: 0.9em; }
-.formSuccess, .generalSuccess { color: #155724; background-color: #d4edda; border: 1px solid #c3e6cb; padding: 10px 15px; border-radius: 4px; margin-top: 15px; font-size: 0.9em; }
+/* --- Estilos de Mensajes --- */
+.formError, .generalError, .formSuccess, .generalSuccess {
+  padding: 10px 15px;
+  border-radius: 4px;
+  margin-top: 15px;
+  font-size: 0.9em;
+  border: 1px solid;
+}
+.formError, .generalError { color: #d9534f; background-color: #f8d7da; border-color: #f5c6cb; }
+.formSuccess, .generalSuccess { color: #155724; background-color: #d4edda; border-color: #c3e6cb; }
+
+
+/* --- Filtros --- */
+.filterContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-top: 20px;
+  margin-bottom: 25px;
+  padding: 18px;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  background-color: #d1dff1;
+}
+
+.filterGroup {
+  display: flex;
+  flex-direction: column;
+  min-width: 160px;
+  flex-grow: 1;
+}
+
+.filterLabel {
+  font-size: 0.85em;
+  margin-bottom: 5px;
+  color: #495057;
+  font-weight: 500;
+}
+
+.filterSelect {
+  padding: 9px 10px;
+  border-radius: 4px;
+  border: 1px solid #ced4da;
+  background-color: #fff;
+  font-size: 0.95em;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+.filterSelect:disabled {
+    background-color: #e9ecef;
+    cursor: not-allowed;
+}
+.filterSelect:focus {
+    border-color: #86b7fe;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+.loadingSmall {
+    align-self: center;
+    font-size: 0.9em;
+    color: #6c757d;
+    margin-left: 10px;
+    padding-bottom: 5px;
+}
 
 
 /* --- Estilos de la Tabla de Inventario --- */
 .listContainer { /* Contenedor tabla */
     margin-top: 10px;
-    overflow-x: auto;
+    overflow-x: auto; /* Mantener scroll horizontal */
     border: 1px solid #ddd;
     border-radius: 5px;
+    background-color: #fff; /* Asegurar fondo blanco */
 }
 
-.inventoryTable { /* Tabla específica */
+.inventoryTable {
     border-collapse: collapse;
     width: 100%;
+    min-width: 700px; /* Ajusta según tus columnas */
     font-size: 0.9em;
-    background-color: #fff;
 }
 
 .inventoryTable th,
@@ -158,13 +228,14 @@
     padding: 10px 12px;
     text-align: left;
     vertical-align: middle;
+    white-space: nowrap; /* Evitar saltos por defecto */
 }
 
 .inventoryTable thead th {
     background-color: #f8f9fa;
     font-weight: 600;
     color: #495057;
-    position: sticky;
+    position: sticky; /* Cabecera fija */
     top: 0;
     z-index: 1;
 }
@@ -176,70 +247,97 @@
     background-color: #f1f5ff;
 }
 
+/* Permitir salto de línea en columnas específicas si es necesario */
+.inventoryTable th:nth-child(1), /* Por ejemplo, Nombre Producto */
+.inventoryTable td:nth-child(1) {
+    white-space: normal;
+    min-width: 150px; /* Darle un ancho mínimo */
+}
+
 .actionsCell { /* Celda acciones */
     white-space: nowrap;
     text-align: center !important;
     width: 80px; /* Ancho fijo */
 }
 
-.filterContainer {
-  display: flex;
-  flex-wrap: wrap; /* Permite que los filtros pasen a la siguiente línea */
-  gap: 18px; /* Espacio entre grupos de filtros */
-  margin-top: 20px; /* Espacio antes de los filtros */
-  margin-bottom: 25px; /* Espacio después de los filtros */
-  padding: 18px;
-  border: 1px solid #e0e0e0; /* Borde más suave */
-  border-radius: 6px;
-  background-color: #d1dff1; /* Fondo azul claro como en HistorialInventario */
+/* Botones de acción en la lista */
+.listButton {
+    padding: 5px 10px;
+    font-size: 0.85em;
+    margin: 2px; /* Añadir margen vertical si se apilan */
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    transition: background-color 0.2s, border-color 0.2s;
+    display: inline-block; /* Asegurar display correcto */
 }
-
-.filterGroup {
-  display: flex;
-  flex-direction: column;
-  min-width: 160px; /* Ancho mínimo para cada filtro */
-  flex-grow: 1; /* Permite que crezcan para llenar espacio */
-}
-
-.filterLabel {
-  font-size: 0.85em;
-  margin-bottom: 5px;
-  color: #495057; /* Gris oscuro */
-  font-weight: 500;
-}
-
-.filterSelect {
-  padding: 9px 10px; /* Padding ajustado */
-  border-radius: 4px;
-  border: 1px solid #ced4da; /* Borde estándar */
-  background-color: #fff;
-  font-size: 0.95em;
-  transition: border-color 0.2s, box-shadow 0.2s;
-  cursor: pointer; /* Añadido cursor */
-}
-.filterSelect:disabled {
-    background-color: #e9ecef;
-    cursor: not-allowed;
-}
-.filterSelect:focus {
-    border-color: #86b7fe; /* Azul claro para foco */
-    outline: 0;
-    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25); /* Sombra de foco */
-}
-
-.loadingSmall { /* Renombrado de loadingFiltersText si prefieres */
-    align-self: center; /* Alinea verticalmente con los selects */
-    font-size: 0.9em;
-    color: #6c757d; /* Gris muted */
-    margin-left: 10px;
-    padding-bottom: 5px; /* Ajuste fino de alineación vertical */
-}
-
-
-
-/* Botones de acción en la lista (Reutilizados) */
-.listButton { padding: 5px 10px; font-size: 0.85em; margin-left: 5px; cursor: pointer; border: 1px solid transparent; border-radius: 3px; transition: background-color 0.2s, border-color 0.2s; }
 .editButton { background-color: #e0eaff; border-color: #b3c7ff; color: #0033cc; }
 .editButton:hover { background-color: #cce0ff; border-color: #a0bfff; }
 .deleteButton { background-color: #ffe0e0; border-color: #ffb3b3; color: #cc0000; }
 .deleteButton:hover { background-color: #ffcccc; border-color: #ff9999; }
+
+/* --- Media Queries --- */
+
+@media (max-width: 768px) {
+    .gestionContainer {
+        padding: 15px;
+    }
+    .gestionContainer h3 { font-size: 1.3em; }
+    .gestionContainer h4 { font-size: 1.1em; }
+
+    .inventoryForm {
+        padding: 20px;
+        max-width: 95%; /* Permitir que sea más ancho */
+    }
+    .input, .select, .infoText { padding: 10px; font-size: 0.95em; }
+    .label { font-size: 0.85em; }
+    .commonButton { padding: 8px 12px; font-size: 0.9em; }
+    .buttonGroup .commonButton { flex-grow: 1; } /* Estirar botones del form */
+
+    .filterContainer { padding: 15px; gap: 10px 15px; }
+    .filterGroup { min-width: 150px; }
+    .filterSelect { padding: 8px; font-size: 0.9em; }
+
+    .inventoryTable { font-size: 0.85em; min-width: 600px; }
+    .inventoryTable th, .inventoryTable td { padding: 8px 10px; }
+    .actionsCell { width: 70px; }
+    .listButton { padding: 4px 8px; font-size: 0.8em; }
+}
+
+@media (max-width: 480px) {
+     .gestionContainer {
+        padding: 10px;
+    }
+    .gestionContainer h3 { font-size: 1.2em; }
+    .gestionContainer h4 { font-size: 1.05em; margin-bottom: 10px; }
+
+    .inventoryForm {
+        padding: 15px;
+        max-width: none; /* Ocupar todo el ancho */
+        background: transparent; /* Opcional */
+        border: none; /* Opcional */
+        box-shadow: none; /* Opcional */
+        margin-bottom: 20px;
+    }
+     .inputGroup { margin-bottom: 15px; }
+     .input, .select, .infoText { font-size: 0.9em; padding: 9px; }
+     .infoText { min-height: 40px; }
+     .label { font-size: 0.8em; margin-bottom: 4px; }
+     .commonButton { padding: 8px 10px; font-size: 0.85em; width: 100%; margin: 5px 0 0 0; } /* Botones al 100% */
+     .createButton { margin-bottom: 15px; }
+     .buttonGroup { flex-direction: column; gap: 8px; } /* Apilar botones del form */
+
+    .filterContainer { padding: 10px; gap: 10px; flex-direction: column; align-items: stretch; }
+    .filterGroup { min-width: 100%; flex-grow: 0; }
+    .filterSelect { font-size: 0.85em; }
+
+    .inventoryTable { font-size: 0.8em; min-width: 450px; } /* Reducir min-width */
+    .inventoryTable th, .inventoryTable td { padding: 6px 8px; }
+    .actionsCell { width: auto; } /* Ancho automático para acciones */
+    .actionsCell .listButton {
+        display: block; /* Apilar botones de acción */
+        width: calc(100% - 4px); /* Ancho completo menos margen */
+        margin: 4px 2px;
+    }
+    .listButton { font-size: 0.8em; }
+}
