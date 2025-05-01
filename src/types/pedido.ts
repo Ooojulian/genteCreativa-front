@@ -96,7 +96,7 @@ export interface UserData { // <-- Nombre elegido: UserData
     empresa: EmpresaData | null;
     is_active?: boolean;
     is_staff?: boolean;
-    //vehiculo_asignado: string | null; // StringRelatedField del backend
+    vehiculo_asignado: string | null; // StringRelatedField del backend
     // Considera añadir vehiculo_asignado_id si lo necesitas directamente al leer usuarios
     vehiculo_asignado_id?: number | null;
 }

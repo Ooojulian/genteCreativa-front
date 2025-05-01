@@ -24,6 +24,27 @@ export const getUsuarios = async (filtros?: GetUsuariosFilters): Promise<UserDat
     }
 };
 
+export const changeUserPassword = async (
+    userId: number,
+    new_password: string,
+    confirm_password: string // Incluir confirmación aquí ayuda a la validación del serializer backend
+): Promise<void> => { // No esperamos datos de vuelta, solo éxito o error
+    console.log(`[API changeUserPassword] Intentando cambiar contraseña para User ID: ${userId}`);
+    try {
+        // Llama al nuevo endpoint de la acción personalizada
+        await api.post(`/gestion/usuarios/${userId}/cambiar-password/`, {
+            new_password,
+            confirm_password // Enviar ambos para que el serializer valide coincidencia
+        });
+        console.log(`[API changeUserPassword] Contraseña cambiada exitosamente para User ID: ${userId}`);
+        // No se retorna nada en caso de éxito (status 200 OK)
+    } catch (error: any) {
+        console.error(`[API changeUserPassword] Error cambiando contraseña para User ID: ${userId}:`, error.response?.data || error.message);
+        // Re-lanza el error para que el componente lo maneje
+        throw error;
+    }
+};
+
 export const getConductores = async (): Promise<UserData[]> => {
     console.log(`[API getConductores] Buscando rol ID: ${ROL_ID_CONDUCTOR}`);
     return getUsuarios({ rol: ROL_ID_CONDUCTOR }); // Reutiliza getUsuarios

@@ -59,6 +59,59 @@
     text-align: center;
 }
 
+.listButton.passwordButton {
+    background-color: #ffa000; /* Naranja como ejemplo */
+    color: white;
+    margin-left: 5px; /* Separarlo de otros botones */
+  }
+  .listButton.passwordButton:hover {
+    background-color: #f57c00;
+  }
+  
+  /* Estilos para el Modal */
+  .modalOverlay {
+    position: fixed; /* Cubre toda la pantalla */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6); /* Fondo semi-transparente */
+    display: flex;
+    align-items: center; /* Centrar verticalmente */
+    justify-content: center; /* Centrar horizontalmente */
+    z-index: 1000; /* Asegurar que esté por encima */
+    padding: 20px;
+  }
+  
+  .modalContent {
+    background-color: #fff;
+    padding: 25px 30px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 450px; /* Ancho máximo del modal */
+    position: relative; /* Para posicionar botón de cierre si lo añades */
+  }
+  
+  .modalContent .formTitle {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+  }
+  
+  /* Ajusta los estilos de inputGroup, label, input, buttonGroup, etc.
+     dentro del modal si es necesario, o heredarán los globales */
+  
+  .modalContent .inputGroup {
+    margin-bottom: 18px;
+  }
+  
+  .modalContent .buttonGroup {
+    margin-top: 25px;
+    justify-content: flex-end; /* Alinea botones a la derecha */
+  }
+
 .inputGroup { margin-bottom: 18px; }
 .label { display: block; margin-bottom: 6px; font-weight: 500; color: #334d6e; font-size: 0.9em; }
 .labelSmall { font-size: 0.8em; color: #667; margin-top: 3px; }
