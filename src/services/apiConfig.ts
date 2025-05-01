@@ -4,7 +4,7 @@ import axios from 'axios';
 // 1. Crear instancia de Axios
 const api = axios.create({
     baseURL: process.env.REACT_APP_API_URL || 'http://127.0.0.1:8000/api', // Usa variable de entorno o default
-    timeout: 10000, // Timeout opcional
+    timeout: 30000, // Timeout opcional
 });
 
 // 2. Configurar Interceptors (como los tenías en api.ts)
